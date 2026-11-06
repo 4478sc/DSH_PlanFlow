@@ -263,5 +263,5 @@ tasks, 8 views. Settled times, medians of 3 runs (runs vary 10–20 %).
 - E2E: `e2e/tests/boards/` (sidebar, rules, sections, layout, editor).
 - Released clients: `e2e/tests/sync/supersync-views-released-client.spec.ts`
   checks that a released client's whole-board edit keeps the new fields and
-  needs no repair. It runs only in the scheduled workflow's released-client job
-  ([e2e-scheduled.yml](../../.github/workflows/e2e-scheduled.yml)).
+  needs no repair. It ran only in the scheduled workflow's released-client job, which this copy
+  does not ship.

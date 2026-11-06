@@ -62,9 +62,9 @@ Run a focused client spec with:
 npm run test:file src/app/op-log/sync/<file>.spec.ts
 ```
 
-For SuperSync and WebDAV E2E, prefer manually dispatching
-[`E2E Tests (Scheduled)`](../../.github/workflows/e2e-scheduled.yml) for the
-branch. It provides the dedicated services and sharded SuperSync jobs. See
+For SuperSync and WebDAV E2E, the inherited `E2E Tests (Scheduled)` workflow is
+not part of this copy; run the suites locally as described below and in
+[`e2e/CLAUDE.md`](../../e2e/CLAUDE.md). See
 [`e2e/CLAUDE.md`](../../e2e/CLAUDE.md) for focused local commands.
 
 Every sync fix must begin with a reproducible failure against real operation or

@@ -2,9 +2,8 @@
 
 ## How it is published
 
-[`publish-plugin-api.yml`](../../.github/workflows/publish-plugin-api.yml)
-publishes this package to npm on every stable app release, with the app's
-version: `plugin-api@19.4.0` describes the plugin API of Super Productivity
+The inherited `publish-plugin-api.yml` workflow (removed in this copy) published
+this package to npm on every stable app release, with the app's version: `plugin-api@19.4.0` describes the plugin API of Super Productivity
 19.4.0, so plugin authors can tell which app version added what they use and
 set `minSupVersion` (the oldest app version a plugin installs on) accordingly.
 

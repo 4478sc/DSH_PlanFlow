@@ -15,9 +15,9 @@ configuration or documentation.
 
 - [`build/electron-builder.mas.yaml`](../build/electron-builder.mas.yaml) owns the
   MAS target, entitlements, application ID, and profile path.
-- [The Mac App Store workflow](../.github/workflows/build-publish-to-mac-store-on-release.yml)
-  owns certificate import, secret names, profile installation, diagnostics, and
-  upload.
+- The Mac App Store workflow (removed in this copy; re-add one if you publish to
+  the MAS) owned certificate import, secret names, profile installation,
+  diagnostics, and upload.
 - The Apple Developer portal owns the active certificates and provisioning
   profiles.
 
