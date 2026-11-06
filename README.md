@@ -1,6 +1,10 @@
 <a href="https://super-productivity.com/"><img alt="Banner" src="docs/screens/banner.png"/></a>
 
 <p align="center">
+  <strong>English</strong> | <a href="README.zh.md">简体中文</a>
+</p>
+
+<p align="center">
   <strong>
     A to-do list, time tracker and daily planner for focused personal work. Private, offline-first and open source.
   </strong>

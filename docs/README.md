@@ -1,5 +1,7 @@
 # Maintainer documentation
 
+**English** | [简体中文](README.zh.md)
+
 This directory contains user documentation, maintainer runbooks, architecture
 guidance, active plans, and research. These have different authority: a plan or
 research note does not override the current code, tests, or an accepted decision.
