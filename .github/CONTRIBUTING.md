@@ -1,3 +1,9 @@
+> **Note for this copy:** this document was inherited from the upstream
+> project and still describes its process. For changes made in this repository
+> (including the Simplified Chinese docs), open an issue or pull request here:
+> <https://github.com/4478sc/DSH_PlanFlow>. See `INDEPENDENCE.md` for what is
+> still tied to upstream.
+
 # Thank you for considering to contribute!
 I love Super Productivity. It's my favorite side project and I use it every day to plan my tasks and to track my time. I need your help!
 

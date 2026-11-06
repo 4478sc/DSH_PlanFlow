@@ -1,0 +1,48 @@
+DSH_PlanFlow
+============
+
+This repository is an independent derivative work of Super Productivity.
+
+Original work
+-------------
+  Super Productivity
+  Copyright (c) 2018 Johannes Millan and contributors
+  https://github.com/super-productivity/super-productivity
+  Licensed under the MIT License (see LICENSE)
+
+This repository (DSH_PlanFlow)
+------------------------------
+  Copyright (c) 2026 4478sc <1956747161@qq.com>
+  https://github.com/4478sc/DSH_PlanFlow
+  Licensed under the MIT License (see LICENSE)
+
+Changes made here
+-----------------
+  - Added a Simplified Chinese README (README.zh.md) and a Chinese
+    maintainer-documentation index (docs/README.zh.md), plus language switchers
+    in README.md and docs/README.md.
+  - Added this NOTICE, an appended modification copyright line in LICENSE, and
+    INDEPENDENCE.md (the checklist for running this as a standalone project).
+  - Further changes are recorded in the git history of this repository.
+
+What the MIT License requires, and what is honored here
+-------------------------------------------------------
+The MIT License requires that the copyright notice and the permission notice be
+included in all copies or substantial portions of the Software. The upstream
+notice is preserved verbatim in LICENSE, and the full permission text is
+unchanged; this file records where the work came from and what was modified.
+
+Trademark and endorsement
+-------------------------
+The name "Super Productivity", its logo, and its store/app identifiers belong to
+the upstream project and its author. This repository does not claim ownership of
+them. Builds or distributions made from this repository must not state or imply
+that they are official releases of, endorsed by, or affiliated with the upstream
+project. If you promote a build produced here, give it your own name and keep a
+visible "based on Super Productivity (MIT)" attribution.
+
+Third-party components
+----------------------
+This repository vendors or depends on third-party packages, fonts, icons and
+assets that keep their own licenses. See package.json, package-lock.json and the
+per-package license files. Nothing in this NOTICE relicenses them.

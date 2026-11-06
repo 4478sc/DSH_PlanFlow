@@ -1,7 +1,7 @@
 {
   "name": "superProductivity",
   "version": "19.3.1",
-  "description": "A to-do list, time tracker and daily planner for focused personal work",
+  "description": "A to-do list, time tracker and daily planner for focused personal work (independent copy of Super Productivity)",
   "keywords": [
     "ToDo",
     "Task Management",
@@ -9,13 +9,13 @@
     "GitHub",
     "Time Tracking"
   ],
-  "homepage": "https://super-productivity.com",
+  "homepage": "https://github.com/4478sc/DSH_PlanFlow#readme",
   "repository": {
     "type": "git",
-    "url": "git://github.com/super-productivity/super-productivity.git"
+    "url": "git+https://github.com/4478sc/DSH_PlanFlow.git"
   },
   "license": "MIT",
-  "author": "Johannes Millan <contact@super-productivity.com> (http://super-productivity.com)",
+  "author": "4478sc <1956747161@qq.com> (https://github.com/4478sc/DSH_PlanFlow)",
   "main": "./electron/main.js",
   "scripts": {
     "env": "node ./tools/load-env.js",
@@ -391,5 +391,11 @@
   "volta": {
     "node": "22.23.3",
     "npm": "11.18.0"
+  },
+  "bugs": {
+    "url": "https://github.com/4478sc/DSH_PlanFlow/issues"
+  },
+  "funding": {
+    "url": "https://github.com/4478sc/DSH_PlanFlow"
   }
 }

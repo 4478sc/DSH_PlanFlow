@@ -23,6 +23,7 @@
 - **下载与使用**：请通过上游的[官方下载渠道](https://super-productivity.com/download/)获取，本仓库的 release 页面不会有可用安装包。
 - **与上游同步**：本仓库可能落后上游若干提交，功能、行为与 bug 一律**以上游为准**。
 - **许可与署名**：代码与文档均以 MIT 许可证发布，版权归原作者所有（见 [LICENSE](LICENSE)）；中英文内容如有出入，以英文 [README.md](README.md) 为准。
+- **独立运维**：改名、应用 ID、更新源、商店与 CI 的解绑清单见 [INDEPENDENCE.md](INDEPENDENCE.md)，版权与出处声明见 [NOTICE](NOTICE)。
 
 <p align="center">
   <strong>

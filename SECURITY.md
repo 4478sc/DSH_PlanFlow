@@ -1,7 +1,17 @@
 # Security Policy
 
-I am a web developer with a frontend focus and no security expert. I tried to follow the best practices as much as possible and I update electron often, but I can offer no guarantees. Any help with this subject by more dedicated experts would be very much appreciated!
+This repository is an independent copy of
+[Super Productivity](https://github.com/super-productivity/super-productivity) (MIT).
+The application code is inherited from upstream and follows the same practices,
+but this copy is maintained by a single person and is **not security-audited**.
+Treat it accordingly.
 
 ## Reporting a Vulnerability
 
-Please report any vulnerabilities using the [form here on github](https://github.com/super-productivity/super-productivity/security/advisories/new).
+- Problems that exist in this copy as maintained here: open a private advisory at
+  <https://github.com/4478sc/DSH_PlanFlow/security/advisories/new>.
+- Problems that also affect upstream Super Productivity should be reported there
+  as well, because the fix has to land upstream first:
+  <https://github.com/super-productivity/super-productivity/security/advisories/new>.
+
+Please do not open a public issue for a security problem.

@@ -1,7 +1,7 @@
 # CODEOWNERS - Define code ownership for security-critical files
 # https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 #
-# Changes to files listed below require approval from @johannesjo
+# Changes to files listed below require approval from @4478sc
 # This protects against unauthorized workflow modifications and supply chain attacks
 
 # ==========================================
@@ -11,74 +11,74 @@
 # - Secret exfiltration via workflow modification
 # - Malicious deployment to production
 # - Supply chain attacks on users
-/.github/workflows/*.yml @johannesjo
-/.github/workflows/*.yaml @johannesjo
+/.github/workflows/*.yml @4478sc
+/.github/workflows/*.yaml @4478sc
 
 # CODEOWNERS file itself (prevent removal of protections)
-/.github/CODEOWNERS @johannesjo
+/.github/CODEOWNERS @4478sc
 
 # Agent instructions and reusable agent workflows
-AGENTS.md @johannesjo
-CLAUDE.md @johannesjo
-/.agents/ @johannesjo
-/.codex/ @johannesjo
+AGENTS.md @4478sc
+CLAUDE.md @4478sc
+/.agents/ @4478sc
+/.codex/ @4478sc
 
 # ==========================================
 # Build & Deployment Configuration (HIGH)
 # ==========================================
 # Electron application entry point and build config
-/electron/ @johannesjo
+/electron/ @4478sc
 
 # Docker deployment configuration
-/Dockerfile @johannesjo
-/docker-entrypoint.sh @johannesjo
-/docker-compose*.yml @johannesjo
-/docker-compose*.yaml @johannesjo
+/Dockerfile @4478sc
+/docker-entrypoint.sh @4478sc
+/docker-compose*.yml @4478sc
+/docker-compose*.yaml @4478sc
 
 # Mobile app build configuration
-/android/ @johannesjo
-/ios/ @johannesjo
-/capacitor.config.ts @johannesjo
+/android/ @4478sc
+/ios/ @4478sc
+/capacitor.config.ts @4478sc
 
 # Electron Builder configuration (code signing, auto-update)
-/build/ @johannesjo
-/electron-builder*.yml @johannesjo
-/electron-builder*.yaml @johannesjo
+/build/ @4478sc
+/electron-builder*.yml @4478sc
+/electron-builder*.yaml @4478sc
 
 # ==========================================
 # Package Management (HIGH)
 # ==========================================
 # Dependencies and lock files (supply chain risk)
-/package.json @johannesjo
-/package-lock.json @johannesjo
+/package.json @4478sc
+/package-lock.json @4478sc
 
 # ==========================================
 # Security & Environment (HIGH)
 # ==========================================
 # Security documentation
-/SECURITY.md @johannesjo
+/SECURITY.md @4478sc
 
 # Environment configuration
-/.env.example @johannesjo
-/tools/load-env.js @johannesjo
+/.env.example @4478sc
+/tools/load-env.js @4478sc
 
 # ==========================================
 # Web Server Configuration (MEDIUM)
 # ==========================================
 # Nginx reverse proxy and web server config
-/nginx/ @johannesjo
+/nginx/ @4478sc
 
 # ==========================================
 # Git Configuration (MEDIUM)
 # ==========================================
 # Git hooks and configuration
-/.husky/ @johannesjo
-/.gitignore @johannesjo
+/.husky/ @4478sc
+/.gitignore @4478sc
 
 # ==========================================
 # Documentation Changes (LOW - Optional)
 # ==========================================
 # Uncomment if you want to review all README changes
-# /README.md @johannesjo
-# /CLAUDE.md @johannesjo
-# /docs/ @johannesjo
+# /README.md @4478sc
+# /CLAUDE.md @4478sc
+# /docs/ @4478sc
