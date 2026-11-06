@@ -8,6 +8,22 @@
 > 原项目与本文档均以 **MIT 许可证**发布，版权归原作者所有（Copyright © 2018 Johannes Millan，见 [LICENSE](LICENSE)）。
 > 译文仅供方便阅读；如与英文版 [README.md](README.md) 有出入，一律以英文版为准。
 
+## 本仓库与上游的差异
+
+本仓库（DSH_PlanFlow）是 Super Productivity 的**个人工作副本**，不是官方仓库，也不发布任何安装包。
+
+| 项 | 上游 [super-productivity/super-productivity](https://github.com/super-productivity/super-productivity) | 本仓库 |
+|---|---|---|
+| 定位 | 官方项目，发布各平台安装包 | 个人使用与本地实验 |
+| 代码 | 持续开发中 | 从上游 `f68f812`（2026-11-06）导入，可能滞后若干提交 |
+| 文档 | 英文 README | 额外提供本文 [README.zh.md](README.zh.md) 与 [docs/README.zh.md](docs/README.zh.md) |
+| 安装包 | Flathub / Snap / Microsoft Store / Play / F-Droid / App Store | 不提供 |
+| 问题反馈 | 提 issue 或到 discussions 讨论 | 仅作个人记录，请勿在此报告 bug |
+
+- **下载与使用**：请通过上游的[官方下载渠道](https://super-productivity.com/download/)获取，本仓库的 release 页面不会有可用安装包。
+- **与上游同步**：本仓库可能落后上游若干提交，功能、行为与 bug 一律**以上游为准**。
+- **许可与署名**：代码与文档均以 MIT 许可证发布，版权归原作者所有（见 [LICENSE](LICENSE)）；中英文内容如有出入，以英文 [README.md](README.md) 为准。
+
 <p align="center">
   <strong>
     面向专注型个人工作的待办清单、时间追踪与每日规划器。隐私优先、离线可用、开源。
