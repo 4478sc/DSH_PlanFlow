@@ -42,27 +42,34 @@ user's data (see section 6).
 
 ## 2. Identity fields in the build
 
-| File | Field | Current (upstream) value |
+Renamed in this repository (verify with `git log -p -- electron-builder.yaml`):
+
+| File | Field | New value |
 |---|---|---|
-| `electron-builder.yaml` | `appId` | `superProductivity` |
-| `electron-builder.yaml` | `productName` | `Super Productivity` |
-| `electron-builder.yaml` | `artifactName` | `${name}-${arch}.${ext}` |
-| `electron-builder.yaml` | `publish` | upstream release feed |
-| `capacitor.config.ts` | `appId` / `appName` | `com.super-productivity.app` / `Super Productivity` |
-| `package.json` | `name` | `superProductivity` (kept on purpose, see section 6) |
-| `package.json` | `description` / `author` / `repository` / `homepage` / `bugs` | already updated to this repository |
-| `android/` | `applicationId`, `namespace`, `app_name` string | `com.superproductivity.superproductivity` |
-| `ios/` | bundle identifier, display name | `com.superproductivity.superproductivity` |
-| `snap/`, `build/linux/*.desktop`, Flatpak manifest | app id, `Name=`, icon name | `superproductivity` |
-| `build/icon.icns`, `icon.ico`, `src/assets/icons/`, Android mipmaps | icons | upstream artwork |
-| `src/assets/i18n/*.json` | product-name strings | "Super Productivity" |
+| `electron-builder.yaml` | `appId` | `com.dshplanflow.app` |
+| `electron-builder.yaml` | `productName` | `DSH_PlanFlow` |
+| `electron-builder.yaml` | `linux.executableName` | `dsh-planflow` |
+| `electron-builder.yaml` | `linux.desktop.entry.StartupWMClass` | `dsh-planflow` |
+| `electron-builder.yaml` | `publish` | this repository's GitHub Releases |
+| `capacitor.config.ts` | `appId` / `appName` | `com.dshplanflow.app` / `DSH_PlanFlow` |
+| `package.json` | `name` | `dsh-planflow` |
+| `src/index.html` | `<title>` | `DSH_PlanFlow` |
+| `src/assets/i18n/*.json` | product name | `DSH_PlanFlow` (28 locales) |
+| `electron/start-app.ts` | `APP_DISPLAY_NAME`, `LINUX_DESKTOP_NAME` | `DSH_PlanFlow`, `dsh-planflow.desktop` |
+| `tools/afterPack.js` | `BIN_NAME`, `RENAMED` | `dsh-planflow`, `dsh-planflow-bin` |
+| `build/linux/snap-wrapper.sh`, `build/linux/rpm-posttrans.sh` | snap/exec paths | `dsh-planflow` |
+| `android/` | launcher label | `DSH_PlanFlow` (package id unchanged, see below) |
+| `funding.json` | entity | `4478sc` |
 
-Search before renaming, so nothing is missed:
+Still upstream-owned, on purpose (changing them needs a platform SDK and a migration):
 
-```bash
-rg -n "Super Productivity|super-productivity|superProductivity|superproductivity" \
-  --glob '!node_modules' --glob '!.git'
-```
+| Item | Current value | Why it is still like this |
+|---|---|---|
+| Android package id | `com.superproductivity.superproductivity` | Renaming a Java package moves every source directory and needs an Android SDK to verify; the launcher label is already `DSH_PlanFlow` |
+| Android deep-link scheme | `com.super-productivity.app` | Must match `capacitor.config.ts` on both sides; do it together with the package id |
+| iOS bundle id | `com.superproductivity.superproductivity` | Needs Xcode to re-sign |
+| Snap store / Flathub / Play listing | upstream accounts | Register your own |
+| Windows signing subject | `CN=___-___` placeholder | Put your certificate subject here |
 
 ## 3. Links shown to users and used at runtime
 
@@ -150,11 +157,19 @@ future merge mechanical.
 
 ## 10. What this repository already does
 
-- `NOTICE` records the derivation, the modifications, and the trademark caveat.
+- `NOTICE` records the derivation, the modifications and the trademark caveat.
 - `LICENSE` keeps the upstream MIT notice and appends the copyright line for
   modifications.
-- `package.json` author/repository/homepage/bugs point at this repository.
-- `README.zh.md` carries a "本仓库与上游的差异" section that tells readers this is a
-  personal copy rather than an official release.
-
-Everything else above is a decision only the maintainer can make.
+- Rebranded to **DSH_PlanFlow**: app id `com.dshplanflow.app`, executable
+  `dsh-planflow`, window class, installer identity, i18n product name, index
+  title, Linux wrapper paths.
+- **User data moved** from `superProductivity` to `DSH_PlanFlow`, with a one-time
+  copy on first start (`electron/legacy-user-data-migration.ts`, opt out with
+  `DSH_SKIP_USER_DATA_MIGRATION=1`).
+- **CI trimmed** to `.github/workflows/ci.yml` (install, main-process tests, unit
+  tests) plus `docs-links.yml`; 38 inherited pipelines (stores, nightly E2E,
+  wiki sync, previews, release automation) were removed.
+- **README badges removed**: no store listings, no upstream social accounts; the
+  page now states it is an independent copy and points at `INDEPENDENCE.md`.
+- `SECURITY.md`, `CODEOWNERS`, `FUNDING.yml`, issue templates and
+  `package.json` metadata point at this repository.

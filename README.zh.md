@@ -1,11 +1,17 @@
-<a href="https://super-productivity.com/"><img alt="Banner" src="docs/screens/banner.png"/></a>
+<img alt="Banner" src="docs/screens/banner.png"/>
+
+[English](README.md) | **简体中文**
 
 <p align="center">
-  <strong>English</strong> | <a href="README.zh.md">简体中文</a>
+  <strong>DSH_PlanFlow：面向专注型个人工作的待办清单、时间追踪与每日规划器。隐私优先、离线可用、开源。</strong>
+</p>
+
+<p align="center">
+  <a href="https://lbesson.mit-license.org"><img alt="MIT license" src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square"/></a>
 </p>
 
 > 本文档是 [super-productivity/super-productivity](https://github.com/super-productivity/super-productivity) 英文 README 的简体中文翻译。
-> 原项目与本文档均以 **MIT 许可证**发布，版权归原作者所有（Copyright © 2018 Johannes Millan，见 [LICENSE](LICENSE)）。
+> 原项目与本文档均以 **MIT 许可证**发布，版权归原作者所有（Copyright © 2018 Johannes Millan，见 [LICENSE](LICENSE) 与 [NOTICE](NOTICE)）。
 > 译文仅供方便阅读；如与英文版 [README.md](README.md) 有出入，一律以英文版为准。
 
 ## 本仓库与上游的差异
@@ -17,90 +23,15 @@
 | 定位 | 官方项目，发布各平台安装包 | 个人使用与本地实验 |
 | 代码 | 持续开发中 | 从上游 `f68f812`（2026-11-06）导入，可能滞后若干提交 |
 | 文档 | 英文 README | 额外提供本文 [README.zh.md](README.zh.md) 与 [docs/README.zh.md](docs/README.zh.md) |
-| 安装包 | Flathub / Snap / Microsoft Store / Play / F-Droid / App Store | 不提供 |
-| 问题反馈 | 提 issue 或到 discussions 讨论 | 仅作个人记录，请勿在此报告 bug |
+| 安装包 | Flathub / Snap / Microsoft Store / Play / F-Droid / App Store | 不提供，需从源码运行（`npm ci && npm start`，Node 22+） |
+| 问题反馈 | 上游 issue 或 discussions | 请提到[本仓库 issues](https://github.com/4478sc/DSH_PlanFlow/issues) |
+| 应用 ID / 名称 | Super Productivity / com.super-productivity.app | **DSH_PlanFlow** / com.dshplanflow.app |
+| 用户数据目录 | `superProductivity` | `DSH_PlanFlow`（首次启动自动迁移旧数据） |
 
-- **下载与使用**：请通过上游的[官方下载渠道](https://super-productivity.com/download/)获取，本仓库的 release 页面不会有可用安装包。
-- **与上游同步**：本仓库可能落后上游若干提交，功能、行为与 bug 一律**以上游为准**。
+- **下载与使用**：本仓库不提供安装包，请从源码构建运行；上游的[官方下载渠道](https://super-productivity.com/download/)安装的是原版 Super Productivity。
+- **与上游同步**：本仓库可能落后上游若干提交，功能与行为以**上游为准**，但本仓库的产品名、应用 ID 与用户数据目录已独立。
 - **许可与署名**：代码与文档均以 MIT 许可证发布，版权归原作者所有（见 [LICENSE](LICENSE)）；中英文内容如有出入，以英文 [README.md](README.md) 为准。
 - **独立运维**：改名、应用 ID、更新源、商店与 CI 的解绑清单见 [INDEPENDENCE.md](INDEPENDENCE.md)，版权与出处声明见 [NOTICE](NOTICE)。
-
-<p align="center">
-  <strong>
-    面向专注型个人工作的待办清单、时间追踪与每日规划器。隐私优先、离线可用、开源。
-  </strong>
-</p>
-
-<p align="center">
-  :globe_with_meridians: <a href="https://app.super-productivity.com">打开网页版</a> 或 :computer: <a href="https://super-productivity.com/download/">下载安装</a>
-</p>
-
-<br/>
-
-<!-- The <a> and <img> elements are intentionally made without space.
-     Because of the extra whitespace characters in <a>, makes blue underline lines appear for them.
-     Please do not change this formatting, so as not to make them.
--->
-<p align="center">
-  <a href="https://lbesson.mit-license.org"><img alt="MIT license" src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square"/></a>
-  &nbsp;
-  <a href="https://github.com/super-productivity/super-productivity/discussions"><img alt="GitHub Discussions" src="https://img.shields.io/badge/Community-Discussions-blue?style=flat-square&logo=github"/></a>
-</p>
-
-<p align="center">
-  <a href="https://www.reddit.com/r/superProductivity/"><img alt="Reddit Community" src="https://img.shields.io/badge/Reddit-%23FF4500.svg?style=for-the-badge&logo=Reddit&logoColor=white" width="85"/></a>
-  &nbsp;
-  <a href="https://mastodon.social/@superproductivity"><img alt="Super Productivity on Mastodon" src="https://img.shields.io/badge/-MASTODON-%232B90D9?style=for-the-badge&logo=mastodon&logoColor=white" width="105"/></a>
-  &nbsp;
-  <a href="https://x.com/intent/post?text=Super%20Productivity%20%20https%3A%2F%2Fsuper-productivity.com"><img alt="Tweet" src="https://img.shields.io/badge/TWEET-%23000000.svg?style=for-the-badge&logo=X" width="90"/></a>
-</p>
-
-<p align="center">
-  <a href="https://youtu.be/_mvMXWLsL-8"><img src="docs/screens/reel.gif" alt="Super Productivity：记录任务、在日程上规划、然后专注执行"/></a>
-</p>
-
-## :computer: 下载与安装
-
-<p align="center">
-  <a href='https://flathub.org/apps/com.super_productivity.SuperProductivity' target="_blank"><img alt='Get it on Flathub' src='https://flathub.org/api/badge?locale=en' height="30"/></a>
-  <a href="https://snapcraft.io/superproductivity" target="_blank"><img alt="Get it from the Snap Store" src="https://snapcraft.io/static/images/badges/en/snap-store-black.svg" height="30"/></a>
-  <a href='//www.microsoft.com/store/apps/9NHFVG8361TW?cid=storebadge&ocid=badge' target="_blank"><img src='https://developer.microsoft.com/store/badges/images/English_get-it-from-MS.png' alt='Get it from Microsoft Store' height="30"/></a>
-  <a href='https://play.google.com/store/apps/details?id=com.superproductivity.superproductivity&amp;referrer=utm_source%3Dgithub%26utm_medium%3Downed%26utm_campaign%3Dreadme' target="_blank"><img src='docs/screens/google-play-badge.svg' alt='Play Store Badge' height="30"/></a>
-  <a href='//f-droid.org/en/packages/com.superproductivity.superproductivity' target="_blank"><img src='https://f-droid.org/assets/fdroid-logo-text_S0MUfk_FsnAYL7n2MQye-34IoSNm6QM6xYjDnMqkufo=.svg' alt="F-Droid Badge" height="30"/></a>
-  <a href='https://apps.obtainium.imranr.dev/redirect?r=obtainium%3A%2F%2Fadd%2Fhttps%3A%2F%2Fgithub.com%2Fsuper-productivity%2Fsuper-productivity%2Freleases'><img src='https://raw.githubusercontent.com/ImranR98/Obtainium/main/assets/graphics/badge_obtainium.png' alt='Get it on Obtainium' height="30"/></a>
-  <a href='//apps.apple.com/app/super-productivity/id1482572463?l=en' target="_blank"><img src='docs/screens/app-store-badge.svg' alt='App Store Badge' height="30"/></a>
-</p>
-
-<p align="center">
-  <strong>全部下载方式、各平台安装包与平台专属说明，请看
-    <a href="https://github.com/super-productivity/super-productivity/wiki/2.01-Downloads-and-Install" target="_blank">
-      Wiki
-    </a>
-  </strong><br/>
-  <a href="https://github.com/super-productivity/super-productivity/wiki/2.01-Downloads-and-Install" target="_blank">
-    <img
-      src="docs/screens/get-it-on-github.webp"
-      alt="从 GitHub 获取"
-      height="120"
-    />
-  </a>
-</p>
-
-<hr>
-
-<p align="center">
-  <a href="https://bank.gov.ua/en/news/all/natsionalniy-bank-vidkriv-rahunok-dlya-gumanitarnoyi-dopomogi-ukrayintsyam-postrajdalim-vid-rosiyskoyi-agresiyi" target="_blank">
-    <img
-      src="https://upload.wikimedia.org/wikipedia/commons/4/49/Flag_of_Ukraine.svg"
-      alt="Ukraine Flag"
-      height="120"
-    /><br/>
-    <strong>乌克兰人道主义援助</strong><br/>
-    可通过乌克兰国家银行官方账户支持人道主义救援。
-  </a>
-</p>
-
-<hr>
 
 ## :heavy_check_mark: 功能特性
 

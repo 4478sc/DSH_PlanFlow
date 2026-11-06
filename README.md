@@ -1,85 +1,26 @@
-<a href="https://super-productivity.com/"><img alt="Banner" src="docs/screens/banner.png"/></a>
+<img alt="Banner" src="docs/screens/banner.png"/>
+
+**English** | [简体中文](README.zh.md)
 
 <p align="center">
-  <strong>English</strong> | <a href="README.zh.md">简体中文</a>
+  <strong>DSH_PlanFlow — a to-do list, time tracker and daily planner for focused personal work. Private, offline-first and open source.</strong>
 </p>
 
-<p align="center">
-  <strong>
-    A to-do list, time tracker and daily planner for focused personal work. Private, offline-first and open source.
-  </strong>
-</p>
-
-<p align="center">
-  :globe_with_meridians: <a href="https://app.super-productivity.com">Open Web App</a> or :computer: <a href="https://super-productivity.com/download/">Download</a>
-</p>
-
-<br/>
-
-<!-- The <a> and <img> elements are intentionally made without space.
-     Because of the extra whitespace characters in <a>, makes blue underline lines appear for them.
-     Please do not change this formatting, so as not to make them.
--->
 <p align="center">
   <a href="https://lbesson.mit-license.org"><img alt="MIT license" src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square"/></a>
-  &nbsp;
-  <a href="https://github.com/super-productivity/super-productivity/discussions"><img alt="GitHub Discussions" src="https://img.shields.io/badge/Community-Discussions-blue?style=flat-square&logo=github"/></a>
 </p>
+
+> **This is an independent copy, not an official release.** DSH_PlanFlow is a
+> personal working copy of [Super Productivity](https://github.com/super-productivity/super-productivity)
+> (MIT, © 2018 Johannes Millan and contributors); see [NOTICE](NOTICE) for
+> attribution and [INDEPENDENCE.md](INDEPENDENCE.md) for what still points at
+> upstream. It publishes no installers — run it from source
+> (`npm ci && npm start`, Node 22+) and report bugs
+> [here](https://github.com/4478sc/DSH_PlanFlow/issues), not upstream.
 
 <p align="center">
-  <a href="https://www.reddit.com/r/superProductivity/"><img alt="Reddit Community" src="https://img.shields.io/badge/Reddit-%23FF4500.svg?style=for-the-badge&logo=Reddit&logoColor=white" width="85"/></a>
-  &nbsp;
-  <a href="https://mastodon.social/@superproductivity"><img alt="Super Productivity on Mastodon" src="https://img.shields.io/badge/-MASTODON-%232B90D9?style=for-the-badge&logo=mastodon&logoColor=white" width="105"/></a>
-  &nbsp;
-  <a href="https://x.com/intent/post?text=Super%20Productivity%20%20https%3A%2F%2Fsuper-productivity.com"><img alt="Tweet" src="https://img.shields.io/badge/TWEET-%23000000.svg?style=for-the-badge&logo=X" width="90"/></a>
+  <a href="https://youtu.be/_mvMXWLsL-8"><img src="docs/screens/reel.gif" alt="DSH_PlanFlow: capture a task, plan it on the schedule, then focus on it"/></a>
 </p>
-
-<p align="center">
-  <a href="https://youtu.be/_mvMXWLsL-8"><img src="docs/screens/reel.gif" alt="Super Productivity: capture a task, plan it on the schedule, then focus on it"/></a>
-</p>
-
-## :computer: Downloads & Install
-
-<p align="center">
-  <a href='https://flathub.org/apps/com.super_productivity.SuperProductivity' target="_blank"><img alt='Get it on Flathub' src='https://flathub.org/api/badge?locale=en' height="30"/></a>
-  <a href="https://snapcraft.io/superproductivity" target="_blank"><img alt="Get it from the Snap Store" src="https://snapcraft.io/static/images/badges/en/snap-store-black.svg" height="30"/></a>
-  <a href='//www.microsoft.com/store/apps/9NHFVG8361TW?cid=storebadge&ocid=badge' target="_blank"><img src='https://developer.microsoft.com/store/badges/images/English_get-it-from-MS.png' alt='Get it from Microsoft Store' height="30"/></a>
-  <a href='https://play.google.com/store/apps/details?id=com.superproductivity.superproductivity&amp;referrer=utm_source%3Dgithub%26utm_medium%3Downed%26utm_campaign%3Dreadme' target="_blank"><img src='docs/screens/google-play-badge.svg' alt='Play Store Badge' height="30"/></a>
-  <a href='//f-droid.org/en/packages/com.superproductivity.superproductivity' target="_blank"><img src='https://f-droid.org/assets/fdroid-logo-text_S0MUfk_FsnAYL7n2MQye-34IoSNm6QM6xYjDnMqkufo=.svg' alt='F-Droid Badge' height="30"/></a>
-  <a href='https://apps.obtainium.imranr.dev/redirect?r=obtainium%3A%2F%2Fadd%2Fhttps%3A%2F%2Fgithub.com%2Fsuper-productivity%2Fsuper-productivity%2Freleases'><img src='https://raw.githubusercontent.com/ImranR98/Obtainium/main/assets/graphics/badge_obtainium.png' alt='Get it on Obtainium' height="30"/></a>
-  <a href='//apps.apple.com/app/super-productivity/id1482572463?l=en' target="_blank"><img src='docs/screens/app-store-badge.svg' alt='App Store Badge' height="30"/></a>
-</p>
-
-<p align="center">
-  <strong>For all current downloads, package links, and platform-specific notes:
-    <a href="https://github.com/super-productivity/super-productivity/wiki/2.01-Downloads-and-Install" target="_blank">
-      check the wiki
-    </a>
-  </strong><br/>
-  <a href="https://github.com/super-productivity/super-productivity/wiki/2.01-Downloads-and-Install" target="_blank">
-    <img
-      src="docs/screens/get-it-on-github.webp"
-      alt="Get it on GitHub"
-      height="120"
-    />
-  </a>
-</p>
-
-<hr>
-
-<p align="center">
-  <a href="https://bank.gov.ua/en/news/all/natsionalniy-bank-vidkriv-rahunok-dlya-gumanitarnoyi-dopomogi-ukrayintsyam-postrajdalim-vid-rosiyskoyi-agresiyi" target="_blank">
-    <img
-      src="https://upload.wikimedia.org/wikipedia/commons/4/49/Flag_of_Ukraine.svg"
-      alt="Ukraine Flag"
-      height="120"
-    /><br/>
-    <strong>Humanitarian Aid for Ukraine</strong><br/>
-    Support humanitarian relief via the official National Bank of Ukraine account.
-  </a>
-</p>
-
-<hr>
 
 ## :heavy_check_mark: Features
 

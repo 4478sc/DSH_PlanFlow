@@ -26,7 +26,7 @@ test('has app, edit and window menus', () => {
   const { tpl } = buildTpl();
   assert.deepEqual(
     tpl.map((item) => item.label),
-    ['Super Productivity', 'Edit', 'Window'],
+    ['DSH_PlanFlow', 'Edit', 'Window'],
   );
 });
 
@@ -67,7 +67,7 @@ test('window menu contains no close/minimize/zoom roles', () => {
 
 test('quit item keeps Cmd+Q and is wired to onQuit', () => {
   const { tpl, calls } = buildTpl();
-  const appMenu = findMenu(tpl, 'Super Productivity');
+  const appMenu = findMenu(tpl, 'DSH_PlanFlow');
   const quitItem = appMenu.submenu.find((item) => item.label === 'Quit');
   assert.equal(quitItem.accelerator, 'CmdOrCtrl+Q');
   quitItem.click();

@@ -64,7 +64,7 @@ const getStatus: ToolSpec = {
     name: 'get_status',
     ...describeTool('Check connection', READ_ONLY_HINTS),
     description:
-      'Reports whether Super Productivity is ready and which permissions this connection has. Returns no task data.',
+      'Reports whether DSH_PlanFlow is ready and which permissions this connection has. Returns no task data.',
     inputSchema: { type: 'object', properties: {}, additionalProperties: false },
   },
   run: async (args, scopes, forward) => {
@@ -203,7 +203,7 @@ const getTask: ToolSpec = {
     if (includeNotes && !scopes.includes('tasks:read_notes')) {
       return fail(
         'NOTES_NOT_PERMITTED',
-        'This connection may not read notes. The user can allow it in Super Productivity settings.',
+        'This connection may not read notes. The user can allow it in DSH_PlanFlow settings.',
       );
     }
 
@@ -228,7 +228,7 @@ const getTask: ToolSpec = {
       // Revoked while the task was being fetched.
       return fail(
         'NOTES_NOT_PERMITTED',
-        'This connection may not read notes. The user can allow it in Super Productivity settings.',
+        'This connection may not read notes. The user can allow it in DSH_PlanFlow settings.',
       );
     }
     if (includeNotes) {
@@ -298,9 +298,9 @@ const CAPTURE_MESSAGES: Record<
   Exclude<AssistantCaptureResult['status'], 'created'>,
   string
 > = {
-  APP_BUSY: 'Super Productivity is applying synced changes. Retry in a few seconds.',
+  APP_BUSY: 'DSH_PlanFlow is applying synced changes. Retry in a few seconds.',
   PERSIST_DEGRADED:
-    'Super Productivity could not save recent changes. Nothing was added; ask the user to check the app.',
+    'DSH_PlanFlow could not save recent changes. Nothing was added; ask the user to check the app.',
   OUTCOME_UNKNOWN:
     'The task may or may not have been saved. Ask the user to check the Inbox before retrying.',
 };

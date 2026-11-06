@@ -90,10 +90,10 @@ const MODERN_META_KEY = 'io.modelcontextprotocol/protocolVersion';
 
 // `title` and `websiteUrl` are 2025-11-25 fields; older clients ignore them.
 const toServerInfo = (version: string): Record<string, string> => ({
-  name: 'super-productivity',
-  title: 'Super Productivity',
+  name: 'dsh-planflow',
+  title: 'DSH_PlanFlow',
   version,
-  websiteUrl: 'https://super-productivity.com',
+  websiteUrl: 'https://github.com/4478sc/DSH_PlanFlow',
 });
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>

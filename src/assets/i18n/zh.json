@@ -19,12 +19,12 @@
     },
     "B_SYNC_SAFETY": {
       "DISMISS": "暂不",
-      "MSG": "您已经使用 Super Productivity 一段时间了。设置同步以备份您的数据，并在所有设备上保持安全。",
+      "MSG": "您已经使用 DSH_PlanFlow 一段时间了。设置同步以备份您的数据，并在所有设备上保持安全。",
       "SETUP": "设置同步"
     },
     "B_UPDATE_AVAILABLE": {
       "DOWNLOAD": "下载",
-      "MSG": "Super Productivity 有新版本可用（{{version}}）。"
+      "MSG": "DSH_PlanFlow 有新版本可用（{{version}}）。"
     },
     "CONTEXT_MENU": {
       "CHANGE_PROJECT_SETTINGS": "更改项目设置",
@@ -88,7 +88,7 @@
   },
   "DONATE_PAGE": {
     "BUTTON_TEXT": "通过 GitHub Sponsors 捐赠",
-    "INTRO_1": "Super Productivity 完全由社区资助。没有追踪、没有广告、也没有数据收集——您的任务数据仅存于本地设备。",
+    "INTRO_1": "DSH_PlanFlow 完全由社区资助。没有追踪、没有广告、也没有数据收集——您的任务数据仅存于本地设备。",
     "INTRO_2": "如果您认同这种方式，并希望项目持续健康地发展，您的自愿性捐赠我们将非常感激。"
   },
   "EXAMPLE_TASKS": {
@@ -98,7 +98,7 @@
     },
     "LEARN_KEYBOARD_SHORTCUTS": {
       "TITLE": "学习键盘快捷键",
-      "NOTES": "Super Productivity 专为键盘操作而设计。学习快捷键可以让您工作更高效。\n\n**如何开始：**\n1. 打开**侧边栏菜单**\n2. 进入**帮助**\n3. 点击**键盘导航教程**"
+      "NOTES": "DSH_PlanFlow 专为键盘操作而设计。学习快捷键可以让您工作更高效。\n\n**如何开始：**\n1. 打开**侧边栏菜单**\n2. 进入**帮助**\n3. 点击**键盘导航教程**"
     },
     "CREATE_PROJECT": {
       "TITLE": "创建您的第一个项目",
@@ -224,7 +224,7 @@
         "TWO_WAY_SYNC_TITLE": "标题同步方向"
       },
       "FORM_SECTION": {
-        "HELP": "<p>在这里，您可以将 SuperProductivity 配置为在每日规划视图的任务创建看板中列出特定项目的未完成 CalDav 待办事项。它们将列为建议，并提供指向待办事项的链接以及有关它的更多信息。</p> <p>此外，您还可以自动添加并同步所有未完成的待办事项到您的任务待办事项列表。</p><p>要在网页应用中为 nextcloud 启用此功能，您可能需要通过 nextcloud 应用 <a href='https://apps.nextcloud.com/apps/webapppassword '>webapppassword</a> 将 \"https://app.super-productivity.com \" 加入白名单。</p>"
+        "HELP": "<p>在这里，您可以将 SuperProductivity 配置为在每日规划视图的任务创建看板中列出特定项目的未完成 CalDav 待办事项。它们将列为建议，并提供指向待办事项的链接以及有关它的更多信息。</p> <p>此外，您还可以自动添加并同步所有未完成的待办事项到您的任务待办事项列表。</p><p>要在网页应用中为 nextcloud 启用此功能，您可能需要通过 nextcloud 应用 <a href='https://apps.nextcloud.com/apps/webapppassword '>webapppassword</a> 将 \"https://app.github.com/4478sc/DSH_PlanFlow \" 加入白名单。</p>"
       },
       "ISSUE_CONTENT": {
         "DESCRIPTION": "描述",
@@ -301,7 +301,7 @@
       "FEEDBACK_PUBLIC": "在 GitHub Discussions 发帖",
       "FEEDBACK_PUBLIC_DESC": "他人可以看到并回复",
       "FEEDBACK_TITLE": "您想如何帮助？",
-      "TITLE": "喜欢 Super Productivity 吗？",
+      "TITLE": "喜欢 DSH_PlanFlow 吗？",
       "TXT": "这是一个由爱好者打造的<strong>免费开源项目</strong> —— 没有追踪，没有广告。一条评分或简短留言能帮助更多人发现它。"
     },
     "DROPBOX": {
@@ -913,7 +913,7 @@
         "TOKEN": "访问令牌"
       },
       "FORM_SECTION": {
-        "HELP": "<p>在这里，您可以将 SuperProductivity 配置为列出未结的 OpenProject 工作包。请注意，为了使其在浏览器中工作，您可能需要为您的 OpenProject 服务器配置跨域资源共享，以允许从 app.super-productivity.com 访问</p>"
+        "HELP": "<p>在这里，您可以将 SuperProductivity 配置为列出未结的 OpenProject 工作包。请注意，为了使其在浏览器中工作，您可能需要为您的 OpenProject 服务器配置跨域资源共享，以允许从 app.github.com/4478sc/DSH_PlanFlow 访问</p>"
       },
       "ISSUE_CONTENT": {
         "ASSIGNEE": "负责人",
@@ -1575,9 +1575,9 @@
         },
         "TITLE": "同步",
         "WEB_DAV": {
-          "CORS_INFO": "<strong>在浏览器中使其工作：</strong> 要使此功能在浏览器中工作，您需要将 Super Productivity 添加到您的 WebDAV 服务器的 CORS 请求白名单中。这可能会带来安全风险！对于 Nextcloud，请<a href='https://github.com/nextcloud/server/issues/3131'>参考此线程获取更多信息</a>。一种在移动设备上实现的方法是，通过 Nextcloud 应用 <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword</a> 将 \"https://app.super-productivity.com\" 加入白名单。风险自负！",
+          "CORS_INFO": "<strong>在浏览器中使其工作：</strong> 要使此功能在浏览器中工作，您需要将 DSH_PlanFlow 添加到您的 WebDAV 服务器的 CORS 请求白名单中。这可能会带来安全风险！对于 Nextcloud，请<a href='https://github.com/nextcloud/server/issues/3131'>参考此线程获取更多信息</a>。一种在移动设备上实现的方法是，通过 Nextcloud 应用 <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword</a> 将 \"https://app.github.com/4478sc/DSH_PlanFlow\" 加入白名单。风险自负！",
           "D_SYNC_FOLDER_PATH": "同步文件将存储在 WebDAV 服务器根目录下的相对路径（例如 '/super-productivity' 或 '/'）。这不是您服务器的内部目录路径。",
-          "INFO": "不幸的是，WebDAV 的实现方式差异很大。已知 Super Productivity 与 Nextcloud 配合良好，但可能不适用于您的提供商。",
+          "INFO": "不幸的是，WebDAV 的实现方式差异很大。已知 DSH_PlanFlow 与 Nextcloud 配合良好，但可能不适用于您的提供商。",
           "L_BASE_URL": "基础 URL",
           "L_PASSWORD": "密码",
           "L_SYNC_FOLDER_PATH": "同步文件夹路径",
@@ -1620,7 +1620,7 @@
         "ERROR_REMOTE_FILE_EMPTY": "远程同步文件为空。这可能发生在同步中断之后。要用本地数据覆盖远程数据吗？",
         "ERROR_REMOTE_FILE_LOCKED": "远程同步文件被服务器锁定。下次尝试同步时可能会解决。",
         "ERROR_REMOTE_RESPONSE_NOT_SYNC_DATA": "同步服务器返回的是一个网页而不是你的同步数据（例如登录页、代理页或错误页）。你的远程数据很可能完好——请检查服务器地址、凭据和网络，然后重试。如果问题持续，可以通过 同步设置 → 强制覆盖 覆盖远程数据。",
-        "ERROR_SYNC_VERSION_MISMATCH": "远程同步数据使用不兼容的格式版本。请确保所有设备运行相同版本的 Super Productivity。",
+        "ERROR_SYNC_VERSION_MISMATCH": "远程同步数据使用不兼容的格式版本。请确保所有设备运行相同版本的 DSH_PlanFlow。",
         "REMOTE_NOT_ENCRYPTED": "同步的数据未加密，但本设备启用了加密，因此被拒绝。如果你在其他设备上关闭了加密，请在此处的同步设置中也关闭它以继续。",
         "UNSUPPORTED_MULTI_ENTITY_CONFLICT": "为避免数据丢失，同步出于安全考虑已停止。请报告此代码：{{details}}",
         "WARN_CLIENT_ID_REGENERATED": "同步设备 ID 无效，已重新生成。下次同步时可能会发生同步冲突。",
@@ -2395,7 +2395,7 @@
     "IMPORT_FROM_URL_DIALOG_TITLE": "从 URL 导入",
     "OPEN_IMPORT_FROM_URL_DIALOG": "从 URL 导入",
     "PRIVACY_EXPORT": "导出数据（匿名化）",
-    "PRIVACY_EXPORT_DESCRIPTION": "导出匿名化数据（发送至 contact@super-productivity.com 进行调试）",
+    "PRIVACY_EXPORT_DESCRIPTION": "导出匿名化数据（发送至 contact@github.com/4478sc/DSH_PlanFlow 进行调试）",
     "S_BACKUP_DOWNLOADED": "备份已下载至安卓文档文件夹",
     "S_ERR_IMPORT_FAILED": "导入数据失败",
     "S_ERR_INVALID_DATA": "导入失败：JSON 无效",
@@ -2518,7 +2518,7 @@
     },
     "CALENDARS": {
       "AUTO_IMPORT_FOR_CURRENT_DAY": "自动将当天事件导入为任务",
-      "BROWSER_WARNING": "由于跨源限制，<b>超级生产力的浏览器版本可能无法使用此功能。<br />请 <a href=\"https://super-productivity.com/download/ \">下载桌面版本</a> 以使用此功能！</b>",
+      "BROWSER_WARNING": "由于跨源限制，<b>超级生产力的浏览器版本可能无法使用此功能。<br />请 <a href=\"https://github.com/4478sc/DSH_PlanFlow/download/ \">下载桌面版本</a> 以使用此功能！</b>",
       "CAL_COLOR": "日历颜色",
       "CAL_PATH": "iCal 源的 URL",
       "CHECK_UPDATES": "每 X 检查远程更新",
@@ -2750,7 +2750,7 @@
       "IS_VERTICAL_ACTION_BAR": "侧边垂直操作栏（实验性）",
       "IS_VERTICAL_ACTION_BAR_HINT": "将页眉操作按钮移到窗口右侧的垂直栏中。仅限桌面版。",
       "LOCAL_REST_API_TOKEN": "访问令牌",
-      "LOCAL_REST_API_TOKEN_ERROR": "无法保存访问令牌，因此 API 未运行。请检查 Super Productivity 是否能写入其数据文件夹，然后使用“重新生成”重试。",
+      "LOCAL_REST_API_TOKEN_ERROR": "无法保存访问令牌，因此 API 未运行。请检查 DSH_PlanFlow 是否能写入其数据文件夹，然后使用“重新生成”重试。",
       "LOCAL_REST_API_TOKEN_REGENERATE": "重新生成访问令牌",
       "LOCAL_REST_API_TOKEN_REGENERATE_ERROR": "无法保存新的访问令牌。之前的令牌仍然有效。",
       "START_OF_NEXT_DAY": "下一天的开始时间",
@@ -2781,7 +2781,7 @@
       "DEFAULT_TASK_REMIND_OPTION": "创建任务时默认选中的提醒方式",
       "DISABLE_REMINDERS": "禁用所有提醒",
       "DUE_DATE_NOTIFICATION_HOUR": "显示到期通知的时间（0-23）",
-      "HELP": "<p><strong>重要：</strong>提醒使用<strong>本地通知</strong>，而非推送通知。这意味着应用需要在您的设备上至少打开过一次才能安排提醒。在另一台设备上设置的提醒只有在应用在目标设备上同步后才会显示。</p><p>在 <strong>iOS</strong> 上，请确保在设备设置的\"设置\">\"通知\"中为 Super Productivity 启用通知。</p>",
+      "HELP": "<p><strong>重要：</strong>提醒使用<strong>本地通知</strong>，而非推送通知。这意味着应用需要在您的设备上至少打开过一次才能安排提醒。在另一台设备上设置的提醒只有在应用在目标设备上同步后才会显示。</p><p>在 <strong>iOS</strong> 上，请确保在设备设置的\"设置\">\"通知\"中为 DSH_PlanFlow 启用通知。</p>",
       "IS_COUNTDOWN_BANNER_ENABLED": "提醒到期前显示倒计时横幅",
       "IS_FOCUS_WINDOW": "提醒触发时，将应用程序窗口设为焦点",
       "NOTIFY_ON_DUE_DATE": "显示今天到期任务的通知",
@@ -2996,7 +2996,7 @@
     "ARCHIVED_PROJECTS": "已归档项目"
   },
   "MIGRATE": {
-    "C_DOWNLOAD_BACKUP": "是否要下载旧版数据的备份（可用于旧版本的 Super Productivity）？",
+    "C_DOWNLOAD_BACKUP": "是否要下载旧版数据的备份（可用于旧版本的 DSH_PlanFlow）？",
     "DETECTED_LEGACY": "检测到旧版数据。我们将为您自动迁移！",
     "DIALOG_MESSAGE": "我们正在更新数据存储方式以提升同步可靠性。系统将自动下载备份。",
     "DIALOG_TITLE": "正在迁移您的数据",
@@ -3017,10 +3017,10 @@
     "TASK_MARKED_DONE": "任务已标记为完成"
   },
   "ONBOARDING": {
-    "TITLE": "你想如何使用 Super Productivity？",
+    "TITLE": "你想如何使用 DSH_PlanFlow？",
     "SUBTITLE": "选择适合你工作方式的设置。你可以随时在设置中更改。",
     "PRIVACY_HINT": "你的数据安全地保存在你的设备上。不会向服务器发送任何内容。",
-    "SYNC_CTA": "已经在其他设备上使用 Super Productivity？",
+    "SYNC_CTA": "已经在其他设备上使用 DSH_PlanFlow？",
     "SYNC_CTA_LINK": "设置同步",
     "PRESETS": {
       "SIMPLE_TODO": {
@@ -3074,7 +3074,7 @@
       "FOCUS_MODE": "<b>专注模式</b> · 番茄钟与无干扰工作",
       "FOOTER": "之后可在帮助 → 快速导览再次找到。",
       "HABITS": "<b>习惯</b> · 逐日跟踪你的日常习惯",
-      "INTRO": "Super Productivity 一开始很简洁。需要时，还有更多功能：",
+      "INTRO": "DSH_PlanFlow 一开始很简洁。需要时，还有更多功能：",
       "OPEN_SETTINGS": "打开设置 ›",
       "PLUGINS": "<b>插件与集成</b> · Jira、GitHub、CalDAV 等",
       "SCHEDULE": "<b>计划</b> · 以时间线呈现你的一天",

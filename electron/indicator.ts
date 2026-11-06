@@ -67,7 +67,7 @@ const IS_WINDOWS = process.platform === 'win32';
 // binds to the executable's full path, and a stale binding makes
 // Shell_NotifyIcon(NIM_ADD) fail silently (Electron raises no JS error) —
 // leaving an invisible tray icon and an unreachable window. SignPath signs only
-// our Setup/portable wrappers; the installed `Super Productivity.exe` is unsigned
+// our Setup/portable wrappers; the installed `DSH_PlanFlow.exe` is unsigned
 // (verified on v19.2.0), so the GUID broke on Store/portable (#7282) and on NSIS
 // after updates (#10831). Without a GUID, Windows identifies the icon by window
 // handle and it stays visible. Revisit only if the app exe itself gets signed.
@@ -497,7 +497,7 @@ function createIndicatorMessage(
 function createContextMenu(msg?: string): Menu {
   const template: any[] = [];
 
-  // Either show the time string (if task is running) or "Super Productivity"
+  // Either show the time string (if task is running) or "DSH_PlanFlow"
   if (msg) {
     template.push({ label: msg, enabled: false });
     template.push({ type: 'separator' });

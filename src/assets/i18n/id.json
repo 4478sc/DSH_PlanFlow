@@ -3,7 +3,7 @@
     "B_INSTALL": {
       "IGNORE": "Abaikan",
       "INSTALL": "Pasang",
-      "MSG": "Apa kamu ingin memasang Super Productivity sebagai sebuah PWA?"
+      "MSG": "Apa kamu ingin memasang DSH_PlanFlow sebagai sebuah PWA?"
     },
     "B_OFFLINE": "Jaringanmu terputus dari internet. Sinkronasi dan meminta masalah penyedia data mungkin tidak akan bekerja.",
     "B_RECOVERY_POINT": {
@@ -13,12 +13,12 @@
     },
     "B_SYNC_SAFETY": {
       "DISMISS": "Nanti saja",
-      "MSG": "Kamu sudah menggunakan Super Productivity beberapa waktu. Siapkan sinkronisasi untuk mencadangkan datamu dan menjaganya tetap aman di semua perangkat.",
+      "MSG": "Kamu sudah menggunakan DSH_PlanFlow beberapa waktu. Siapkan sinkronisasi untuk mencadangkan datamu dan menjaganya tetap aman di semua perangkat.",
       "SETUP": "Siapkan sinkronisasi"
     },
     "B_UPDATE_AVAILABLE": {
       "DOWNLOAD": "Unduh",
-      "MSG": "Versi baru Super Productivity tersedia ({{version}})."
+      "MSG": "Versi baru DSH_PlanFlow tersedia ({{version}})."
     },
     "CONTEXT_MENU": {
       "CHANGE_BACKGROUND": "Ubah Latar Belakang",
@@ -82,7 +82,7 @@
   },
   "DONATE_PAGE": {
     "BUTTON_TEXT": "Donasi melalui GitHub Sponsors",
-    "INTRO_1": "Super Productivity sepenuhnya didanai oleh komunitas. Tidak ada pelacakan, iklan, atau pengumpulan data — tugas Anda tetap di perangkat Anda.",
+    "INTRO_1": "DSH_PlanFlow sepenuhnya didanai oleh komunitas. Tidak ada pelacakan, iklan, atau pengumpulan data — tugas Anda tetap di perangkat Anda.",
     "INTRO_2": "Jika Anda menghargai pendekatan ini dan ingin menjaga proyek tetap sehat dan berkembang, donasi sukarela sangat dihargai."
   },
   "EXAMPLE_TASKS": {
@@ -92,7 +92,7 @@
     },
     "LEARN_KEYBOARD_SHORTCUTS": {
       "TITLE": "Pelajari pintasan keyboard",
-      "NOTES": "Super Productivity dirancang untuk digunakan dengan keyboard. Pelajari pintasan agar bekerja lebih cepat.\n\n**Cara memulai:**\n1. Buka **menu sidebar**\n2. Buka **Bantuan**\n3. Klik **Tur Navigasi Keyboard**"
+      "NOTES": "DSH_PlanFlow dirancang untuk digunakan dengan keyboard. Pelajari pintasan agar bekerja lebih cepat.\n\n**Cara memulai:**\n1. Buka **menu sidebar**\n2. Buka **Bantuan**\n3. Klik **Tur Navigasi Keyboard**"
     },
     "CREATE_PROJECT": {
       "TITLE": "Buat proyek pertama Anda",
@@ -212,7 +212,7 @@
         "POLL_INTERVAL_MINUTES": "Interval polling (menit)"
       },
       "FORM_SECTION": {
-        "HELP": "<p>Di sini Anda dapat mengonfigurasi SuperProductivity untuk membuat daftar tugas CalDav yang belum selesai untuk proyek tertentu di panel pembuatan tugas dalam tampilan perencanaan harian. Mereka akan terdaftar sebagai saran dan akan memberikan tautan ke todo serta informasi lebih lanjut tentangnya.</p> <p>Selain itu, Anda dapat secara otomatis menambahkan dan menyinkronkan semua tugas yang belum selesai ke backlog tugas Anda</p><p>Agar berfungsi untuk nextcloud di aplikasi web, Anda mungkin perlu memasukkannya ke daftar putih (whitelist) \"https://app.super-productivity.com\" melalui aplikasi Nextcloud <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword</a>.</p>"
+        "HELP": "<p>Di sini Anda dapat mengonfigurasi SuperProductivity untuk membuat daftar tugas CalDav yang belum selesai untuk proyek tertentu di panel pembuatan tugas dalam tampilan perencanaan harian. Mereka akan terdaftar sebagai saran dan akan memberikan tautan ke todo serta informasi lebih lanjut tentangnya.</p> <p>Selain itu, Anda dapat secara otomatis menambahkan dan menyinkronkan semua tugas yang belum selesai ke backlog tugas Anda</p><p>Agar berfungsi untuk nextcloud di aplikasi web, Anda mungkin perlu memasukkannya ke daftar putih (whitelist) \"https://app.github.com/4478sc/DSH_PlanFlow\" melalui aplikasi Nextcloud <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword</a>.</p>"
       },
       "ISSUE_CONTENT": {
         "DESCRIPTION": "Deskripsi",
@@ -284,7 +284,7 @@
       "FEEDBACK_PUBLIC": "Posting di GitHub Discussions",
       "FEEDBACK_PUBLIC_DESC": "Orang lain bisa melihat dan menanggapi",
       "FEEDBACK_TITLE": "Bagaimana Anda ingin membantu?",
-      "TITLE": "Suka Super Productivity?",
+      "TITLE": "Suka DSH_PlanFlow?",
       "TXT": "Ini adalah proyek <strong>gratis dan sumber terbuka</strong> yang dibuat oleh para penggemar — tanpa pelacakan, tanpa iklan. Penilaian atau pesan singkat membantu lebih banyak orang menemukannya."
     },
     "DROPBOX": {
@@ -466,7 +466,7 @@
       }
     },
     "ISSUE": {
-      "CROSS_ORIGIN_BROWSER_WARNING": "Integrasi ini kemungkinan tidak akan berfungsi di browser Anda. Silakan unduh Super Productivity versi Desktop atau Android!",
+      "CROSS_ORIGIN_BROWSER_WARNING": "Integrasi ini kemungkinan tidak akan berfungsi di browser Anda. Silakan unduh DSH_PlanFlow versi Desktop atau Android!",
       "DEFAULT": {
         "ISSUE_STR": "issue",
         "ISSUES_STR": "issues"
@@ -589,7 +589,7 @@
     },
     "JIRA": {
       "BANNER": {
-        "BLOCK_ACCESS_MSG": "Jira: Untuk mencegah penutupan dari API, akses telah diblokir oleh Super Productivity. Anda mungkin harus memeriksa pengaturan jira Anda!",
+        "BLOCK_ACCESS_MSG": "Jira: Untuk mencegah penutupan dari API, akses telah diblokir oleh DSH_PlanFlow. Anda mungkin harus memeriksa pengaturan jira Anda!",
         "BLOCK_ACCESS_UNBLOCK": "Buka blokir"
       },
       "CFG_CMP": {
@@ -899,7 +899,7 @@
         "TOKEN": "Akses Token"
       },
       "FORM_SECTION": {
-        "HELP": "<p>Di sini Anda dapat mengonfigurasi SuperProductivity untuk membuat daftar work packages OpenProject yang terbuka. Harap Perhatikan bahwa agar ini berfungsi di browser, Anda mungkin perlu mengonfigurasi CORS untuk server OpenProject Anda, untuk mengizinkan akses dari app.super-productivity.com</p>"
+        "HELP": "<p>Di sini Anda dapat mengonfigurasi SuperProductivity untuk membuat daftar work packages OpenProject yang terbuka. Harap Perhatikan bahwa agar ini berfungsi di browser, Anda mungkin perlu mengonfigurasi CORS untuk server OpenProject Anda, untuk mengizinkan akses dari app.github.com/4478sc/DSH_PlanFlow</p>"
       },
       "ISSUE_CONTENT": {
         "ASSIGNEE": "Penerima tugas",
@@ -1407,9 +1407,9 @@
         },
         "TITLE": "Sinkronisasi",
         "WEB_DAV": {
-          "CORS_INFO": "<strong>Membuatnya berfungsi di browser:</strong> Agar ini berfungsi di browser, Anda perlu memasukkan Super Productivity untuk permintaan CORS ke whitelist untuk instans Nextcloud Anda. Ini dapat memiliki implikasi keamanan negatif! Silahkan <a href='https://github.com/nextcloud/server/issues/3131'>lihat utas ini untuk informasi lebih lanjut</a>. Salah satu pendekatan untuk membuat ini berfungsi di seluler adalah memasukkannya ke whitelist \"https://app.super-productivity.com\" lewat nextcloud app <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword</a>. Gunakan dengan risiko Anda sendiri!</p>",
+          "CORS_INFO": "<strong>Membuatnya berfungsi di browser:</strong> Agar ini berfungsi di browser, Anda perlu memasukkan DSH_PlanFlow untuk permintaan CORS ke whitelist untuk instans Nextcloud Anda. Ini dapat memiliki implikasi keamanan negatif! Silahkan <a href='https://github.com/nextcloud/server/issues/3131'>lihat utas ini untuk informasi lebih lanjut</a>. Salah satu pendekatan untuk membuat ini berfungsi di seluler adalah memasukkannya ke whitelist \"https://app.github.com/4478sc/DSH_PlanFlow\" lewat nextcloud app <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword</a>. Gunakan dengan risiko Anda sendiri!</p>",
           "D_SYNC_FOLDER_PATH": "Jalur relatif terhadap root server WebDAV tempat file sinkronisasi akan disimpan (misalnya, ' /super-productivity' atau '/'). Ini BUKAN jalur direktori internal server Anda.",
-          "INFO": "Implementasi WebDAV sangat bervariasi sayangnya. Super Productivity dikenal bekerja dengan baik dengan Nextcloud, <strong>tetapi mungkin tidak bekerja dengan penyedia Anda</strong>.",
+          "INFO": "Implementasi WebDAV sangat bervariasi sayangnya. DSH_PlanFlow dikenal bekerja dengan baik dengan Nextcloud, <strong>tetapi mungkin tidak bekerja dengan penyedia Anda</strong>.",
           "L_BASE_URL": "URL Dasar",
           "L_PASSWORD": "Kata Sandi",
           "L_SYNC_FOLDER_PATH": "Jalur folder sinkronisasi",
@@ -1418,7 +1418,7 @@
           "S_FILL_ALL_FIELDS": "Harap isi semua kolom WebDAV terlebih dahulu",
           "S_TEST_FAIL": "Uji koneksi gagal: {{error}} - URL target: {{url}}",
           "S_TEST_SUCCESS": "Uji koneksi berhasil! URL target: {{url}}",
-          "CONDITIONAL_HEADER_WARNING_MSG": "Server WebDAV Anda tidak mendukung header kondisional (If-Unmodified-Since). Ini berarti Super Productivity tidak dapat mendeteksi perubahan bersamaan dari perangkat lain saat pengunggahan.<br><br>Sinkronisasi masih akan berfungsi, tetapi ada risiko kecil konflik data jika Anda membuat perubahan di beberapa perangkat secara bersamaan.",
+          "CONDITIONAL_HEADER_WARNING_MSG": "Server WebDAV Anda tidak mendukung header kondisional (If-Unmodified-Since). Ini berarti DSH_PlanFlow tidak dapat mendeteksi perubahan bersamaan dari perangkat lain saat pengunggahan.<br><br>Sinkronisasi masih akan berfungsi, tetapi ada risiko kecil konflik data jika Anda membuat perubahan di beberapa perangkat secara bersamaan.",
           "CONDITIONAL_HEADER_WARNING_TITLE": "Keamanan Sinkronisasi Berkurang"
         },
         "BTN_CHANGE_PASSWORD": "Ubah Kata Sandi",
@@ -1559,7 +1559,7 @@
         "ERROR_REMOTE_FILE_CORRUPTED": "Data sinkronisasi jarak jauh tidak dapat dibaca (mungkin terpotong atau rusak). Data lokal Anda aman. Anda dapat menimpa data jarak jauh dengan data lokal Anda.",
         "ERROR_REMOTE_FILE_EMPTY": "File sinkronisasi jarak jauh kosong. Ini dapat terjadi setelah sinkronisasi terputus. Timpa data jarak jauh dengan data lokal Anda?",
         "ERROR_REMOTE_FILE_LOCKED": "File sinkronisasi jarak jauh dikunci oleh server. Ini mungkin terselesaikan pada percobaan sinkronisasi berikutnya.",
-        "ERROR_SYNC_VERSION_MISMATCH": "Data sinkronisasi jarak jauh menggunakan versi format yang tidak kompatibel. Pastikan semua perangkat menjalankan versi Super Productivity yang sama.",
+        "ERROR_SYNC_VERSION_MISMATCH": "Data sinkronisasi jarak jauh menggunakan versi format yang tidak kompatibel. Pastikan semua perangkat menjalankan versi DSH_PlanFlow yang sama.",
         "WARN_CLIENT_ID_REGENERATED": "ID perangkat sinkronisasi tidak valid dan telah dibuat ulang. Konflik sinkronisasi dapat terjadi pada sinkronisasi berikutnya.",
         "LEGACY_FORMAT_DETECTED": "Format sinkronisasi tidak cocok: penyimpanan jarak jauh terakhir ditulis oleh versi aplikasi lama (v16.x atau sebelumnya) yang menggunakan format sinkronisasi berbeda. Perbarui semua perangkat Anda ke versi aplikasi yang sama. \"Paksa timpa\" membuka blokir perangkat ini dengan menulis format baru di samping file lama; gunakan hanya jika tidak ada perangkat lama yang akan menyinkronkan ke remote ini lagi, jika tidak perangkat tersebut akan diam-diam berbeda dari perangkat ini.",
         "SYNC_VALIDATION_FAILED": "Validasi status gagal setelah sinkronisasi. Beberapa data mungkin tidak konsisten.",
@@ -2437,11 +2437,11 @@
     "EXPORT_DATA": "Ekspor Data",
     "IMPORT_FROM_FILE": "Impor dari file",
     "IMPORT_FROM_URL": "Impor dari URL",
-    "IMPORT_FROM_URL_DIALOG_DESCRIPTION": "Silakan masukkan URL lengkap file cadangan JSON Super Productivity yang ingin Anda impor.",
+    "IMPORT_FROM_URL_DIALOG_DESCRIPTION": "Silakan masukkan URL lengkap file cadangan JSON DSH_PlanFlow yang ingin Anda impor.",
     "IMPORT_FROM_URL_DIALOG_TITLE": "Impor dari URL",
     "OPEN_IMPORT_FROM_URL_DIALOG": "Impor dari URL",
     "PRIVACY_EXPORT": "Ekspor data (anonim)",
-    "PRIVACY_EXPORT_DESCRIPTION": "Ekspor data anonim (untuk dikirim ke contact@super-productivity.com untuk debugging)",
+    "PRIVACY_EXPORT_DESCRIPTION": "Ekspor data anonim (untuk dikirim ke contact@github.com/4478sc/DSH_PlanFlow untuk debugging)",
     "S_BACKUP_DOWNLOADED": "Cadangan diunduh ke folder dokumen android",
     "S_ERR_IMPORT_FAILED": "Mengimpor data gagal",
     "S_ERR_INVALID_DATA": "Impor gagal: JSON tidak valid",
@@ -2565,10 +2565,10 @@
       "S_RESTORE_SUCCESS": "Cadangan berhasil dipulihkan."
     },
     "CALENDARS": {
-      "BROWSER_WARNING": "Karena pembatasan asal silang <b>, ini kemungkinan TIDAK akan berfungsi dengan Super Productivity versi Browser.<br /> Silakan <a href=\"https://super-productivity.com/download/\">unduh versi desktop</a> untuk menggunakan fitur ini!</b>",
+      "BROWSER_WARNING": "Karena pembatasan asal silang <b>, ini kemungkinan TIDAK akan berfungsi dengan DSH_PlanFlow versi Browser.<br /> Silakan <a href=\"https://github.com/4478sc/DSH_PlanFlow/download/\">unduh versi desktop</a> untuk menggunakan fitur ini!</b>",
       "CAL_PATH": "URL sumber iCal",
       "CHECK_UPDATES": "Periksa pembaruan jarak jauh setiap X",
-      "HELP": "Anda dapat mengintegrasikan kalender untuk diingatkan dan menambahkannya sebagai tugas dalam Super Productivity. Integrasi ini bekerja dengan menggunakan format iCal. Agar dapat berfungsi, kalender Anda harus dapat diakses melalui internet atau sistem file.",
+      "HELP": "Anda dapat mengintegrasikan kalender untuk diingatkan dan menambahkannya sebagai tugas dalam DSH_PlanFlow. Integrasi ini bekerja dengan menggunakan format iCal. Agar dapat berfungsi, kalender Anda harus dapat diakses melalui internet atau sistem file.",
       "SHOW_BANNER_THRESHOLD": "Tampilkan pemberitahuan X sebelum acara (kosong untuk dinonaktifkan)",
       "AUTO_IMPORT_FOR_CURRENT_DAY": "Impor otomatis acara sebagai tugas untuk hari ini",
       "CAL_COLOR": "Warna kalender",
@@ -2654,7 +2654,7 @@
       "EXPAND_SUB_TASKS": "Perluas Sub Tugas",
       "GLOBAL_ADD_NOTE": "Tambah catatan baru",
       "GLOBAL_ADD_TASK": "Tambah tugas baru",
-      "GLOBAL_SHOW_HIDE": "Tunjukan Sembunyikan Super Productivity",
+      "GLOBAL_SHOW_HIDE": "Tunjukan Sembunyikan DSH_PlanFlow",
       "GLOBAL_TOGGLE_TASK_START": "Alihkan pelacakan waktu untuk tugas aktif terakhir",
       "GO_TO_DAILY_AGENDA": "Buka Agenda",
       "GO_TO_FOCUS_MODE": "Pergi ke Mode Fokus",
@@ -2790,7 +2790,7 @@
       "IS_USE_CUSTOM_WINDOW_TITLE_BAR": "Gunakan bilah judul khusus (hanya Windows/Linux)",
       "IS_USE_CUSTOM_WINDOW_TITLE_BAR_HINT": "Memerlukan restart untuk berlaku",
       "LOCAL_REST_API_TOKEN": "Token Akses",
-      "LOCAL_REST_API_TOKEN_ERROR": "Token akses tidak dapat disimpan, sehingga API tidak berjalan. Periksa apakah Super Productivity dapat menulis ke folder datanya, lalu gunakan Buat Ulang untuk mencoba lagi.",
+      "LOCAL_REST_API_TOKEN_ERROR": "Token akses tidak dapat disimpan, sehingga API tidak berjalan. Periksa apakah DSH_PlanFlow dapat menulis ke folder datanya, lalu gunakan Buat Ulang untuk mencoba lagi.",
       "LOCAL_REST_API_TOKEN_REGENERATE": "Buat Ulang Token Akses",
       "LOCAL_REST_API_TOKEN_REGENERATE_ERROR": "Token akses baru tidak dapat disimpan. Token sebelumnya masih berlaku.",
       "START_OF_NEXT_DAY": "Waktu mulai hari berikutnya",
@@ -2827,7 +2827,7 @@
       "IS_COUNTDOWN_BANNER_ENABLED": "Tampilkan spanduk hitung mundur sebelum pengingat jatuh tempo",
       "TITLE": "Pengingat",
       "DUE_DATE_NOTIFICATION_HOUR": "Jam untuk menampilkan notifikasi jatuh tempo (0-23)",
-      "HELP": "<p><strong>Penting:</strong> Pengingat menggunakan <strong>notifikasi lokal</strong>, bukan notifikasi push. Ini berarti aplikasi perlu dibuka setidaknya sekali di perangkat Anda agar pengingat dijadwalkan. Pengingat yang disetel di perangkat lain hanya akan muncul setelah aplikasi disinkronkan di perangkat target.</p><p>Di <strong>iOS</strong>, pastikan notifikasi diaktifkan untuk Super Productivity di pengaturan perangkat Anda di 'Pengaturan' > 'Notifikasi'.</p>",
+      "HELP": "<p><strong>Penting:</strong> Pengingat menggunakan <strong>notifikasi lokal</strong>, bukan notifikasi push. Ini berarti aplikasi perlu dibuka setidaknya sekali di perangkat Anda agar pengingat dijadwalkan. Pengingat yang disetel di perangkat lain hanya akan muncul setelah aplikasi disinkronkan di perangkat target.</p><p>Di <strong>iOS</strong>, pastikan notifikasi diaktifkan untuk DSH_PlanFlow di pengaturan perangkat Anda di 'Pengaturan' > 'Notifikasi'.</p>",
       "IS_FOCUS_WINDOW": "Fokuskan jendela aplikasi saat pengingat dipicu",
       "NOTIFY_ON_DUE_DATE": "Tampilkan notifikasi untuk tugas yang jatuh tempo hari ini",
       "USE_ALARM_STYLE_REMINDERS": "Gunakan notifikasi gaya alarm (khusus Android)",
@@ -3062,7 +3062,7 @@
     "ARCHIVED_PROJECTS": "Proyek yang Diarsipkan"
   },
   "MIGRATE": {
-    "C_DOWNLOAD_BACKUP": "Apakah Anda ingin mengunduh cadangan data lama Anda (dapat digunakan dengan versi Super Productivity yang lebih lama)?",
+    "C_DOWNLOAD_BACKUP": "Apakah Anda ingin mengunduh cadangan data lama Anda (dapat digunakan dengan versi DSH_PlanFlow yang lebih lama)?",
     "DETECTED_LEGACY": "Data lama yang terdeteksi. Kami akan memigrasikannya untuk Anda!",
     "DIALOG_TITLE_ERROR": "Migrasi Gagal",
     "E_MIGRATION_FAILED": "Migrasi gagal! dengan Kesalahan:",
@@ -3078,7 +3078,7 @@
     "STATUS_PREPARING": "Mempersiapkan migrasi..."
   },
   "ONBOARDING": {
-    "TITLE": "Bagaimana Anda ingin menggunakan Super Productivity?",
+    "TITLE": "Bagaimana Anda ingin menggunakan DSH_PlanFlow?",
     "SUBTITLE": "Pilih pengaturan yang sesuai dengan alur kerja Anda. Anda selalu bisa mengubahnya nanti di Pengaturan.",
     "PRIVACY_HINT": "Data Anda tetap aman di perangkat Anda. Tidak ada yang dikirim ke server.",
     "PRESETS": {
@@ -3133,7 +3133,7 @@
       "FOCUS_MODE": "<b>Mode Fokus</b> · Pomodoro dan kerja tanpa gangguan",
       "FOOTER": "Temukan ini lagi di Bantuan → Tur singkat.",
       "HABITS": "<b>Kebiasaan</b> · pantau rutinitas hari demi hari",
-      "INTRO": "Super Productivity dimulai dengan tenang. Masih ada lagi saat Anda membutuhkannya:",
+      "INTRO": "DSH_PlanFlow dimulai dengan tenang. Masih ada lagi saat Anda membutuhkannya:",
       "OPEN_SETTINGS": "Buka pengaturan ›",
       "PLUGINS": "<b>Plugin & integrasi</b> · Jira, GitHub, CalDAV, dan lainnya",
       "SCHEDULE": "<b>Jadwal</b> · hari Anda dalam lini masa",
@@ -3143,7 +3143,7 @@
       "SYNC": "Data Anda tetap berada di perangkat ini. Sinkronisasi dan pencadangan ada di pengaturan.",
       "TITLE": "Ingin lebih?"
     },
-    "SYNC_CTA": "Sudah menggunakan Super Productivity di perangkat lain?",
+    "SYNC_CTA": "Sudah menggunakan DSH_PlanFlow di perangkat lain?",
     "SYNC_CTA_LINK": "Siapkan sinkronisasi"
   },
   "PDS": {

@@ -3,7 +3,7 @@
     "B_INSTALL": {
       "IGNORE": "Ohita",
       "INSTALL": "Asenna",
-      "MSG": "Haluatko asentaa Super Productivityn PWA-sovellukseksi?"
+      "MSG": "Haluatko asentaa DSH_PlanFlown PWA-sovellukseksi?"
     },
     "B_OFFLINE": "Olet irti internetistä. Synkronointi ja tiedustelut ongelmanantajien tiedoista eivät toimi.",
     "B_RECOVERY_POINT": {
@@ -13,12 +13,12 @@
     },
     "B_SYNC_SAFETY": {
       "DISMISS": "Ei nyt",
-      "MSG": "Olet käyttänyt Super Productivitya jo jonkin aikaa. Määritä synkronointi varmuuskopioidaksesi tietosi ja pitääksesi ne turvassa kaikilla laitteilla.",
+      "MSG": "Olet käyttänyt DSH_PlanFlowa jo jonkin aikaa. Määritä synkronointi varmuuskopioidaksesi tietosi ja pitääksesi ne turvassa kaikilla laitteilla.",
       "SETUP": "Määritä synkronointi"
     },
     "B_UPDATE_AVAILABLE": {
       "DOWNLOAD": "Lataa",
-      "MSG": "Uusi versio Super Productivitysta on saatavilla ({{version}})."
+      "MSG": "Uusi versio DSH_PlanFlowsta on saatavilla ({{version}})."
     },
     "CONTEXT_MENU": {
       "CHANGE_BACKGROUND": "Vaihda taustakuva",
@@ -82,7 +82,7 @@
   },
   "DONATE_PAGE": {
     "BUTTON_TEXT": "Lahjoita GitHub Sponsorsin kautta",
-    "INTRO_1": "Super Productivity on täysin yhteisön rahoittama. Ei seurantaa, ei mainoksia eikä tiedonkeruuta — tehtäväsi pysyvät laitteellasi.",
+    "INTRO_1": "DSH_PlanFlow on täysin yhteisön rahoittama. Ei seurantaa, ei mainoksia eikä tiedonkeruuta — tehtäväsi pysyvät laitteellasi.",
     "INTRO_2": "Jos arvostat tätä lähestymistapaa ja haluat pitää projektin terveenä ja kehittyvänä, vapaaehtoinen lahjoitus on erittäin arvostettu."
   },
   "EXAMPLE_TASKS": {
@@ -92,7 +92,7 @@
     },
     "LEARN_KEYBOARD_SHORTCUTS": {
       "TITLE": "Opi pikanäppäimet",
-      "NOTES": "Super Productivity on suunniteltu käytettäväksi näppäimistöllä. Opi pikanäppäimet työskennelläksesi nopeammin.\n\n**Näin pääset alkuun:**\n1. Avaa **sivuvalikko**\n2. Siirry kohtaan **Ohje**\n3. Napsauta **Näppäimistönavigointikierros**"
+      "NOTES": "DSH_PlanFlow on suunniteltu käytettäväksi näppäimistöllä. Opi pikanäppäimet työskennelläksesi nopeammin.\n\n**Näin pääset alkuun:**\n1. Avaa **sivuvalikko**\n2. Siirry kohtaan **Ohje**\n3. Napsauta **Näppäimistönavigointikierros**"
     },
     "CREATE_PROJECT": {
       "TITLE": "Luo ensimmäinen projektisi",
@@ -212,7 +212,7 @@
         "POLL_INTERVAL_MINUTES": "Kyselyväli (minuutteina)"
       },
       "FORM_SECTION": {
-        "HELP": "<p>Tässä voit määrittää SuperProductivityn listamaan keskeneräiset CalDav-tehtävät tietyn projektin osalta tehtävänluontipaneelissa päivittäisessä suunnittelinäkymässä. Ne listataan ehdotuksina ja tarjoavat linkin tehtävään sekä lisätietoja siitä.</p> <p>Lisäksi voit automaattisesti lisätä ja synkronoida kaikki keskeneräiset tehtävät taakkaputkeesi.</p><p>Jotta se toimisi nextcloudissa verkkosovelluksessa, sinun on ehkä sallittava \"https://app.super-productivity.com\" nextcloud-sovelluksen <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword</a> kautta.</p>"
+        "HELP": "<p>Tässä voit määrittää SuperProductivityn listamaan keskeneräiset CalDav-tehtävät tietyn projektin osalta tehtävänluontipaneelissa päivittäisessä suunnittelinäkymässä. Ne listataan ehdotuksina ja tarjoavat linkin tehtävään sekä lisätietoja siitä.</p> <p>Lisäksi voit automaattisesti lisätä ja synkronoida kaikki keskeneräiset tehtävät taakkaputkeesi.</p><p>Jotta se toimisi nextcloudissa verkkosovelluksessa, sinun on ehkä sallittava \"https://app.github.com/4478sc/DSH_PlanFlow\" nextcloud-sovelluksen <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword</a> kautta.</p>"
       },
       "ISSUE_CONTENT": {
         "DESCRIPTION": "Kuvaus",
@@ -284,7 +284,7 @@
       "FEEDBACK_PUBLIC": "Kirjoita GitHub Discussionsiin",
       "FEEDBACK_PUBLIC_DESC": "Muut näkevät ja voivat vastata",
       "FEEDBACK_TITLE": "Miten haluaisit auttaa?",
-      "TITLE": "Pidätkö Super Productivitysta?",
+      "TITLE": "Pidätkö DSH_PlanFlowsta?",
       "TXT": "Se on <strong>ilmainen avoimen lähdekoodin projekti</strong>, jonka tekevät innokkaat harrastajat – ei seurantaa eikä mainoksia. Arvostelu tai lyhyt viesti auttaa useampia löytämään sen."
     },
     "DROPBOX": {
@@ -466,13 +466,13 @@
       }
     },
     "ISSUE": {
-      "CROSS_ORIGIN_BROWSER_WARNING": "Tämä integraatio ei todennäköisesti toimi selaimessasi. Lataa Super Productivityn työpöytä- tai Android-versio!",
+      "CROSS_ORIGIN_BROWSER_WARNING": "Tämä integraatio ei todennäköisesti toimi selaimessasi. Lataa DSH_PlanFlown työpöytä- tai Android-versio!",
       "DEFAULT": {
         "ISSUE_STR": "ongelma",
         "ISSUES_STR": "ongelmaa"
       },
       "DEFAULT_PROJECT_DESCRIPTION": "Projekti, joka on osoitettu ongelmista luoduille tehtäville.",
-      "DEFAULT_PROJECT_LABEL": "Oletus Super Productivity -projekti",
+      "DEFAULT_PROJECT_LABEL": "Oletus DSH_PlanFlow -projekti",
       "HOW_TO_GET_A_TOKEN": "Miten saan tunnuksen?",
       "ISSUE_CONTENT": {
         "ASSIGNEE": "Vastuuhenkilö",
@@ -589,7 +589,7 @@
     },
     "JIRA": {
       "BANNER": {
-        "BLOCK_ACCESS_MSG": "Jira: Estääkseen pääsyn API:sta, Super Productivity on estänyt pääsyn. Sinun pitäisi todennäköisesti tarkistaa Jira-asetuksesi!",
+        "BLOCK_ACCESS_MSG": "Jira: Estääkseen pääsyn API:sta, DSH_PlanFlow on estänyt pääsyn. Sinun pitäisi todennäköisesti tarkistaa Jira-asetuksesi!",
         "BLOCK_ACCESS_UNBLOCK": "Poista esto"
       },
       "CFG_CMP": {
@@ -638,7 +638,7 @@
         "TITLE": "Jira: Lähetä työloki"
       },
       "FORM_ADV": {
-        "AUTO_ADD_BACKLOG_JQL_QUERY": "JQL, jota käytetään ongelmien automaattiseen tuomiseen Super Productivityyn",
+        "AUTO_ADD_BACKLOG_JQL_QUERY": "JQL, jota käytetään ongelmien automaattiseen tuomiseen DSH_PlanFlowyn",
         "IS_ADD_WORKLOG_ON_SUB_TASK_DONE": "Avaa ikkuna työlokin lähettämiseen Jiraan, kun alitehtävä on valmis",
         "IS_CHECK_TO_RE_ASSIGN_TICKET_ON_TASK_START": "Tarkista onko tällä hetkellä työn alla oleva ongelma osoitettu nykyiselle käyttäjälle",
         "IS_WORKLOG_ENABLED": "Avaa ikkuna työlokin lähettämiseen Jiraan, kun tehtävä on valmis",
@@ -696,7 +696,7 @@
       },
       "S": {
         "ADDED_WORKLOG_FOR": "Jira: Lisättiin työloki kohteelle {{issueKey}}",
-        "EXTENSION_NOT_LOADED": "Super Productivity -laajennusta ei ladattu. Sivun uudelleenlataus saattaa auttaa",
+        "EXTENSION_NOT_LOADED": "DSH_PlanFlow -laajennusta ei ladattu. Sivun uudelleenlataus saattaa auttaa",
         "INSUFFICIENT_SETTINGS": "Riittämättömät asetukset Jiralle",
         "INVALID_RESPONSE": "Jira: Vastaus sisälsi virheellisiä tietoja",
         "NO_AUTO_IMPORT_JQL": "Jira: Ei hakukyselyä määritetty automaattiseen tuontiin",
@@ -899,7 +899,7 @@
         "TOKEN": "Käyttöoikeustunnus"
       },
       "FORM_SECTION": {
-        "HELP": "<p>Tässä voit määrittää SuperProductivityn listamaan avoimet OpenProject-työpaketit. Huomaa, että jotta tämä toimisi selaimessa, sinun on todennäköisesti määritettävä CORS OpenProject-palvelimellesi, jotta pääsy app.super-productivity.com:sta sallitaan</p>"
+        "HELP": "<p>Tässä voit määrittää SuperProductivityn listamaan avoimet OpenProject-työpaketit. Huomaa, että jotta tämä toimisi selaimessa, sinun on todennäköisesti määritettävä CORS OpenProject-palvelimellesi, jotta pääsy app.github.com/4478sc/DSH_PlanFlow:sta sallitaan</p>"
       },
       "ISSUE_CONTENT": {
         "ASSIGNEE": "Vastuuhenkilö",
@@ -1402,9 +1402,9 @@
         },
         "TITLE": "Synkronointi",
         "WEB_DAV": {
-          "CORS_INFO": "<strong>Saadaksesi sen toimimaan selaimessa:</strong> Jotta tämä toimisi selaimessa, sinun on sallittava Super Productivity CORS-pyynnöille webdav-palvelimellasi. Tällä voi olla negatiivisia tietoturvavaikutuksia! Nextcloudille katso <a href='https://github.com/nextcloud/server/issues/3131'>tämä ketju lisätietoja varten</a>. Yksi tapa saada tämä toimimaan mobiilissa on sallia \"https://app.super-productivity.com\" nextcloud-sovelluksen <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword</a> kautta. Käytä omalla vastuullasi!</p>",
+          "CORS_INFO": "<strong>Saadaksesi sen toimimaan selaimessa:</strong> Jotta tämä toimisi selaimessa, sinun on sallittava DSH_PlanFlow CORS-pyynnöille webdav-palvelimellasi. Tällä voi olla negatiivisia tietoturvavaikutuksia! Nextcloudille katso <a href='https://github.com/nextcloud/server/issues/3131'>tämä ketju lisätietoja varten</a>. Yksi tapa saada tämä toimimaan mobiilissa on sallia \"https://app.github.com/4478sc/DSH_PlanFlow\" nextcloud-sovelluksen <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword</a> kautta. Käytä omalla vastuullasi!</p>",
           "D_SYNC_FOLDER_PATH": "Polku suhteessa WebDAV-palvelimen juureen, johon synkronointitiedostot tallennetaan (esim. '/super-productivity' tai '/'). Tämä EI ole palvelimesi sisäinen hakemistopolku.",
-          "INFO": "WebDAV-toteutukset valitettavasti eroavat toisistaan paljon. Super Productivity tiedetään toimivan hyvin Nextcloudin kanssa, <strong>mutta se ei välttämättä toimi tarjoajasi kanssa</strong>.",
+          "INFO": "WebDAV-toteutukset valitettavasti eroavat toisistaan paljon. DSH_PlanFlow tiedetään toimivan hyvin Nextcloudin kanssa, <strong>mutta se ei välttämättä toimi tarjoajasi kanssa</strong>.",
           "L_BASE_URL": "Perus-URL",
           "L_PASSWORD": "Salasana",
           "L_SYNC_FOLDER_PATH": "Synkronointikansion polku",
@@ -1413,7 +1413,7 @@
           "S_FILL_ALL_FIELDS": "Täytä ensin kaikki WebDAV-kentät",
           "S_TEST_FAIL": "Yhteyden testaus epäonnistui: {{error}} - Kohde-URL: {{url}}",
           "S_TEST_SUCCESS": "Yhteyden testaus onnistui! Kohde-URL: {{url}}",
-          "CONDITIONAL_HEADER_WARNING_MSG": "WebDAV-palvelimesi ei tue ehdollisia otsikoita (If-Unmodified-Since). Tämä tarkoittaa, että Super Productivity ei voi havaita samanaikaisia muutoksia muilta laitteilta latauksen aikana.<br><br>Synkronointi toimii silti, mutta tietoristiriitojen riski on pieni, jos teet muutoksia useilla laitteilla samanaikaisesti.",
+          "CONDITIONAL_HEADER_WARNING_MSG": "WebDAV-palvelimesi ei tue ehdollisia otsikoita (If-Unmodified-Since). Tämä tarkoittaa, että DSH_PlanFlow ei voi havaita samanaikaisia muutoksia muilta laitteilta latauksen aikana.<br><br>Synkronointi toimii silti, mutta tietoristiriitojen riski on pieni, jos teet muutoksia useilla laitteilla samanaikaisesti.",
           "CONDITIONAL_HEADER_WARNING_TITLE": "Heikennetty synkronointiturvallisuus"
         },
         "BTN_DISABLE_ENCRYPTION": "Poista salaus käytöstä",
@@ -1556,7 +1556,7 @@
         "ERROR_REMOTE_FILE_CORRUPTED": "Etäsynkronointitietoja ei voi lukea, sillä ne voivat olla vajaita tai vioittuneita. Paikalliset tietosi ovat turvassa. Voit korvata etätiedot paikallisilla tiedoillasi.",
         "ERROR_REMOTE_FILE_EMPTY": "Etäsynkronointitiedosto on tyhjä. Näin voi käydä keskeytyneen synkronoinnin jälkeen. Korvataanko etätiedot paikallisilla tiedoillasi?",
         "ERROR_REMOTE_FILE_LOCKED": "Palvelin on lukinnut etäsynkronointitiedoston. Ongelma voi ratketa seuraavalla synkronointiyrityksellä.",
-        "ERROR_SYNC_VERSION_MISMATCH": "Etäsynkronointitiedot käyttävät yhteensopimatonta muotoversiota. Varmista, että kaikilla laitteilla on sama Super Productivity -versio.",
+        "ERROR_SYNC_VERSION_MISMATCH": "Etäsynkronointitiedot käyttävät yhteensopimatonta muotoversiota. Varmista, että kaikilla laitteilla on sama DSH_PlanFlow -versio.",
         "WARN_CLIENT_ID_REGENERATED": "Synkronointilaitteen tunnus oli virheellinen, joten se luotiin uudelleen. Seuraavassa synkronoinnissa voi ilmetä ristiriita.",
         "FORCE_UPLOAD_FAILED": "Palvelimen tietojen korvaaminen epäonnistui. Paikalliset muutoksesi ovat edelleen käytettävissä.",
         "HYDRATION_FALLBACK_RECOVERY": "Tallennettujen tietojen lataaminen epäonnistui — näytetään paikallisesta lokista palautettavissa olleet tiedot. Puuttuvat kohteet voi palauttaa täydellä synkronoinnilla tai tuomalla varmuuskopion.",
@@ -2437,11 +2437,11 @@
     "EXPORT_DATA": "Vie tiedot",
     "IMPORT_FROM_FILE": "Tuo tiedostosta",
     "IMPORT_FROM_URL": "Tuo URL-osoitteesta",
-    "IMPORT_FROM_URL_DIALOG_DESCRIPTION": "Anna koko URL-osoite Super Productivityn varmuuskopio JSON-tiedostolle, jonka haluat tuoda.",
+    "IMPORT_FROM_URL_DIALOG_DESCRIPTION": "Anna koko URL-osoite DSH_PlanFlown varmuuskopio JSON-tiedostolle, jonka haluat tuoda.",
     "IMPORT_FROM_URL_DIALOG_TITLE": "Tuo URL-osoitteesta",
     "OPEN_IMPORT_FROM_URL_DIALOG": "Tuo URL-osoitteesta",
     "PRIVACY_EXPORT": "Vie tiedot (anonyymit)",
-    "PRIVACY_EXPORT_DESCRIPTION": "Vie anonyymit tiedot (lähetettäväksi osoitteeseen contact@super-productivity.com vianetsintää varten)",
+    "PRIVACY_EXPORT_DESCRIPTION": "Vie anonyymit tiedot (lähetettäväksi osoitteeseen contact@github.com/4478sc/DSH_PlanFlow vianetsintää varten)",
     "S_BACKUP_DOWNLOADED": "Varmuuskopio ladattu android-asiakirjakansioon",
     "S_ERR_IMPORT_FAILED": "Tietojen tuonti epäonnistui",
     "S_ERR_INVALID_DATA": "Tuonti epäonnistui: Virheellinen JSON",
@@ -2565,10 +2565,10 @@
       "S_RESTORE_SUCCESS": "Varmuuskopio palautettiin onnistuneesti."
     },
     "CALENDARS": {
-      "BROWSER_WARNING": "Alkuperäisen rajoitusten vuoksi <b>tämä todennäköisesti EI toimi Super Productivityn selainversiossa.<br /> Ole hyvä <a href=\"https://super-productivity.com/download/\">lataa työpöytäversio</a> käyttääksesi tätä ominaisuutta!</b>",
+      "BROWSER_WARNING": "Alkuperäisen rajoitusten vuoksi <b>tämä todennäköisesti EI toimi DSH_PlanFlown selainversiossa.<br /> Ole hyvä <a href=\"https://github.com/4478sc/DSH_PlanFlow/download/\">lataa työpöytäversio</a> käyttääksesi tätä ominaisuutta!</b>",
       "CAL_PATH": "iCal-lähteen URL",
       "CHECK_UPDATES": "Tarkista etäpäivitykset joka X",
-      "HELP": "Voit integroida kalenterit saadaksesi muistutuksia ja lisätäksesi niitä tehtävinä Super Productivityyn. Integraatio toimii käyttämällä iCal-muotoa. Jotta tämä toimii, kalenterisi täytyy olla saatavilla joko internetin kautta tai tiedostojärjestelmän kautta.",
+      "HELP": "Voit integroida kalenterit saadaksesi muistutuksia ja lisätäksesi niitä tehtävinä DSH_PlanFlowyn. Integraatio toimii käyttämällä iCal-muotoa. Jotta tämä toimii, kalenterisi täytyy olla saatavilla joko internetin kautta tai tiedostojärjestelmän kautta.",
       "SHOW_BANNER_THRESHOLD": "Näytä ilmoitus X ennen tapahtumaa (tyhjä pois käytöstä)",
       "AUTO_IMPORT_FOR_CURRENT_DAY": "Tuo nykyisen päivän tapahtumat automaattisesti tehtäviksi",
       "CAL_COLOR": "Kalenterin väri",
@@ -2654,7 +2654,7 @@
       "EXPAND_SUB_TASKS": "Laajenna alitehtävät",
       "GLOBAL_ADD_NOTE": "Lisää uusi muistiinpano",
       "GLOBAL_ADD_TASK": "Lisää uusi tehtävä",
-      "GLOBAL_SHOW_HIDE": "Näytä/Piilota Super Productivity",
+      "GLOBAL_SHOW_HIDE": "Näytä/Piilota DSH_PlanFlow",
       "GLOBAL_TOGGLE_TASK_START": "Vaihda ajanseuranta viimeisimmälle aktiiviselle tehtävälle",
       "GO_TO_DAILY_AGENDA": "Siirry asialistaan",
       "GO_TO_FOCUS_MODE": "Siirry keskittymistilaan",
@@ -2790,7 +2790,7 @@
       "IS_USE_CUSTOM_WINDOW_TITLE_BAR": "Käytä mukautettua otsikkopalkkia (vain Windows/Linux)",
       "IS_USE_CUSTOM_WINDOW_TITLE_BAR_HINT": "Vaatii uudelleenkäynnistyksen voimaan tullakseen",
       "LOCAL_REST_API_TOKEN": "Käyttöoikeustunniste",
-      "LOCAL_REST_API_TOKEN_ERROR": "Käyttöoikeustunnistetta ei voitu tallentaa, joten API ei ole käynnissä. Tarkista, että Super Productivity voi kirjoittaa datakansioonsa, ja yritä sitten uudelleen Luo uudelleen -toiminnolla.",
+      "LOCAL_REST_API_TOKEN_ERROR": "Käyttöoikeustunnistetta ei voitu tallentaa, joten API ei ole käynnissä. Tarkista, että DSH_PlanFlow voi kirjoittaa datakansioonsa, ja yritä sitten uudelleen Luo uudelleen -toiminnolla.",
       "LOCAL_REST_API_TOKEN_REGENERATE": "Luo käyttöoikeustunniste uudelleen",
       "LOCAL_REST_API_TOKEN_REGENERATE_ERROR": "Uutta käyttöoikeustunnistetta ei voitu tallentaa. Edellinen tunniste on yhä voimassa.",
       "START_OF_NEXT_DAY": "Seuraavan päivän alkamisaika",
@@ -2827,7 +2827,7 @@
       "IS_COUNTDOWN_BANNER_ENABLED": "Näytä laskuribanneri ennen kuin muistutukset erääntyvät",
       "TITLE": "Muistutukset",
       "DUE_DATE_NOTIFICATION_HOUR": "Tunti, jolloin eräpäiväilmoitukset näytetään (0-23)",
-      "HELP": "<p><strong>Tärkeää:</strong> Muistutukset käyttävät <strong>paikallisia ilmoituksia</strong>, eivät push-ilmoituksia. Tämä tarkoittaa, että sovellus on täytynyt avata vähintään kerran laitteellasi, jotta muistutukset ajoitetaan. Toisella laitteella asetetut muistutukset näkyvät vasta, kun sovellus synkronoi kohdelaitteella.</p><p><strong>iOS</strong>-laitteella varmista, että ilmoitukset on otettu käyttöön Super Productivitylle laitteen asetuksissa kohdassa 'Asetukset' > 'Ilmoitukset'.</p>",
+      "HELP": "<p><strong>Tärkeää:</strong> Muistutukset käyttävät <strong>paikallisia ilmoituksia</strong>, eivät push-ilmoituksia. Tämä tarkoittaa, että sovellus on täytynyt avata vähintään kerran laitteellasi, jotta muistutukset ajoitetaan. Toisella laitteella asetetut muistutukset näkyvät vasta, kun sovellus synkronoi kohdelaitteella.</p><p><strong>iOS</strong>-laitteella varmista, että ilmoitukset on otettu käyttöön DSH_PlanFlowlle laitteen asetuksissa kohdassa 'Asetukset' > 'Ilmoitukset'.</p>",
       "IS_FOCUS_WINDOW": "Tuo sovellusikkuna etualalle muistutuksen lauetessa",
       "NOTIFY_ON_DUE_DATE": "Näytä ilmoitukset tänään erääntyville tehtäville",
       "USE_ALARM_STYLE_REMINDERS": "Käytä hälytystyylisiä ilmoituksia (vain Android)",
@@ -3062,7 +3062,7 @@
     "ARCHIVED_PROJECTS": "Arkistoidut projektit"
   },
   "MIGRATE": {
-    "C_DOWNLOAD_BACKUP": "Haluatko ladata varmuuskopion vanhoista tiedoistasi (voidaan käyttää Super Productivityn vanhempien versioiden kanssa)?",
+    "C_DOWNLOAD_BACKUP": "Haluatko ladata varmuuskopion vanhoista tiedoistasi (voidaan käyttää DSH_PlanFlown vanhempien versioiden kanssa)?",
     "DETECTED_LEGACY": "Havaittiin vanhat tiedot. Siirrämme ne puolestasi!",
     "DIALOG_TITLE_ERROR": "Siirto epäonnistui",
     "E_MIGRATION_FAILED": "Siirto epäonnistui! Virheellä:",
@@ -3078,7 +3078,7 @@
     "STATUS_PREPARING": "Valmistellaan siirtoa..."
   },
   "ONBOARDING": {
-    "TITLE": "Miten haluat käyttää Super Productivitya?",
+    "TITLE": "Miten haluat käyttää DSH_PlanFlowa?",
     "SUBTITLE": "Valitse asetukset, jotka sopivat työtapaasi. Voit aina muuttaa tätä myöhemmin Asetuksissa.",
     "PRIVACY_HINT": "Tietosi pysyvät turvallisesti laitteellasi. Mitään ei lähetetä palvelimelle.",
     "PRESETS": {
@@ -3133,7 +3133,7 @@
       "FOCUS_MODE": "<b>Keskittymismoodi</b> · pomodoro ja häiriötön työskentely",
       "FOOTER": "Löydät tämän uudelleen kohdasta Ohje → Pikaesittely.",
       "HABITS": "<b>Tavat</b> · seuraa rutiineja päivä päivältä",
-      "INTRO": "Super Productivity alkaa rauhallisena. Lisää on tarjolla, kun tarvitset sitä:",
+      "INTRO": "DSH_PlanFlow alkaa rauhallisena. Lisää on tarjolla, kun tarvitset sitä:",
       "OPEN_SETTINGS": "Avaa asetukset ›",
       "PLUGINS": "<b>Lisäosat ja integraatiot</b> · Jira, GitHub, CalDAV ja muita",
       "SCHEDULE": "<b>Aikataulu</b> · päiväsi aikajanalla",
@@ -3143,7 +3143,7 @@
       "SYNC": "Tietosi pysyvät tällä laitteella. Synkronointi ja varmuuskopiot löytyvät kohdasta Asetukset.",
       "TITLE": "Haluatko lisää?"
     },
-    "SYNC_CTA": "Käytätkö jo Super Productivitya toisella laitteella?",
+    "SYNC_CTA": "Käytätkö jo DSH_PlanFlowa toisella laitteella?",
     "SYNC_CTA_LINK": "Määritä synkronointi"
   },
   "PDS": {

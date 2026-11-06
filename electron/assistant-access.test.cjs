@@ -51,10 +51,10 @@ test('initialize echoes a supported version and advertises tools only', async ()
     protocolVersion: '2025-06-18',
     capabilities: { tools: {} },
     serverInfo: {
-      name: 'super-productivity',
-      title: 'Super Productivity',
+      name: 'dsh-planflow',
+      title: 'DSH_PlanFlow',
       version: '1.2.3',
-      websiteUrl: 'https://super-productivity.com',
+      websiteUrl: 'https://github.com/4478sc/DSH_PlanFlow',
     },
   });
 });

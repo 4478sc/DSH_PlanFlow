@@ -242,7 +242,7 @@ export const createWindow = async ({
     height: mainWindowState.height,
     minHeight: 240,
     minWidth: 300,
-    title: IS_DEV ? 'Super Productivity D' : 'Super Productivity',
+    title: IS_DEV ? 'DSH_PlanFlow D' : 'DSH_PlanFlow',
     titleBarStyle,
     titleBarOverlay,
     enableLargerThanScreen: isScreenshotMode,
@@ -404,7 +404,7 @@ export const createWindow = async ({
   mainWin.loadURL(url).then(() => {
     // Set window title for dev mode
     if (IS_DEV) {
-      mainWin.setTitle('Super Productivity D');
+      mainWin.setTitle('DSH_PlanFlow D');
     }
   });
 
