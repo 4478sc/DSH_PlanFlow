@@ -49,7 +49,7 @@ npm run dist                   # validated Electron distribution for the host pl
 
 While iterating on app code, use `npm run test:affected` instead of a full `npm test`. It covers Angular specs only: after editing `packages/*` also run that package's tests, and run `npm test` before opening a PR. It follows static imports, templates and styles; test setup, configs and unimported assets/styles trigger a full run. "Nothing to run" means nothing was tested. CI runs everything (`test:ci`).
 
-For full provider suites prefer the [scheduled E2E workflow](.github/workflows/e2e-scheduled.yml) (`grep` filters SuperSync; `webdav_grep` + `run_webdav` for WebDAV); focused local runs and provider-switch prerequisites are in [e2e/AGENTS.md](e2e/AGENTS.md) (they need both servers and both flags, else they silently skip). Skipped tests do not validate a fix.
+For full provider suites the scheduled E2E workflow was removed in this copy (see INDEPENDENCE.md); the two provider suites are still runnable locally, and focused local runs and provider-switch prerequisites are in [e2e/AGENTS.md](e2e/AGENTS.md) (they need both servers and both flags, else they silently skip). Skipped tests do not validate a fix.
 
 `tsc -p tsconfig.json --noEmit` validates nothing (root config has `files: []`); use the app/spec/Electron config or package checks ([why](docs/hardening-earns-its-place.md#the-three-failure-modes-worth-remembering)).
 

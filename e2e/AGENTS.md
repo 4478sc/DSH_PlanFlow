@@ -16,7 +16,7 @@ npm run e2e:webdav:file e2e/tests/sync/webdav-conflict-use-remote-restore-8107.s
 
 **Provider-switch tests need both servers.** [SuperSync to WebDAV](tests/sync/supersync-provider-switch.spec.ts) and [WebDAV to SuperSync](tests/sync/supersync-provider-switch-to-supersync.spec.ts) can still skip under `e2e:supersync:file` if WebDAV is absent. Prefer the scheduled workflow's SuperSync job for these scenarios: it starts both servers and requires both. For a local run, start and wait for WebDAV as well, and set `E2E_REQUIRE_WEBDAV=true` when invoking `e2e:supersync:file` (which sets `E2E_REQUIRE_SUPERSYNC=true`). Confirm the intended tests ran; skipped tests do not validate a fix.
 
-For the full SuperSync and WebDAV suites, manually dispatch [E2E Tests (Scheduled)](../.github/workflows/e2e-scheduled.yml) on the branch. Its `grep` input filters SuperSync; `webdav_grep` filters WebDAV, and `run_webdav` can omit that job. Local focused runs use the npm scripts above.
+For the full SuperSync and WebDAV suites, the inherited `E2E Tests (Scheduled)` workflow is not part of this copy. Run both suites locally as described above; `grep` and `webdav_grep` were its dispatch inputs.
 
 ### Agent sessions
 
