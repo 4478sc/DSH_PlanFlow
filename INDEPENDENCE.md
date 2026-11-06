@@ -12,9 +12,12 @@ license-clean.
 
 ## 0. What the license requires (do not remove these)
 
-- `LICENSE` keeps the original MIT text and the upstream copyright line
-  (`Copyright (c) 2018 Johannes Millan`). A line for your own modifications is
-  appended below it - never replace the original.
+- `LICENSE` stays **verbatim MIT** with the upstream copyright line
+  (`Copyright (c) 2018 Johannes Millan`) - never replace the text. Do not append
+  your own notice to it either: GitHub's license detector flips the repository to
+  "NOASSERTION" as soon as the file stops looking like stock MIT, and you lose the
+  license badge. Record your own copyright in `NOTICE` instead (this repository
+  does exactly that).
 - `NOTICE` states what the work is, where it came from, and what changed.
   Keep it in every source and binary distribution (electron-builder can ship it
   in `extraResources`).
@@ -158,8 +161,8 @@ future merge mechanical.
 ## 10. What this repository already does
 
 - `NOTICE` records the derivation, the modifications and the trademark caveat.
-- `LICENSE` keeps the upstream MIT notice and appends the copyright line for
-  modifications.
+- `LICENSE` is the untouched MIT text (so GitHub detects MIT); the copyright line
+  for modifications lives in `NOTICE`.
 - Rebranded to **DSH_PlanFlow**: app id `com.dshplanflow.app`, executable
   `dsh-planflow`, window class, installer identity, i18n product name, index
   title, Linux wrapper paths.
