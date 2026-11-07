@@ -3572,7 +3572,7 @@
       "COPY_PROMPT": "Copy prompt for your AI",
       "COPY_FAILED": "Copying to the clipboard failed.",
       "COPY_PROMPT_HINT": "Paste the copied prompt into an AI chat like ChatGPT, Claude or Gemini. Then paste its answer here.",
-      "SAFETY_HINT": "Plugins can read and change your data. Try new ones on test data first, e.g. at test-app.super-productivity.com.",
+      "SAFETY_HINT": "Plugins can read and change your data. Try new ones on test data first.",
       "NEXT": "Next: paste the answer",
       "STEP_PASTE": "2. Paste the AI's answer",
       "ANSWER_LABEL": "The AI's complete answer",
