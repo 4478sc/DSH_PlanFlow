@@ -27,6 +27,15 @@ updates:
     commit-message:
       prefix: 'chore(deps)'
 
+    # typia 15 moved its transform plugin to a tsconfig-driven API: without a
+    # `tsConfig` entry next to `typia/lib/transform` in tsconfig.base.json the
+    # Angular emit dies in createTtscPlugin (path.join(undefined)). That is a
+    # deliberate migration together with ts-patch 4, not a bump, so keep typia
+    # majors out of the queue; patch/minor still come through.
+    ignore:
+      - dependency-name: 'typia'
+        update-types: ['version-update:semver-major']
+
     # Group tightly-coupled families into a single PR. These packages pin each
     # other's peer versions in lockstep (e.g. @ngrx/effects peer-requires an
     # exact @ngrx/store), so a single-package bump can never resolve `npm ci`
