@@ -250,7 +250,7 @@
     "@capawesome/capacitor-android-dark-mode-support": "^8.0.1",
     "@capawesome/capacitor-background-task": "^8.0.3",
     "@codemirror/commands": "^6.11.0",
-    "@codemirror/language": "^6.12.4",
+    "@codemirror/language": "^6.13.1",
     "@codemirror/state": "^6.7.4",
     "@codemirror/view": "^6.43.11",
     "@csstools/stylelint-formatter-github": "^2.0.0",
