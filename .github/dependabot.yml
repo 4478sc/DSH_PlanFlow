@@ -35,6 +35,13 @@ updates:
     ignore:
       - dependency-name: 'typia'
         update-types: ['version-update:semver-major']
+      # Prisma 7 replaces the client generator (explicit `output`, different
+      # import path) before the server's `prisma generate` / vitest suites can
+      # pass, so a major bump is a migration, not a dependency update.
+      - dependency-name: 'prisma'
+        update-types: ['version-update:semver-major']
+      - dependency-name: '@prisma/client'
+        update-types: ['version-update:semver-major']
 
     # Group tightly-coupled families into a single PR. These packages pin each
     # other's peer versions in lockstep (e.g. @ngrx/effects peer-requires an
