@@ -183,7 +183,22 @@ describe('TaskService', () => {
     it('should dispatch setCurrentTask when id is provided', () => {
       service.setCurrentId('task-1');
 
-      expect(store.dispatch).toHaveBeenCalledWith(setCurrentTask({ id: 'task-1' }));
+      // isParallel is false unless the parallel-timers setting is on (#29).
+      expect(store.dispatch).toHaveBeenCalledWith(
+        setCurrentTask({ id: 'task-1', isParallel: false }),
+      );
+    });
+
+    it('should keep the other timers when parallel timers are enabled', () => {
+      (
+        service as unknown as { isParallelTimersEnabled: () => boolean }
+      ).isParallelTimersEnabled = () => true;
+
+      service.setCurrentId('task-1');
+
+      expect(store.dispatch).toHaveBeenCalledWith(
+        setCurrentTask({ id: 'task-1', isParallel: true }),
+      );
     });
 
     it('should dispatch unsetCurrentTask when id is null', () => {

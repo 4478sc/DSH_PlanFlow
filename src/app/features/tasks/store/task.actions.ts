@@ -10,6 +10,12 @@ export const setCurrentTask = createAction(
   '[Task] SetCurrentTask',
   props<{
     id: string | null;
+    /**
+     * Keep the timers that are already running (#29). Set by the caller from the
+     * "allow several tasks to be timed at once" setting; anything that dispatches
+     * without it keeps the single-task behaviour (start replaces the set).
+     */
+    isParallel?: boolean;
   }>(),
 );
 

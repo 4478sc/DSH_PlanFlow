@@ -1100,6 +1100,27 @@ describe('Task Reducer', () => {
       expect(state.trackedTaskIds).toEqual(['task1']);
     });
 
+    it('setCurrentTask with isParallel keeps the timers that are already running', () => {
+      const started = taskReducer(
+        makeState(),
+        fromActions.setCurrentTask({ id: 'task1', isParallel: true }),
+      );
+      const both = taskReducer(
+        started,
+        fromActions.setCurrentTask({ id: 'task2', isParallel: true }),
+      );
+
+      expect(both.currentTaskId).toBe('task2');
+      expect(both.trackedTaskIds).toEqual(['task1', 'task2']);
+
+      // Without the flag the old single-task behaviour still replaces the set.
+      const replaced = taskReducer(
+        both,
+        fromActions.setCurrentTask({ id: 'task1', isParallel: false }),
+      );
+      expect(replaced.trackedTaskIds).toEqual(['task1']);
+    });
+
     it('startTrackingTask adds a second timer without moving the main pointer', () => {
       const started = taskReducer(
         makeState(),

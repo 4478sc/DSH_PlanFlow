@@ -39,6 +39,14 @@ export const TIME_TRACKING_FORM_CFG: ConfigFormSection<TimeTrackingConfig> = {
       },
     },
     {
+      key: 'isParallelTimersEnabled',
+      type: 'checkbox',
+      templateOptions: {
+        label: T.GCF.TIME_TRACKING.L_IS_PARALLEL_TIMERS_ENABLED,
+        description: T.GCF.TIME_TRACKING.L_IS_PARALLEL_TIMERS_ENABLED_HINT,
+      },
+    },
+    {
       key: 'isTrackingReminderEnabled',
       type: 'checkbox',
       templateOptions: {
