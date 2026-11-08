@@ -176,6 +176,37 @@ export const initialTaskState: TaskState = taskAdapter.getInitialState({
   dismissedCalendarAutoImportEventIdsByProvider: {},
 }) as TaskState;
 
+/**
+ * Shared body of `Add time spent` and `Add time spent batch`, so the batched
+ * tick path (issue #29) and the single-dispatch callers stay equivalent.
+ */
+const applyAddTimeSpent = (
+  state: TaskState,
+  { task, date, duration }: { task: Task; date: string; duration: number },
+): TaskState => {
+  // NaN/Infinity → JSON.stringify → null → auto-fix zeroes the day. Catch source.
+  if (!Number.isFinite(duration)) {
+    devError(
+      `addTimeSpent: non-finite duration for task ${task.id} on ${date}: ${duration}`,
+    );
+    return state;
+  }
+  const currentTask = state.entities[task.id];
+  if (!currentTask) {
+    return state;
+  }
+  const currentTimeSpentForTickDay =
+    (currentTask.timeSpentOnDay && +currentTask.timeSpentOnDay[date]) || 0;
+  return updateTimeSpentForTask(
+    task.id,
+    {
+      ...currentTask.timeSpentOnDay,
+      [date]: currentTimeSpentForTickDay + duration,
+    },
+    state,
+  );
+};
+
 export const taskReducer = createReducer<TaskState>(
   initialTaskState,
 
@@ -219,29 +250,14 @@ export const taskReducer = createReducer<TaskState>(
     });
   }),
 
-  on(TimeTrackingActions.addTimeSpent, (state, { task, date, duration }) => {
-    // NaN/Infinity → JSON.stringify → null → auto-fix zeroes the day. Catch source.
-    if (!Number.isFinite(duration)) {
-      devError(
-        `addTimeSpent: non-finite duration for task ${task.id} on ${date}: ${duration}`,
-      );
-      return state;
-    }
-    const currentTask = state.entities[task.id];
-    if (!currentTask) {
-      return state;
-    }
-    const currentTimeSpentForTickDay =
-      (currentTask.timeSpentOnDay && +currentTask.timeSpentOnDay[date]) || 0;
-    return updateTimeSpentForTask(
-      task.id,
-      {
-        ...currentTask.timeSpentOnDay,
-        [date]: currentTimeSpentForTickDay + duration,
-      },
-      state,
-    );
-  }),
+  on(TimeTrackingActions.addTimeSpent, (state, { task, date, duration }) =>
+    applyAddTimeSpent(state, { task, date, duration }),
+  ),
+
+  // Batched form of the tick path: one reducer pass for every running timer.
+  on(TimeTrackingActions.addTimeSpentBatch, (state, { entries }) =>
+    entries.reduce((acc, entry) => applyAddTimeSpent(acc, entry), state),
+  ),
 
   // Sync time spent from operation replay.
   // Local: no-op (state already updated by addTimeSpent ticks).

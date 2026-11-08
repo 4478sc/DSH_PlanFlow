@@ -34,6 +34,10 @@ import {
   updateTaskUi,
 } from './store/task.actions';
 import { getNextHideSubTasksMode } from './util/get-next-hide-sub-tasks-mode';
+import {
+  UnsyncedTimeTrackingContext,
+  trackContextsForSync,
+} from './util/track-contexts-for-sync';
 import { IssueProviderKey } from '../issue/issue.model';
 import { GlobalTrackingIntervalService } from '../../core/global-tracking-interval/global-tracking-interval.service';
 import {
@@ -137,6 +141,11 @@ export class TaskService {
     // NOTE: we can't use share here, as we need the last emitted value
   );
 
+  /** Running timers: only the current task until parallel timers land (#29, PR 1b). */
+  private readonly _runningTasks$: Observable<Task[]> = this.currentTask$.pipe(
+    map((task) => (task ? [task] : [])),
+  );
+
   currentTaskParentOrCurrent$: Observable<Task | undefined> = this._store.pipe(
     select(selectCurrentTaskParentOrCurrent),
     // NOTE: we can't use share here, as we need the last emitted value
@@ -201,10 +210,7 @@ export class TaskService {
   private _allTasks$: Observable<Task[]> = this._store.pipe(select(selectAllTasks));
   private _taskEntities = this._store.selectSignal(selectTaskEntities);
 
-  private _unsyncedContexts: Map<
-    string,
-    { contextType: 'TAG' | 'PROJECT'; contextId: string; date: string }
-  > = new Map();
+  private _unsyncedContexts: Map<string, UnsyncedTimeTrackingContext> = new Map();
 
   constructor() {
     document.addEventListener(
@@ -224,23 +230,38 @@ export class TaskService {
     // time tracking with batch sync
     this._timeTrackingService.tick$
       .pipe(
-        withLatestFrom(this.currentTask$, this._imexMetaService.isDataImportInProgress$),
+        withLatestFrom(
+          this._runningTasks$,
+          this._imexMetaService.isDataImportInProgress$,
+        ),
       )
-      .subscribe(([tick, currentTask, isImportInProgress]) => {
-        if (currentTask?.id && !isImportInProgress) {
-          // Update local state immediately (existing behavior)
-          this.addTimeSpent(currentTask, tick.duration, tick.date);
+      .subscribe(([tick, runningTasks, isImportInProgress]) => {
+        if (!runningTasks.length || isImportInProgress) {
+          return;
+        }
 
+        // One action per tick, however many timers run (issue #29 decision record).
+        this._store.dispatch(
+          TimeTrackingActions.addTimeSpentBatch({
+            entries: runningTasks.map((task) => ({
+              task,
+              date: tick.date,
+              duration: tick.duration,
+            })),
+          }),
+        );
+
+        for (const task of runningTasks) {
           // Accumulate for batch sync
-          this._taskTimeSync.accumulate(currentTask.id, tick.duration, tick.date);
+          this._taskTimeSync.accumulate(task.id, tick.duration, tick.date);
 
           // Track contexts for TIME_TRACKING sync
-          this._trackContextsForSync(currentTask, tick.date);
+          trackContextsForSync(this._unsyncedContexts, task, tick.date);
+        }
 
-          // Check if it's time to sync (every 5 minutes)
-          if (this._taskTimeSync.shouldFlush()) {
-            this._flushAccumulatedTimeSpent();
-          }
+        // Check if it's time to sync (every 5 minutes)
+        if (this._taskTimeSync.shouldFlush()) {
+          this._flushAccumulatedTimeSpent();
         }
       });
 
@@ -254,31 +275,6 @@ export class TaskService {
         this.toggleStartTask();
       }
     });
-  }
-
-  /**
-   * Tracks contexts (tags and project) that need TIME_TRACKING sync.
-   */
-  private _trackContextsForSync(task: Task, date: string): void {
-    // Track project context
-    if (task.projectId) {
-      const key = `PROJECT:${task.projectId}:${date}`;
-      this._unsyncedContexts.set(key, {
-        contextType: 'PROJECT',
-        contextId: task.projectId,
-        date,
-      });
-    }
-
-    // Track tag contexts (including TODAY_TAG)
-    for (const tagId of [TODAY_TAG.id, ...task.tagIds]) {
-      const key = `TAG:${tagId}:${date}`;
-      this._unsyncedContexts.set(key, {
-        contextType: 'TAG',
-        contextId: tagId,
-        date,
-      });
-    }
   }
 
   /**
