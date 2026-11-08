@@ -338,6 +338,10 @@
     },
     "CONFIG": {
       "S": {
+        "PARALLEL_TIMERS_OFF_KEEP_MAIN": "Keep main task running",
+        "PARALLEL_TIMERS_OFF_MSG": "{{nr}} other task(s) are still being timed. Their tracked time is settled before anything stops. Keep the main task running and pause the others, or pause every timer?",
+        "PARALLEL_TIMERS_OFF_PAUSE_ALL": "Pause all timers",
+        "PARALLEL_TIMERS_OFF_TITLE": "Parallel timers turned off",
         "UPDATE_SECTION": "Updated settings for <strong>{{sectionKey}}</strong>"
       }
     },

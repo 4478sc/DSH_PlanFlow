@@ -4,6 +4,7 @@ import { LOCAL_ACTIONS } from '../../../util/local-actions.token';
 import {
   concatMap,
   distinctUntilChanged,
+  exhaustMap,
   filter,
   map,
   switchMap,
@@ -31,7 +32,15 @@ import {
   selectMiscConfig,
 } from './global-config.reducer';
 import { mapKeyboardConfigToQwerty } from '../keyboard-shortcut.util';
-import { MiscConfig } from '../global-config.model';
+import { MiscConfig, TimeTrackingConfig } from '../global-config.model';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogConfirmComponent } from '../../../ui/dialog-confirm/dialog-confirm.component';
+import { TaskTimeSyncService } from '../../tasks/task-time-sync.service';
+import {
+  selectCurrentTaskId,
+  selectTrackedTaskIds,
+} from '../../tasks/store/task.selectors';
+import { pauseTrackingTask } from '../../tasks/store/task.actions';
 import { AppStateActions } from '../../../root-store/app-state/app-state.actions';
 import { TaskSharedActions } from '../../../root-store/meta/task-shared.actions';
 import { selectAllTasks } from '../../tasks/store/task.selectors';
@@ -52,6 +61,67 @@ export class GlobalConfigEffects {
   private _keyboardLayoutService = inject(KeyboardLayoutService);
   private _isElectron = inject(IS_ELECTRON_TOKEN);
   private _isMac = inject(IS_MAC_TOKEN);
+  private _matDialog = inject(MatDialog);
+  private _taskTimeSync = inject(TaskTimeSyncService);
+
+  /**
+   * Turning the parallel-timers switch off must not silently drop the timers that
+   * are already running (#29). Ask which way to settle them, then pause either the
+   * non-main timers or all of them - pauseTracking flushes each task's pending
+   * delta first, so no accumulated time is lost either way.
+   */
+  settleTimersOnParallelOff$ = createEffect(
+    () =>
+      this._actions$.pipe(
+        ofType(updateGlobalConfigSection),
+        filter(
+          ({ sectionKey, sectionCfg }) =>
+            sectionKey === 'timeTracking' &&
+            (sectionCfg as TimeTrackingConfig).isParallelTimersEnabled === false,
+        ),
+        withLatestFrom(
+          this._store.select(selectTrackedTaskIds),
+          this._store.select(selectCurrentTaskId),
+        ),
+        filter(([, trackedIds]) => trackedIds.length > 1),
+        exhaustMap(([, trackedIds, currentTaskId]) =>
+          this._matDialog
+            .open(DialogConfirmComponent, {
+              data: {
+                title: T.F.CONFIG.S.PARALLEL_TIMERS_OFF_TITLE,
+                message: T.F.CONFIG.S.PARALLEL_TIMERS_OFF_MSG,
+                translateParams: { nr: trackedIds.length - 1 },
+                okTxt: T.F.CONFIG.S.PARALLEL_TIMERS_OFF_KEEP_MAIN,
+                cancelTxt: T.F.CONFIG.S.PARALLEL_TIMERS_OFF_PAUSE_ALL,
+              },
+            })
+            .afterClosed()
+            // Dismissing without a choice keeps the least destructive outcome: the
+            // main task keeps running, everything else is paused.
+            .pipe(
+              map((isKeepMain) => ({
+                isKeepMain: isKeepMain !== false,
+                trackedIds,
+                currentTaskId,
+              })),
+            ),
+        ),
+        tap(({ isKeepMain, trackedIds, currentTaskId }) => {
+          for (const id of trackedIds) {
+            if (isKeepMain && id === currentTaskId) {
+              continue;
+            }
+            // Same order as TaskService.pauseTracking: settle the pending delta
+            // first, so the 5-minute batch can never write it back afterwards.
+            this._taskTimeSync.flushOne(id);
+            this._store.dispatch(pauseTrackingTask({ id }));
+          }
+        }),
+      ),
+    // The settlement dispatches its own actions explicitly; keeping the effect
+    // non-dispatching also keeps its type a plain Observable for specs.
+    { dispatch: false },
+  );
 
   snackUpdate$ = createEffect(
     () =>

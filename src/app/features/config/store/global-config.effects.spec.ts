@@ -20,17 +20,27 @@ import { LOCAL_ACTIONS } from '../../../util/local-actions.token';
 import { AppStateActions } from '../../../root-store/app-state/app-state.actions';
 import { loadAllData } from '../../../root-store/meta/load-all-data.action';
 import { DEFAULT_GLOBAL_CONFIG } from '../default-global-config.const';
+import { GlobalSectionConfig } from '../global-config.model';
 import { KeyboardConfig } from '@sp/keyboard-config';
 import { TaskSharedActions } from '../../../root-store/meta/task-shared.actions';
 import { selectAllTasks } from '../../tasks/store/task.selectors';
 import { IS_ELECTRON_TOKEN } from '../../../app.constants';
 import { IS_MAC_TOKEN } from '../../../util/is-mac';
+import { MatDialog } from '@angular/material/dialog';
+import { TaskTimeSyncService } from '../../tasks/task-time-sync.service';
+import { pauseTrackingTask } from '../../tasks/store/task.actions';
+import {
+  selectCurrentTaskId,
+  selectTrackedTaskIds,
+} from '../../tasks/store/task.selectors';
 
 describe('GlobalConfigEffects', () => {
   let effects: GlobalConfigEffects;
   let actions$: Subject<Action>;
   let dateServiceSpy: jasmine.SpyObj<DateService>;
   let store: MockStore;
+  let dialog: { open: jasmine.Spy };
+  let taskTimeSync: jasmine.SpyObj<TaskTimeSyncService>;
 
   const setup = (
     isElectron = false,
@@ -38,6 +48,10 @@ describe('GlobalConfigEffects', () => {
     keyboardLayoutService?: KeyboardLayoutService,
   ): void => {
     actions$ = new Subject<Action>();
+    dialog = { open: jasmine.createSpy('open') };
+    taskTimeSync = jasmine.createSpyObj<TaskTimeSyncService>('TaskTimeSyncService', [
+      'flushOne',
+    ]);
     dateServiceSpy = jasmine.createSpyObj('DateService', [
       'setStartOfNextDayDiff',
       'todayStr',
@@ -63,6 +77,8 @@ describe('GlobalConfigEffects', () => {
         },
         { provide: IS_ELECTRON_TOKEN, useValue: isElectron },
         { provide: IS_MAC_TOKEN, useValue: isMac },
+        { provide: MatDialog, useValue: dialog },
+        { provide: TaskTimeSyncService, useValue: taskTimeSync },
         {
           provide: KeyboardLayoutService,
           useValue: keyboardLayoutService || new KeyboardLayoutService(),
@@ -527,6 +543,88 @@ describe('GlobalConfigEffects', () => {
           );
         });
       });
+    });
+  });
+
+  describe('settleTimersOnParallelOff$', () => {
+    beforeEach(() => {
+      setup();
+      // MockStore.dispatch is a plain function here, so it needs a spy.
+      spyOn(store, 'dispatch');
+    });
+
+    const turnParallelOff = (): void => {
+      actions$.next(
+        updateGlobalConfigSection({
+          sectionKey: 'timeTracking',
+          // GlobalSectionConfig does not list TimeTrackingConfig, so the payload
+          // needs a cast - the config page saves this section the same way.
+          sectionCfg: {
+            isParallelTimersEnabled: false,
+          } as unknown as Partial<GlobalSectionConfig>,
+        }),
+      );
+    };
+
+    it('should do nothing when at most one timer is running', () => {
+      store.overrideSelector(selectTrackedTaskIds, ['task1']);
+      store.overrideSelector(selectCurrentTaskId, 'task1');
+      store.refreshState();
+      effects.settleTimersOnParallelOff$.subscribe();
+
+      turnParallelOff();
+
+      expect(dialog.open).not.toHaveBeenCalled();
+      expect(taskTimeSync.flushOne).not.toHaveBeenCalled();
+    });
+
+    it('should keep the main timer and pause the others when confirmed', () => {
+      const afterClosed$ = new Subject<boolean>();
+      dialog.open.and.returnValue({ afterClosed: () => afterClosed$ });
+      store.overrideSelector(selectTrackedTaskIds, ['task1', 'task2']);
+      store.overrideSelector(selectCurrentTaskId, 'task1');
+      store.refreshState();
+      effects.settleTimersOnParallelOff$.subscribe();
+
+      turnParallelOff();
+      afterClosed$.next(true);
+
+      expect(taskTimeSync.flushOne).toHaveBeenCalledWith('task2');
+      expect(taskTimeSync.flushOne).not.toHaveBeenCalledWith('task1');
+      expect(store.dispatch).toHaveBeenCalledWith(pauseTrackingTask({ id: 'task2' }));
+    });
+
+    it('should pause every timer when the dialog is answered with cancel', () => {
+      const afterClosed$ = new Subject<boolean | undefined>();
+      dialog.open.and.returnValue({ afterClosed: () => afterClosed$ });
+      store.overrideSelector(selectTrackedTaskIds, ['task1', 'task2']);
+      store.overrideSelector(selectCurrentTaskId, 'task1');
+      store.refreshState();
+      effects.settleTimersOnParallelOff$.subscribe();
+
+      turnParallelOff();
+      afterClosed$.next(false);
+
+      expect(taskTimeSync.flushOne).toHaveBeenCalledWith('task1');
+      expect(taskTimeSync.flushOne).toHaveBeenCalledWith('task2');
+      expect(store.dispatch).toHaveBeenCalledWith(pauseTrackingTask({ id: 'task1' }));
+      expect(store.dispatch).toHaveBeenCalledWith(pauseTrackingTask({ id: 'task2' }));
+    });
+
+    it('should keep the main timer when the dialog is dismissed', () => {
+      const afterClosed$ = new Subject<boolean | undefined>();
+      dialog.open.and.returnValue({ afterClosed: () => afterClosed$ });
+      store.overrideSelector(selectTrackedTaskIds, ['task1', 'task2']);
+      store.overrideSelector(selectCurrentTaskId, 'task1');
+      store.refreshState();
+      effects.settleTimersOnParallelOff$.subscribe();
+
+      turnParallelOff();
+      afterClosed$.next(undefined);
+
+      expect(taskTimeSync.flushOne).toHaveBeenCalledWith('task2');
+      expect(store.dispatch).toHaveBeenCalledWith(pauseTrackingTask({ id: 'task2' }));
+      expect(store.dispatch).not.toHaveBeenCalledWith(pauseTrackingTask({ id: 'task1' }));
     });
   });
 });
