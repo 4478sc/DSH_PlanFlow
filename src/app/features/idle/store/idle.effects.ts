@@ -8,6 +8,9 @@ import { DataInitStateService } from '../../../core/data-init/data-init-state.se
 import { ChromeExtensionInterfaceService } from '../../../core/chrome-extension-interface/chrome-extension-interface.service';
 import { WorkContextService } from '../../work-context/work-context.service';
 import { TaskService } from '../../tasks/task.service';
+import { Task } from '../../tasks/task.model';
+import { getIdleRefundTasks } from '../idle-refund.util';
+import { selectTrackedTasks } from '../../tasks/store/task.selectors';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { UiHelperService } from '../../ui-helper/ui-helper.service';
@@ -79,6 +82,9 @@ export class IdleEffects {
 
   private _clearIdlePollInterval?: () => void;
   private _isDialogOpen: boolean = false;
+  /** Running timers captured at the idle edge (#29); the answer refunds equally to them. */
+  private _trackedTasksAtIdleStart: Task[] = [];
+  private _mainTaskIdAtIdleStart: string | null = null;
 
   // NOTE: needs to live forever since we can't unsubscribe from ipcEvent$
   private _isFocusSessionRunning$ = this._store.select(selectIsSessionRunning);
@@ -172,15 +178,30 @@ export class IdleEffects {
         this._store.select(selectIdleTime),
         this._simpleCounterService.enabledSimpleStopWatchCounters$,
         this._isFocusSessionRunning$,
+        this._store.select(selectTrackedTasks),
       ),
       map(
-        ([isIdle, idleTime, enabledSimpleStopWatchCounters, isFocusSessionRunning]) => ({
+        ([
           isIdle,
           idleTime,
           enabledSimpleStopWatchCounters,
           isFocusSessionRunning,
-          taskIdAtIdleStart: this._taskService.currentTaskId(),
-        }),
+          trackedTasksAtIdleStart,
+        ]) => {
+          // The running set is captured with the other entities above (#29): the
+          // later refund must go to the tasks that were running THEN, not to
+          // whatever is running when the user answers.
+          this._trackedTasksAtIdleStart = trackedTasksAtIdleStart;
+          this._mainTaskIdAtIdleStart = this._taskService.currentTaskId();
+          return {
+            isIdle,
+            idleTime,
+            enabledSimpleStopWatchCounters,
+            isFocusSessionRunning,
+            taskIdsAtIdleStart: trackedTasksAtIdleStart.map((task) => task.id),
+            taskIdAtIdleStart: this._taskService.currentTaskId(),
+          };
+        },
       ),
       // Guard: defer idle state changes during sync - CRITICAL because this effect
       // has data mutations (removeTimeSpent, setCurrentId, decreaseCounterToday).
@@ -198,6 +219,7 @@ export class IdleEffects {
       map(
         ({
           taskIdAtIdleStart,
+          taskIdsAtIdleStart,
           idleTime,
           enabledSimpleStopWatchCounters,
           isFocusSessionRunning,
@@ -208,14 +230,18 @@ export class IdleEffects {
             this._uiHelperService.focusAppAfterNotification();
           }
 
-          // untrack current task time und unselect
+          // untrack every running timer (#29) and unselect
           let lastCurrentTaskId: string | null;
           // snapshot from the idle edge, not a re-read — see the capture above
           const tid = taskIdAtIdleStart;
           if (tid) {
             lastCurrentTaskId = tid;
-            // remove idle time already tracked
-            this._taskService.removeTimeSpent(tid, idleTime);
+            // remove the idle span from each timer that was running. Older state
+            // may lack the set, so fall back to the single main task.
+            const idsToSettle = taskIdsAtIdleStart.length ? taskIdsAtIdleStart : [tid];
+            for (const id of idsToSettle) {
+              this._taskService.removeTimeSpent(id, idleTime);
+            }
             this._taskService.setCurrentId(null);
           } else {
             lastCurrentTaskId = null;
@@ -391,13 +417,28 @@ export class IdleEffects {
               });
             } else if (taskItem.task) {
               taskItemId = taskItem.task.id;
-              this._taskService.addTimeSpentAndSync(taskItem.task, taskItem.time);
+              // Parallel timers (#29): "I was working" on the main task refunds the
+              // whole span to every timer that was running at the idle edge, each
+              // getting it in full (the sum may exceed wall-clock by design).
+              const refundTasks = getIdleRefundTasks(
+                taskItem.task,
+                taskItem.time === idleTime,
+                this._mainTaskIdAtIdleStart,
+                this._trackedTasksAtIdleStart,
+              );
+              for (const refundTask of refundTasks) {
+                this._taskService.addTimeSpentAndSync(refundTask, taskItem.time);
+              }
             }
           });
 
           if (taskItems.length === 1 && taskItemId) {
             this._taskService.setCurrentId(taskItemId);
           }
+
+          // The snapshot is only valid for this idle episode.
+          this._trackedTasksAtIdleStart = [];
+          this._mainTaskIdAtIdleStart = null;
         },
       ),
       // unset idle at the end

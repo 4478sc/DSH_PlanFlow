@@ -17,6 +17,7 @@ import { IPC } from '../../../../../electron/shared-with-frontend/ipc-events.con
 import { selectIdleConfig } from '../../config/store/global-config.reducer';
 import { selectIsSessionRunning } from '../../focus-mode/store/focus-mode.selectors';
 import { selectIdleTime, selectIsIdle } from './idle.selectors';
+import { selectTrackedTasks } from '../../tasks/store/task.selectors';
 import { openIdleDialog, triggerIdle } from './idle.actions';
 import { HydrationStateService } from '../../../op-log/apply/hydration-state.service';
 
@@ -91,6 +92,8 @@ describe('IdleEffects', () => {
             { selector: selectIsSessionRunning, value: isSessionRunning },
             { selector: selectIsIdle, value: false },
             { selector: selectIdleTime, value: 0 },
+            // Single running timer, as the default path has (#29).
+            { selector: selectTrackedTasks, value: [{ id: 'task-1' }] },
           ],
         }),
         { provide: DataInitStateService, useValue: dataInitStateMock },
