@@ -8,6 +8,7 @@ import {
   distinctUntilChanged,
   filter,
   map,
+  mergeMap,
   pairwise,
   startWith,
   switchMap,
@@ -30,8 +31,17 @@ import {
 import { startLoopingAlarm, stopLoopingAlarm } from '../../../util/looping-alarm';
 import { FocusModeLocalSettingsService } from '../../config/focus-mode-local-settings.service';
 import { IS_ELECTRON, IS_ELECTRON_TOKEN } from '../../../app.constants';
-import { setCurrentTask, unsetCurrentTask } from '../../tasks/store/task.actions';
-import { selectLastCurrentTask, selectTaskById } from '../../tasks/store/task.selectors';
+import {
+  pauseTrackingTask,
+  setCurrentTask,
+  unsetCurrentTask,
+} from '../../tasks/store/task.actions';
+import {
+  selectCurrentTaskId,
+  selectLastCurrentTask,
+  selectTaskById,
+  selectTrackedTaskIds,
+} from '../../tasks/store/task.selectors';
 import { openIdleDialog } from '../../idle/store/idle.actions';
 import { LS } from '../../../core/persistence/storage-keys.const';
 import {
@@ -76,6 +86,26 @@ export class FocusModeEffects {
   private isAndroidWebView = inject(IS_ANDROID_WEB_VIEW_TOKEN);
   private focusModeLocalSettingsService = inject(FocusModeLocalSettingsService);
   private _breakEndAlarm: Promise<number> | null = null;
+
+  // Hard rule, not a setting (#29): entering a focus/pomodoro session settles
+  // every other running timer. A background timer silently accruing during a
+  // break is a bookkeeping error, and a toggle would only turn it into a config
+  // question. Inert until the parallel-timer switch exists (PR 2), because the
+  // running set then only ever holds the main task.
+  pauseNonMainTimersOnFocusStart$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actions.startFocusSession),
+      withLatestFrom(
+        this.store.select(selectTrackedTaskIds),
+        this.store.select(selectCurrentTaskId),
+      ),
+      mergeMap(([_action, trackedIds, mainTaskId]) =>
+        trackedIds
+          .filter((id) => id !== mainTaskId)
+          .map((id) => pauseTrackingTask({ id })),
+      ),
+    ),
+  );
 
   // Sync: When tracking starts → resume/skip-break or auto-spawn a new session.
   //
