@@ -48,6 +48,18 @@ export const syncTimeTracking = createAction(
   }),
 );
 
+/**
+ * One entry of a batched tick. Mirrors `Add time spent` minus the reminder flag,
+ * which only the single-task callers (tracking reminder, idle dialog) use.
+ */
+export interface AddTimeSpentBatchEntry {
+  task: Task;
+  date: string;
+  duration: number;
+  /** See `Add time spent`: past-day backfill only touches the task's time. */
+  isBackfill?: boolean;
+}
+
 export const TimeTrackingActions = createActionGroup({
   source: 'TimeTracking',
   events: {
@@ -63,6 +75,13 @@ export const TimeTrackingActions = createActionGroup({
        */
       isBackfill?: boolean;
     }>(),
+    /**
+     * Batched form of `Add time spent`, dispatched once per 1s tracking tick so N
+     * running timers cost one reducer pass and one change-detection turn instead
+     * of N (parallel timers, issue #29). Local-only and never persisted: the
+     * persisted deltas keep travelling as `syncTimeSpent`.
+     */
+    'Add time spent batch': props<{ entries: AddTimeSpentBatchEntry[] }>(),
     'Update whole State': props<{
       newState: TimeTrackingState;
     }>(),

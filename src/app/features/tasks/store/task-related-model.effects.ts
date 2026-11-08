@@ -7,6 +7,7 @@ import {
   filter,
   first,
   map,
+  mergeMap,
   switchMap,
 } from 'rxjs/operators';
 import { moveTaskInTodayList } from '../../work-context/store/work-context-meta.actions';
@@ -40,7 +41,20 @@ export class TaskRelatedModelEffects {
   autoAddTodayTagOnTracking = createEffect(() =>
     this.ifAutoAddTodayEnabled$(
       this._actions$.pipe(
-        ofType(TimeTrackingActions.addTimeSpent),
+        ofType(TimeTrackingActions.addTimeSpent, TimeTrackingActions.addTimeSpentBatch),
+        // Flatten a batched tick (issue #29) before the cheap filters below.
+        mergeMap((action) =>
+          'entries' in action
+            ? action.entries
+            : [
+                {
+                  task: action.task,
+                  date: action.date,
+                  duration: action.duration,
+                  isBackfill: action.isBackfill,
+                },
+              ],
+        ),
         // PERF: Skip during hydration/sync before any further work.
         filter(() => !this._hydrationState.isApplyingRemoteOps()),
         // Time back-filled for a past day is not work done today.

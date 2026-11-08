@@ -1,4 +1,5 @@
 import {
+  AddTimeSpentBatchEntry,
   TimeTrackingActions,
   updateWorkContextData,
   syncTimeTracking,
@@ -19,6 +20,70 @@ export const initialTimeTrackingState: TimeTrackingState = {
   // lastFlush: 0,
 } as const;
 
+/**
+ * Shared body of `Add time spent` and `Add time spent batch`, so the batched
+ * tick path (issue #29) and the single-dispatch callers stay equivalent.
+ */
+const applyAddTimeSpentToTimeTracking = (
+  state: TimeTrackingState,
+  { task, date, isBackfill }: Omit<AddTimeSpentBatchEntry, 'duration'>,
+): TimeTrackingState => {
+  // Back-filled time for a past day was not worked now: stamping Date.now()
+  // as that day's work end (or start) would be wrong.
+  if (isBackfill) {
+    return state;
+  }
+  const now = Date.now();
+  const e = roundTsToMinutes(now);
+  const startOf = (entry?: TTWorkContextData): number =>
+    roundTsToMinutes(entry?.s || now);
+  const stamp = (entry?: TTWorkContextData): TTWorkContextData => ({
+    ...entry,
+    e,
+    s: startOf(entry),
+  });
+  // Whether stamp() would leave the entry as it is.
+  const isStamped = (entry?: TTWorkContextData): boolean =>
+    !!entry && entry.e === e && entry.s === startOf(entry);
+  const tagIds = [TODAY_TAG.id, ...(task.tagIds || [])] as string[];
+
+  // Start/end are minute-rounded, so this per-second tick changes them at most
+  // once a minute. Keep the state reference otherwise, so selectors built on it
+  // (e.g. the archive merge behind TimeTrackingService.state$) don't recompute
+  // every second while tracking.
+  if (
+    (!task.projectId || isStamped(state.project[task.projectId]?.[date])) &&
+    tagIds.every((tagId) => isStamped(state.tag[tagId]?.[date]))
+  ) {
+    return state;
+  }
+
+  return {
+    ...state,
+    ...(task.projectId
+      ? {
+          project: {
+            ...state.project,
+            [task.projectId]: {
+              ...state.project[task.projectId],
+              [date]: stamp(state.project[task.projectId]?.[date]),
+            },
+          },
+        }
+      : {}),
+    tag: {
+      ...state.tag,
+      ...tagIds.reduce((acc, tagId) => {
+        acc[tagId] = {
+          ...state.tag[tagId],
+          [date]: stamp(state.tag[tagId]?.[date]),
+        };
+        return acc;
+      }, {}),
+    },
+  };
+};
+
 export const timeTrackingReducer = createReducer(
   initialTimeTrackingState,
 
@@ -29,63 +94,14 @@ export const timeTrackingReducer = createReducer(
   ),
   on(TimeTrackingActions.updateWholeState, (state, { newState }) => newState),
 
-  on(TimeTrackingActions.addTimeSpent, (state, { task, date, isBackfill }) => {
-    // Back-filled time for a past day was not worked now: stamping Date.now()
-    // as that day's work end (or start) would be wrong.
-    if (isBackfill) {
-      return state;
-    }
-    const now = Date.now();
-    const e = roundTsToMinutes(now);
-    const startOf = (entry?: TTWorkContextData): number =>
-      roundTsToMinutes(entry?.s || now);
-    const stamp = (entry?: TTWorkContextData): TTWorkContextData => ({
-      ...entry,
-      e,
-      s: startOf(entry),
-    });
-    // Whether stamp() would leave the entry as it is.
-    const isStamped = (entry?: TTWorkContextData): boolean =>
-      !!entry && entry.e === e && entry.s === startOf(entry);
-    const tagIds = [TODAY_TAG.id, ...(task.tagIds || [])] as string[];
+  on(TimeTrackingActions.addTimeSpent, (state, { task, date, isBackfill }) =>
+    applyAddTimeSpentToTimeTracking(state, { task, date, isBackfill }),
+  ),
 
-    // Start/end are minute-rounded, so this per-second tick changes them at most
-    // once a minute. Keep the state reference otherwise, so selectors built on it
-    // (e.g. the archive merge behind TimeTrackingService.state$) don't recompute
-    // every second while tracking.
-    if (
-      (!task.projectId || isStamped(state.project[task.projectId]?.[date])) &&
-      tagIds.every((tagId) => isStamped(state.tag[tagId]?.[date]))
-    ) {
-      return state;
-    }
-
-    return {
-      ...state,
-      ...(task.projectId
-        ? {
-            project: {
-              ...state.project,
-              [task.projectId]: {
-                ...state.project[task.projectId],
-                [date]: stamp(state.project[task.projectId]?.[date]),
-              },
-            },
-          }
-        : {}),
-      tag: {
-        ...state.tag,
-        ...tagIds.reduce((acc, tagId) => {
-          acc[tagId] = {
-            ...state.tag[tagId],
-            [date]: stamp(state.tag[tagId]?.[date]),
-          };
-          return acc;
-        }, {}),
-      },
-    };
-  }),
-
+  // Batched form of the tick path: one reducer pass for every running timer.
+  on(TimeTrackingActions.addTimeSpentBatch, (state, { entries }) =>
+    entries.reduce((acc, entry) => applyAddTimeSpentToTimeTracking(acc, entry), state),
+  ),
   on(updateWorkContextData, (state, { ctx, date, updates }) => {
     const prop = ctx.type === 'TAG' ? 'tag' : 'project';
 

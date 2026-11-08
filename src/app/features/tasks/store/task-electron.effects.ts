@@ -18,6 +18,7 @@ import {
   distinctUntilChanged,
   filter,
   map,
+  mergeMap,
   skipWhile,
   startWith,
   take,
@@ -251,12 +252,19 @@ export class TaskElectronEffects {
   setTaskBarProgress$ = createEffect(
     () =>
       this._actions$.pipe(
-        ofType(TimeTrackingActions.addTimeSpent),
+        ofType(TimeTrackingActions.addTimeSpent, TimeTrackingActions.addTimeSpentBatch),
+        // Flatten a batched tick (issue #29) into its per-task entries so the bar
+        // still reacts once per delta instead of once per production tick.
+        mergeMap((action) =>
+          'entries' in action
+            ? action.entries
+            : [{ task: action.task, date: action.date, duration: action.duration }],
+        ),
         // The bar shows the tracked task's progress; time added to any other
         // task (e.g. back-filled via the Local REST API) must not drive it.
         withLatestFrom(this._store$.select(selectCurrentTaskId)),
-        filter(([{ task }, currentTaskId]) => task.id === currentTaskId),
-        map(([action]) => action),
+        filter(([entry, currentTaskId]) => entry.task.id === currentTaskId),
+        map(([entry]) => entry),
         // The OS taskbar progress bar moves imperceptibly per second; throttling
         // collapses 1 IPC/sec into ~1 IPC/3s. Leading+trailing keeps the first
         // tick after start instant and the final value at the end of a window.

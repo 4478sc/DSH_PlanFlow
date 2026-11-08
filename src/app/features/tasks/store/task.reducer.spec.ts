@@ -1086,6 +1086,64 @@ describe('Task Reducer', () => {
     });
   });
 
+  describe('addTimeSpentBatch', () => {
+    const makeState = (): TaskState => ({
+      ...initialTaskState,
+      ids: ['task1', 'task2'],
+      entities: { task1: { ...task1 }, task2: { ...task2 } },
+    });
+
+    it('applies one entry per task, equivalent to sequential addTimeSpent', () => {
+      const date = '2024-01-01';
+
+      const sequential = [task1, task2].reduce<TaskState>(
+        (state, task) =>
+          taskReducer(
+            state,
+            TimeTrackingActions.addTimeSpent({
+              task,
+              date,
+              duration: 5000,
+              isFromTrackingReminder: false,
+            }),
+          ),
+        makeState(),
+      );
+
+      const batched = taskReducer(
+        makeState(),
+        TimeTrackingActions.addTimeSpentBatch({
+          entries: [
+            { task: task1, date, duration: 5000 },
+            { task: task2, date, duration: 5000 },
+          ],
+        }),
+      );
+
+      expect(batched.entities['task1']!.timeSpentOnDay[date]).toBe(5000);
+      expect(batched.entities['task2']!.timeSpentOnDay[date]).toBe(5000);
+      expect(batched.entities).toEqual(sequential.entities);
+    });
+
+    it('skips a missing task without dropping the other entries', () => {
+      const date = '2024-01-01';
+      const ghost = createTask('ghost');
+
+      const state = taskReducer(
+        makeState(),
+        TimeTrackingActions.addTimeSpentBatch({
+          entries: [
+            { task: ghost, date, duration: 1000 },
+            { task: task1, date, duration: 2000 },
+          ],
+        }),
+      );
+
+      expect(state.entities['ghost']).toBeUndefined();
+      expect(state.entities['task1']!.timeSpentOnDay[date]).toBe(2000);
+    });
+  });
+
   describe('syncTimeSpent', () => {
     it('should be a no-op for local dispatch', () => {
       const action = syncTimeSpent({

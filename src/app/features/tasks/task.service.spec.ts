@@ -29,6 +29,7 @@ import { signal } from '@angular/core';
 import { DeletedTaskIssueSidecarService } from '../issue/two-way-sync/deleted-task-issue-sidecar.service';
 import { TaskTimeSyncService } from './task-time-sync.service';
 import { selectTaskEntities } from './store/task.selectors';
+import { TimeTrackingActions } from '../time-tracking/store/time-tracking.actions';
 
 describe('TaskService', () => {
   let service: TaskService;
@@ -1058,6 +1059,53 @@ describe('TaskService', () => {
             dispatchedAction.type === '[TimeTracking] Sync time spent',
         ) as Record<string, unknown>;
       expect(action['timeSpentForDay']).toBeUndefined();
+    });
+  });
+
+  describe('tracking tick', () => {
+    const setTrackingState = (currentTaskId: string | null): void => {
+      store.setState({
+        tasks: {
+          ids: ['task-1'],
+          entities: { ['task-1']: createMockTask('task-1') },
+          currentTaskId,
+          selectedTaskId: null,
+          taskDetailTargetPanel: null,
+          isDataLoaded: true,
+        },
+      });
+      store.refreshState();
+    };
+
+    const batchCalls = (): {
+      entries: { task: { id: string }; date: string; duration: number }[];
+    }[] =>
+      (store.dispatch as jasmine.Spy).calls
+        .allArgs()
+        .map(([action]) => action)
+        .filter((action) => action.type === TimeTrackingActions.addTimeSpentBatch.type);
+
+    it('dispatches exactly one batched action per tick for the running task', () => {
+      setTrackingState('task-1');
+      (store.dispatch as jasmine.Spy).calls.reset();
+
+      tickSubject.next({ duration: 1000, date: '2026-01-05' });
+
+      const calls = batchCalls();
+      expect(calls.length).toBe(1);
+      expect(calls[0].entries.length).toBe(1);
+      expect(calls[0].entries[0].task.id).toBe('task-1');
+      expect(calls[0].entries[0].duration).toBe(1000);
+      expect(calls[0].entries[0].date).toBe('2026-01-05');
+    });
+
+    it('dispatches no batched action when nothing is tracked', () => {
+      setTrackingState(null);
+      (store.dispatch as jasmine.Spy).calls.reset();
+
+      tickSubject.next({ duration: 1000, date: '2026-01-05' });
+
+      expect(batchCalls().length).toBe(0);
     });
   });
 
