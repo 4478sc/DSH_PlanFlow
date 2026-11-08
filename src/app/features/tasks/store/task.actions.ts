@@ -24,6 +24,25 @@ export const setSelectedTask = createAction(
 
 export const unsetCurrentTask = createAction('[Task] UnsetCurrentTask');
 
+/**
+ * Adds a task to the running set without moving the main/focus pointer
+ * (parallel timers, #29). Non-persistent by design: the running set is local
+ * runtime state and is never synced.
+ */
+export const startTrackingTask = createAction(
+  '[Task] StartTrackingTask',
+  props<{ id: string }>(),
+);
+
+/** Removes one task from the running set and unpins the main pointer if it was the main one. */
+export const pauseTrackingTask = createAction(
+  '[Task] PauseTrackingTask',
+  props<{ id: string }>(),
+);
+
+/** Stops every running timer. */
+export const pauseAllTracking = createAction('[Task] PauseAllTracking');
+
 export const __updateMultipleTaskSimple = createAction(
   '[Task] Update multiple Tasks (simple)',
   (taskProps: { taskUpdates: Update<Task>[]; isIgnoreShortSyntax?: boolean }) => ({

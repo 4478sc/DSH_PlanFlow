@@ -73,7 +73,8 @@ export class TrackingReminderService {
   );
 
   _hideTrigger$: Observable<any> = merge(
-    this._taskService.currentTaskId$.pipe(filter((currentId) => !!currentId)),
+    // Hide as soon as any timer runs, not only the main one (#29).
+    this._taskService.trackedTaskIds$.pipe(filter((ids) => ids.length > 0)),
     this._idleService.isIdle$.pipe(filter((isIdle) => isIdle)),
   );
 
@@ -97,13 +98,13 @@ export class TrackingReminderService {
       (!cfg.isTrackingReminderShowOnMobile && IS_TOUCH_ONLY)
         ? EMPTY
         : combineLatest([
-            this._taskService.currentTaskId$,
+            this._taskService.trackedTaskIds$,
             this._idleService.isIdle$,
             this._isFocusModeActive$,
           ]).pipe(
             map(
-              ([currentTaskId, isIdle, isFocusModeActive]) =>
-                !currentTaskId && !isIdle && !isFocusModeActive,
+              ([trackedTaskIds, isIdle, isFocusModeActive]) =>
+                trackedTaskIds.length === 0 && !isIdle && !isFocusModeActive,
             ),
             distinctUntilChanged(),
             switchMap((isEnabled) => (isEnabled ? this._resetableCounter$ : of(0))),

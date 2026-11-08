@@ -1086,6 +1086,72 @@ describe('Task Reducer', () => {
     });
   });
 
+  describe('running set (#29)', () => {
+    const makeState = (): TaskState => ({
+      ...initialTaskState,
+      ids: ['task1', 'task2'],
+      entities: { task1: { ...task1 }, task2: { ...task2 } },
+    });
+
+    it('setCurrentTask replaces the running set with the started task', () => {
+      const state = taskReducer(makeState(), fromActions.setCurrentTask({ id: 'task1' }));
+
+      expect(state.currentTaskId).toBe('task1');
+      expect(state.trackedTaskIds).toEqual(['task1']);
+    });
+
+    it('startTrackingTask adds a second timer without moving the main pointer', () => {
+      const started = taskReducer(
+        makeState(),
+        fromActions.setCurrentTask({ id: 'task1' }),
+      );
+      const both = taskReducer(started, fromActions.startTrackingTask({ id: 'task2' }));
+
+      expect(both.currentTaskId).toBe('task1');
+      expect(both.trackedTaskIds).toEqual(['task1', 'task2']);
+      // idempotent
+      expect(
+        taskReducer(both, fromActions.startTrackingTask({ id: 'task2' })).trackedTaskIds,
+      ).toEqual(['task1', 'task2']);
+    });
+
+    it('pauseTrackingTask stops one timer and only unpins the main pointer when it was main', () => {
+      const started = taskReducer(
+        makeState(),
+        fromActions.setCurrentTask({ id: 'task1' }),
+      );
+      const both = taskReducer(started, fromActions.startTrackingTask({ id: 'task2' }));
+
+      const pausedOther = taskReducer(
+        both,
+        fromActions.pauseTrackingTask({ id: 'task2' }),
+      );
+      expect(pausedOther.currentTaskId).toBe('task1');
+      expect(pausedOther.trackedTaskIds).toEqual(['task1']);
+
+      const pausedMain = taskReducer(
+        both,
+        fromActions.pauseTrackingTask({ id: 'task1' }),
+      );
+      expect(pausedMain.currentTaskId).toBeNull();
+      expect(pausedMain.trackedTaskIds).toEqual(['task2']);
+      expect(pausedMain.lastCurrentTaskId).toBe('task1');
+    });
+
+    it('pauseAllTracking stops everything and keeps the last main task', () => {
+      const started = taskReducer(
+        makeState(),
+        fromActions.setCurrentTask({ id: 'task1' }),
+      );
+      const both = taskReducer(started, fromActions.startTrackingTask({ id: 'task2' }));
+
+      const stopped = taskReducer(both, fromActions.pauseAllTracking());
+      expect(stopped.currentTaskId).toBeNull();
+      expect(stopped.trackedTaskIds).toEqual([]);
+      expect(stopped.lastCurrentTaskId).toBe('task1');
+    });
+  });
+
   describe('addTimeSpentBatch', () => {
     const makeState = (): TaskState => ({
       ...initialTaskState,

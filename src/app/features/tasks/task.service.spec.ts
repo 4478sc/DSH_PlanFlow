@@ -1099,6 +1099,35 @@ describe('TaskService', () => {
       expect(calls[0].entries[0].date).toBe('2026-01-05');
     });
 
+    it('dispatches one batched action covering every tracked task', () => {
+      store.setState({
+        tasks: {
+          ids: ['task-1', 'task-2'],
+          entities: {
+            ['task-1']: createMockTask('task-1'),
+            ['task-2']: createMockTask('task-2'),
+          },
+          currentTaskId: 'task-1',
+          trackedTaskIds: ['task-1', 'task-2'],
+          selectedTaskId: null,
+          taskDetailTargetPanel: null,
+          isDataLoaded: true,
+        },
+      });
+      store.refreshState();
+      (store.dispatch as jasmine.Spy).calls.reset();
+
+      tickSubject.next({ duration: 1000, date: '2026-01-05' });
+
+      const calls = batchCalls();
+      expect(calls.length).toBe(1);
+      expect(calls[0].entries.map((entry) => entry.task.id)).toEqual([
+        'task-1',
+        'task-2',
+      ]);
+      expect(calls[0].entries.every((entry) => entry.duration === 1000)).toBe(true);
+    });
+
     it('dispatches no batched action when nothing is tracked', () => {
       setTrackingState(null);
       (store.dispatch as jasmine.Spy).calls.reset();

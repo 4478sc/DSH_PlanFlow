@@ -103,6 +103,20 @@ export const selectIsTaskDataLoaded = createSelector(
 export const selectCurrentTask = createSelector(selectTaskFeatureState, (s) =>
   s.currentTaskId ? (s.entities[s.currentTaskId] ?? null) : null,
 );
+/**
+ * Ids of the tasks with a running timer (#29). Falls back to the single main
+ * task for state written before `trackedTaskIds` existed, and drops ids whose
+ * entity is gone, so a remote delete cannot leave an orphan timer.
+ */
+export const selectTrackedTaskIds = createSelector(selectTaskFeatureState, (s) => {
+  const tracked = s.trackedTaskIds ?? (s.currentTaskId ? [s.currentTaskId] : []);
+  return tracked.filter((id) => !!s.entities[id]);
+});
+export const selectTrackedTasks = createSelector(
+  selectTaskEntities,
+  selectTrackedTaskIds,
+  (entities, ids) => ids.map((id) => entities[id]).filter((t): t is Task => !!t),
+);
 export const selectLastCurrentTask = createSelector(selectTaskFeatureState, (s) =>
   s.lastCurrentTaskId ? (s.entities[s.lastCurrentTaskId] ?? null) : null,
 );

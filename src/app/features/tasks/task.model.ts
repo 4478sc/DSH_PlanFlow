@@ -252,6 +252,13 @@ export interface TaskState extends EntityState<Task> {
 
   // additional entities state properties
   currentTaskId: string | null;
+  /**
+   * Tasks with a running timer (parallel timers, #29). Local runtime state only:
+   * the actions that touch it are non-persistent and no sync op carries it, so a
+   * remote device never starts or stops a timer because of a sync. Optional
+   * because persisted state from older versions does not contain it.
+   */
+  trackedTaskIds?: string[];
   selectedTaskId: string | null;
   taskDetailTargetPanel?: TaskDetailTargetPanel | null;
   lastCurrentTaskId: string | null;

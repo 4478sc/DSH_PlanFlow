@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { BehaviorSubject, of, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Action } from '@ngrx/store';
 import { TakeABreakService } from './take-a-break.service';
 import { idleDialogResult } from '../idle/store/idle.actions';
@@ -39,6 +40,10 @@ describe('TakeABreakService', () => {
     currentTaskId$ = new BehaviorSubject<string | null>(null);
     (taskService as unknown as { currentTaskId$: unknown }).currentTaskId$ =
       currentTaskId$;
+    // The service reads the running set (#29); single-task tests derive it from
+    // the current task so their behaviour is unchanged.
+    (taskService as unknown as { trackedTaskIds$: unknown }).trackedTaskIds$ =
+      currentTaskId$.pipe(map((id) => (id ? [id] : [])));
     taskService.currentTaskId.and.returnValue(null);
 
     snackService = jasmine.createSpyObj<SnackService>('SnackService', ['open']);
