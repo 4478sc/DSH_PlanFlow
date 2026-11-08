@@ -62,9 +62,12 @@ export class TakeABreakService {
   otherNoBreakTIme$ = new Subject<number>();
 
   private _timeWithNoCurrentTask$: Observable<number> =
-    this._taskService.currentTaskId$.pipe(
-      switchMap((currentId) => {
-        return currentId
+    this._taskService.trackedTaskIds$.pipe(
+      // Collapse to "is anything running": the counter must only reset when the
+      // last timer stops, not on every pause of one of several running tasks (#29).
+      distinctUntilChanged((a, b) => Boolean(a.length) === Boolean(b.length)),
+      switchMap((trackedIds) => {
+        return trackedIds.length
           ? from([0])
           : this._timeTrackingService.tick$.pipe(scan(reduceBreak, 0));
       }),

@@ -52,6 +52,8 @@ import {
   selectStartableTasks,
   selectTaskById,
   selectTaskByIdWithSubTaskData,
+  selectTrackedTaskIds,
+  selectTrackedTasks,
   selectTaskDetailTargetPanel,
   selectTaskEntities,
   selectTaskFeatureState,
@@ -141,10 +143,11 @@ export class TaskService {
     // NOTE: we can't use share here, as we need the last emitted value
   );
 
-  /** Running timers: only the current task until parallel timers land (#29, PR 1b). */
-  private readonly _runningTasks$: Observable<Task[]> = this.currentTask$.pipe(
-    map((task) => (task ? [task] : [])),
-  );
+  /** Ids of the tasks with a running timer (#29). Local runtime state, never synced. */
+  trackedTaskIds$: Observable<string[]> = this._store.pipe(select(selectTrackedTaskIds));
+  trackedTaskIds = toSignal(this.trackedTaskIds$, { initialValue: [] as string[] });
+  /** The same set resolved to entities; the tracking tick consumes it. */
+  private readonly _trackedTasks$ = this._store.select(selectTrackedTasks);
 
   currentTaskParentOrCurrent$: Observable<Task | undefined> = this._store.pipe(
     select(selectCurrentTaskParentOrCurrent),
@@ -231,7 +234,7 @@ export class TaskService {
     this._timeTrackingService.tick$
       .pipe(
         withLatestFrom(
-          this._runningTasks$,
+          this._trackedTasks$,
           this._imexMetaService.isDataImportInProgress$,
         ),
       )

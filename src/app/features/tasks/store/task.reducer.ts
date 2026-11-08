@@ -7,10 +7,13 @@ import {
   moveSubTaskToBottom,
   moveSubTaskToTop,
   moveSubTaskUp,
+  pauseAllTracking,
+  pauseTrackingTask,
   removeTimeSpent,
   roundTimeSpentForDay,
   setCurrentTask,
   setSelectedTask,
+  startTrackingTask,
   toggleStart,
   unsetCurrentTask,
   updateTaskUi,
@@ -169,6 +172,8 @@ const reorderSubTask = (
 export const initialTaskState: TaskState = taskAdapter.getInitialState({
   // TODO maybe at least move those properties to an ui property
   currentTaskId: null,
+  // Local running-timer set (#29); defaults to "nothing else is running".
+  trackedTaskIds: [],
   selectedTaskId: null,
   taskDetailTargetPanel: TaskDetailTargetPanel.Default,
   lastCurrentTaskId: null,
@@ -318,6 +323,7 @@ export const taskReducer = createReducer<TaskState>(
         return {
           ...state,
           currentTaskId: null,
+          trackedTaskIds: [],
         };
       }
       const subTaskIds = task.subTaskIds;
@@ -332,12 +338,16 @@ export const taskReducer = createReducer<TaskState>(
       return {
         ...state,
         currentTaskId: taskToStartId,
+        // Starting a task replaces the running set until the parallel switch
+        // (PR 2) lets the UI add a second one via startTrackingTask (#29).
+        trackedTaskIds: [taskToStartId],
         selectedTaskId: state.selectedTaskId && taskToStartId,
       };
     } else {
       return {
         ...state,
         currentTaskId: null,
+        trackedTaskIds: [],
       };
     }
   }),
@@ -347,9 +357,42 @@ export const taskReducer = createReducer<TaskState>(
     return {
       ...state,
       currentTaskId: null,
+      trackedTaskIds: [],
       lastCurrentTaskId: state.currentTaskId ?? state.lastCurrentTaskId,
     };
   }),
+
+  on(startTrackingTask, (state, { id }) => {
+    if (!state.entities[id]) {
+      return state;
+    }
+    const tracked = state.trackedTaskIds ?? [];
+    if (tracked.includes(id)) {
+      return state;
+    }
+    return { ...state, trackedTaskIds: [...tracked, id] };
+  }),
+
+  on(pauseTrackingTask, (state, { id }) => {
+    const tracked = state.trackedTaskIds ?? [];
+    if (!tracked.includes(id) && state.currentTaskId !== id) {
+      return state;
+    }
+    const isMain = state.currentTaskId === id;
+    return {
+      ...state,
+      trackedTaskIds: tracked.filter((trackedId) => trackedId !== id),
+      currentTaskId: isMain ? null : state.currentTaskId,
+      lastCurrentTaskId: isMain ? id : state.lastCurrentTaskId,
+    };
+  }),
+
+  on(pauseAllTracking, (state) => ({
+    ...state,
+    trackedTaskIds: [],
+    currentTaskId: null,
+    lastCurrentTaskId: state.currentTaskId ?? state.lastCurrentTaskId,
+  })),
 
   on(setSelectedTask, (state, { id, taskDetailTargetPanel, isSkipToggle }) => {
     if (

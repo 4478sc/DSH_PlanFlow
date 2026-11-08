@@ -2,6 +2,7 @@ import { TestBed, fakeAsync, tick, discardPeriodicTasks } from '@angular/core/te
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { Action } from '@ngrx/store';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { TrackingReminderService } from './tracking-reminder.service';
 import { IdleService } from '../idle/idle.service';
 import { TaskService } from '../tasks/task.service';
@@ -87,7 +88,11 @@ describe('TrackingReminderService', () => {
         },
         {
           provide: TaskService,
-          useValue: { currentTaskId$: currentTaskId$.asObservable() },
+          useValue: {
+            currentTaskId$: currentTaskId$.asObservable(),
+            // Single-task tests: the running set mirrors the current task (#29).
+            trackedTaskIds$: currentTaskId$.pipe(map((id) => (id ? [id] : []))),
+          },
         },
         {
           provide: GlobalConfigService,
