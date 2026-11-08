@@ -3114,6 +3114,8 @@
       "L_DEFAULT_ESTIMATE_SUB_TASKS": "Default time estimate for new subtasks",
       "L_IS_AUTO_START_NEXT_TASK": "Start tracking next task when marking current task completed",
       "L_IS_NOTIFY_WHEN_TIME_ESTIMATE_EXCEEDED": "Notify when time estimate exceeded",
+      "L_IS_PARALLEL_TIMERS_ENABLED": "Allow several tasks to be timed at once",
+      "L_IS_PARALLEL_TIMERS_ENABLED_HINT": "Starting another task no longer pauses the running one. Each task's tracked time adds up independently, so the sum can be larger than the elapsed time.",
       "L_IS_TRACKING_REMINDER_ENABLED": "Enable tracking reminder",
       "L_IS_TRACKING_REMINDER_FOCUS_WINDOW": "Focus app window when reminder is active (desktop only)",
       "L_IS_TRACKING_REMINDER_NOTIFY": "Notify when time tracking reminder is shown",

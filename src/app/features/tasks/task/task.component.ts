@@ -232,6 +232,8 @@ export class TaskComponent implements OnDestroy, AfterViewInit {
 
   // Use shared signals from services to avoid creating 600+ subscriptions on initial render
   isCurrent = computed(() => this._taskService.currentTaskId() === this.task().id);
+  /** Running alongside the main task when parallel timers are on (#29). */
+  isTracked = computed(() => this._taskService.trackedTaskIds().includes(this.task().id));
   isWontDo = computed(() => isWontDoTask(this.task()));
   isSelected = computed(() => this._taskService.selectedTaskId() === this.task().id);
   // Part of the transient multi-selection (modifier click, Shift+Arrow, X,
@@ -857,6 +859,11 @@ export class TaskComponent implements OnDestroy, AfterViewInit {
 
   pauseTask(): void {
     this._taskService.pauseCurrent();
+  }
+
+  /** Stops this task's timer when it is a parallel one, not the main task. */
+  pauseTrackedTask(): void {
+    this._taskService.pauseTracking(this.task().id);
   }
 
   togglePlayPause(): void {

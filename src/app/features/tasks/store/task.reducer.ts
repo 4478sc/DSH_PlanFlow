@@ -308,7 +308,7 @@ export const taskReducer = createReducer<TaskState>(
   // persistent `updateTask` for it. Writing `isDone` here on a non-persistent
   // action was invisible to op-log capture and left other devices showing the
   // task as done forever (#9904).
-  on(setCurrentTask, (state, { id }) => {
+  on(setCurrentTask, (state, { id, isParallel }) => {
     if (id) {
       // A dialog can hold a task id across a remote `moveToArchive` that removes
       // the entity (idle dialog: it captures lastCurrentTaskId on open and calls
@@ -338,9 +338,11 @@ export const taskReducer = createReducer<TaskState>(
       return {
         ...state,
         currentTaskId: taskToStartId,
-        // Starting a task replaces the running set until the parallel switch
-        // (PR 2) lets the UI add a second one via startTrackingTask (#29).
-        trackedTaskIds: [taskToStartId],
+        // Single-task default replaces the running set; with parallel timers on
+        // (#29) the new task joins the ones already running.
+        trackedTaskIds: isParallel
+          ? Array.from(new Set([...(state.trackedTaskIds ?? []), taskToStartId]))
+          : [taskToStartId],
         selectedTaskId: state.selectedTaskId && taskToStartId,
       };
     } else {

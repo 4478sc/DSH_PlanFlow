@@ -1,7 +1,7 @@
 @if (isTimeTrackingEnabled() && !task().isDone && !task().subTasks?.length) {
-  @if (isCurrent()) {
+  @if (isCurrent() || isTracked()) {
     <button
-      (click)="parent.pauseTask()"
+      (click)="isCurrent() ? parent.pauseTask() : parent.pauseTrackedTask()"
       title="{{ T.F.TASK.CMP.TRACK_TIME_STOP | translate }} {{
         kb.togglePlay ? '[' + kb.togglePlay + ']' : ''
       }}"

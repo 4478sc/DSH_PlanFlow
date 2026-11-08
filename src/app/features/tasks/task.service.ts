@@ -27,6 +27,7 @@ import {
   moveSubTaskUp,
   removeTimeSpent,
   roundTimeSpentForDay,
+  pauseTrackingTask,
   setCurrentTask,
   setSelectedTask,
   toggleStart,
@@ -34,6 +35,8 @@ import {
   updateTaskUi,
 } from './store/task.actions';
 import { getNextHideSubTasksMode } from './util/get-next-hide-sub-tasks-mode';
+import { isParallelTimersSupported } from './util/parallel-timers';
+import { flushAccumulatedTimeSpent } from './util/flush-accumulated-time-spent';
 import {
   UnsyncedTimeTrackingContext,
   trackContextsForSync,
@@ -94,9 +97,7 @@ import { DateService } from '../../core/date/date.service';
 import {
   TimeTrackingActions,
   syncTimeSpent,
-  syncTimeTracking,
 } from '../time-tracking/store/time-tracking.actions';
-import { selectTimeTrackingState } from '../time-tracking/store/time-tracking.selectors';
 import { ArchiveService } from '../archive/archive.service';
 import { TaskArchiveService } from '../archive/task-archive.service';
 import { TODAY_TAG } from '../tag/tag.const';
@@ -284,26 +285,7 @@ export class TaskService {
    * Dispatches syncTimeSpent for all accumulated time and resets accumulators.
    */
   private _flushAccumulatedTimeSpent(): void {
-    // Sync task.timeSpent totals
-    this._taskTimeSync.flush();
-
-    // Sync TIME_TRACKING session data (start/end times)
-    if (this._unsyncedContexts.size > 0) {
-      this._store
-        .pipe(select(selectTimeTrackingState), take(1))
-        .subscribe((timeTrackingState) => {
-          this._unsyncedContexts.forEach(({ contextType, contextId, date }) => {
-            const prop = contextType === 'TAG' ? 'tag' : 'project';
-            const data = timeTrackingState?.[prop]?.[contextId]?.[date];
-            if (data) {
-              this._store.dispatch(
-                syncTimeTracking({ contextType, contextId, date, data }),
-              );
-            }
-          });
-          this._unsyncedContexts.clear();
-        });
-    }
+    flushAccumulatedTimeSpent(this._store, this._taskTimeSync, this._unsyncedContexts);
   }
 
   /**
@@ -323,11 +305,28 @@ export class TaskService {
   // ----
   setCurrentId(id: string | null): void {
     if (id) {
-      this._store.dispatch(setCurrentTask({ id }));
+      // Parallel timers (#29): with the setting on, starting a task joins the
+      // ones already running instead of replacing them.
+      this._store.dispatch(
+        setCurrentTask({ id, isParallel: this.isParallelTimersEnabled() }),
+      );
     } else {
       this._store.dispatch(unsetCurrentTask());
     }
   }
+
+  /** Stops one running timer without touching the others (#29). */
+  pauseTracking(id: string): void {
+    this._taskTimeSync.flushOne(id);
+    this._store.dispatch(pauseTrackingTask({ id }));
+  }
+
+  /** Parallel timers are opt-in and desktop/web only (#29). */
+  isParallelTimersEnabled = computed(() =>
+    isParallelTimersSupported(
+      this._globalConfigService.cfg()?.timeTracking?.isParallelTimersEnabled === true,
+    ),
+  );
 
   setSelectedId(
     id: string | null,

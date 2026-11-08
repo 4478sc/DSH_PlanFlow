@@ -221,6 +221,7 @@ export const DEFAULT_GLOBAL_CONFIG: GlobalConfigState = {
     trackingReminderMinTime: 5 * minute,
     isTrackingReminderNotify: false, // Show desktop notification when tracking reminder is triggered
     isTrackingReminderFocusWindow: false, // Focus the application window when tracking reminder is triggered
+    isParallelTimersEnabled: false, // Time several tasks at once (#29); desktop/web only
   },
   reminder: {
     isCountdownBannerEnabled: true,

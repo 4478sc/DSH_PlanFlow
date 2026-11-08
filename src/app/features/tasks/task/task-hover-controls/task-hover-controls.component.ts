@@ -29,6 +29,8 @@ export class TaskHoverControlsComponent {
 
   task = input.required<TaskWithSubTasks>();
   isCurrent = input.required<boolean>();
+  /** Running without being the main task (parallel timers, #29). */
+  isTracked = input<boolean>(false);
   isSelected = input.required<boolean>();
   isShowAddToToday = input.required<boolean>();
   isShowRemoveFromToday = input.required<boolean>();

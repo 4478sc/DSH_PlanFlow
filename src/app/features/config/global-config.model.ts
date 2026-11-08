@@ -114,6 +114,11 @@ export type TimeTrackingConfig = Readonly<{
   trackingReminderMinTime: number;
   isTrackingReminderNotify?: boolean;
   isTrackingReminderFocusWindow?: boolean;
+  /**
+   * Allow several tasks to be timed at once (#29). Default off; desktop/web only.
+   * Optional because persisted settings from older versions do not contain it.
+   */
+  isParallelTimersEnabled?: boolean;
 }>;
 
 export type EvaluationConfig = Readonly<{
