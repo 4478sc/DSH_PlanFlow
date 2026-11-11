@@ -35,7 +35,7 @@ import {
 import { SectionService } from '../../features/section/section.service';
 import { DialogPromptComponent } from '../../ui/dialog-prompt/dialog-prompt.component';
 import { MatMenu, MatMenuContent, MatMenuItem } from '@angular/material/menu';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MatIcon } from '@angular/material/icon';
 import { INBOX_PROJECT } from '../../features/project/project.const';
 import { SnackService } from '../../core/snack/snack.service';
@@ -77,6 +77,7 @@ export class WorkContextMenuComponent implements OnInit, OnChanges {
   private _tagService = inject(TagService);
   private _projectService = inject(ProjectService);
   private _sectionService = inject(SectionService);
+  private _translateService = inject(TranslateService);
   private _workContextService = inject(WorkContextService);
   private _router = inject(Router);
   private _snackService = inject(SnackService);
@@ -451,6 +452,15 @@ export class WorkContextMenuComponent implements OnInit, OnChanges {
   }
 
   protected readonly INBOX_PROJECT = INBOX_PROJECT;
+
+  createTodayDaypartSections(): void {
+    if (this.isForProject || this.contextId !== TODAY_TAG.id) return;
+    this._sectionService.createTodayDaypartSections([
+      this._translateService.instant(T.MH.DAYPART_MORNING),
+      this._translateService.instant(T.MH.DAYPART_AFTERNOON),
+      this._translateService.instant(T.MH.DAYPART_EVENING),
+    ]);
+  }
 
   async shareTasksAsMarkdown(): Promise<void> {
     const { status, markdown, contextTitle } =

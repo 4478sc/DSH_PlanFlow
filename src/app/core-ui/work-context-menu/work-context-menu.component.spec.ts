@@ -21,6 +21,9 @@ import { DialogPromptComponent } from '../../ui/dialog-prompt/dialog-prompt.comp
 import { DateService } from '../../core/date/date.service';
 import { DialogProjectCompleteComponent } from '../../features/project/dialog-project-complete/dialog-project-complete.component';
 import { PlainspaceShareService } from '../../features/issue/providers/plainspace/plainspace-share.service';
+import { SectionService } from '../../features/section/section.service';
+import { TODAY_TAG } from '../../features/tag/tag.const';
+import { T } from '../../t.const';
 
 @Component({
   standalone: true,
@@ -178,6 +181,32 @@ describe('WorkContextMenuComponent', () => {
     component.contextTypeSet = host.contextType();
     router = TestBed.inject(Router);
     spyOn(router, 'navigateByUrl').and.returnValue(Promise.resolve(true));
+  });
+
+  describe('Today daypart sections', () => {
+    it('offers the template only in Today and invokes its service', () => {
+      host.contextId.set(TODAY_TAG.id);
+      host.contextType.set(WorkContextType.TAG);
+      openMenu();
+      const service = TestBed.inject(SectionService);
+      const create = spyOn(service, 'createTodayDaypartSections');
+      const button = menuButtonByIcon('view_agenda');
+      expect(button).not.toBeNull();
+      button!.click();
+      expect(create).toHaveBeenCalledOnceWith([
+        T.MH.DAYPART_MORNING,
+        T.MH.DAYPART_AFTERNOON,
+        T.MH.DAYPART_EVENING,
+      ]);
+    });
+
+    it('does not offer or apply the template to a project', () => {
+      openMenu();
+      const create = spyOn(TestBed.inject(SectionService), 'createTodayDaypartSections');
+      expect(menuButtonByIcon('view_agenda')).toBeNull();
+      component.createTodayDaypartSections();
+      expect(create).not.toHaveBeenCalled();
+    });
   });
 
   describe('completeProject()', () => {
