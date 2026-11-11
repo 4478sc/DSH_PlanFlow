@@ -2,7 +2,8 @@ import { Injectable, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { nanoid } from 'nanoid';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
+import { TODAY_TAG } from '../tag/tag.const';
 import { Section } from './section.model';
 import { isValidSectionContext, sanitizeSectionTitle } from './section.util';
 import { WorkContextType } from '../work-context/work-context.model';
@@ -56,6 +57,43 @@ export class SectionService {
       }),
     );
     return id;
+  }
+
+  /**
+   * A template of ordinary, independently editable sections. Stable IDs keep a
+   * second click (even after renaming or changing language) from creating copies.
+   * Reuse the existing single-section create operation: partial delivery is safe
+   * and retrying creates only missing sections, without touching tasks or order.
+   */
+  createTodayDaypartSections(titles: readonly [string, string, string]): void {
+    this.getSectionsByContextId$(TODAY_TAG.id)
+      .pipe(take(1))
+      .subscribe((sections) => {
+        const parts = ['morning', 'afternoon', 'evening'] as const;
+        parts.forEach((part, index) => {
+          const id = 'today-daypart-' + part;
+          const title = sanitizeSectionTitle(titles[index]);
+          if (
+            sections.some(
+              (section) =>
+                section.id === id || sanitizeSectionTitle(section.title) === title,
+            )
+          )
+            return;
+          this._store.dispatch(
+            addSection({
+              section: {
+                id,
+                contextId: TODAY_TAG.id,
+                contextType: WorkContextType.TAG,
+                title,
+                isExpanded: true,
+                taskIds: [],
+              },
+            }),
+          );
+        });
+      });
   }
 
   deleteSection(id: string): void {

@@ -94,6 +94,16 @@
       </button>
     }
 
+    @if (!isForProject && contextId === TODAY_TAG_ID) {
+      <button
+        (click)="createTodayDaypartSections()"
+        mat-menu-item
+      >
+        <mat-icon>view_agenda</mat-icon>
+        <span class="text">{{ T.MH.CREATE_DAYPART_SECTIONS | translate }}</span>
+      </button>
+    }
+
     <button
       (click)="openSettings()"
       mat-menu-item

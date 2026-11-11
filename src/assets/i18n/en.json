@@ -3191,6 +3191,10 @@
   "MH": {
     "ADD_NEW_TASK": "Add new Task",
     "ADD_SECTION": "Add Section",
+    "CREATE_DAYPART_SECTIONS": "Create morning / afternoon / evening sections",
+    "DAYPART_MORNING": "Morning (before 12:00)",
+    "DAYPART_AFTERNOON": "Afternoon (before 18:00)",
+    "DAYPART_EVENING": "Evening (before 24:00)",
     "BOARDS": "Views",
     "COPY_TASK_LIST_MARKDOWN": "Copy to clipboard",
     "CREATE_PROJECT": "Create project",
