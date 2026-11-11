@@ -1015,6 +1015,29 @@ describe('AddTaskBarActionsComponent', () => {
   });
 
   describe('Estimate Operations', () => {
+    it('should offer 45m between 30m and 1h and apply it when selected', fakeAsync(() => {
+      const emitSpy = spyOn(component.estimateChanged, 'emit');
+      component.estimateMenuTrigger()!.openMenu();
+      fixture.detectChanges();
+      tick();
+
+      const buttons = Array.from(
+        document.querySelectorAll<HTMLButtonElement>(
+          '.cdk-overlay-container button[mat-menu-item]',
+        ),
+      );
+      const labels = buttons.map((button) => button.textContent?.trim());
+      const index = labels.indexOf('45m');
+      expect(index).toBeGreaterThan(-1);
+      expect(labels.slice(index - 1, index + 2)).toEqual(['30m', '45m', '1h']);
+
+      buttons[index]?.click();
+      tick();
+
+      expect(mockParserService.applyUserEstimatePick).toHaveBeenCalledOnceWith(2700000);
+      expect(emitSpy).toHaveBeenCalledOnceWith('45m');
+    }));
+
     it('should handle estimate input with valid value', () => {
       spyOn(component.estimateChanged, 'emit');
       (mockStateService as any)._mockInputTxtSignal.set('Task');

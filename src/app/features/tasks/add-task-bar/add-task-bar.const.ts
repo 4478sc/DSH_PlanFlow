@@ -37,6 +37,7 @@ export const ESTIMATE_OPTIONS = [
   { label: '10m', value: '10m', ms: 10 * M },
   { label: '15m', value: '15m', ms: 15 * M },
   { label: '30m', value: '30m', ms: 30 * M },
+  { label: '45m', value: '45m', ms: 45 * M },
   { label: '1h', value: '1h', ms: 1 * H },
   { label: '2h', value: '2h', ms: 2 * H },
   { label: '3h', value: '3h', ms: 3 * H },
