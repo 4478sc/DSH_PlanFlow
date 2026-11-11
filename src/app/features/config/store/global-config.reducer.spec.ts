@@ -19,7 +19,7 @@ import {
 } from './global-config.reducer';
 import { updateGlobalConfigSection } from './global-config.actions';
 import { loadAllData } from '../../../root-store/meta/load-all-data.action';
-import { GlobalConfigState, GlobalSectionConfig } from '../global-config.model';
+import { AppFeaturesConfig, GlobalConfigState } from '../global-config.model';
 import { MemoizedSelector } from '@ngrx/store';
 import { SyncProviderId } from '../../../op-log/sync-providers/provider.const';
 import { AppDataComplete } from '../../../op-log/model/model-config';
@@ -954,7 +954,8 @@ describe('GlobalConfigReducer', () => {
           sectionKey: 'appFeatures',
           sectionCfg: {
             isEnableUserProfiles: true,
-          } as unknown as Partial<GlobalSectionConfig>,
+            // Deliberately replay a field sent by an older client.
+          } as Partial<AppFeaturesConfig>,
         }),
       );
 

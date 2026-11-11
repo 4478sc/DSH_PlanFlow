@@ -20,7 +20,6 @@ import { LOCAL_ACTIONS } from '../../../util/local-actions.token';
 import { AppStateActions } from '../../../root-store/app-state/app-state.actions';
 import { loadAllData } from '../../../root-store/meta/load-all-data.action';
 import { DEFAULT_GLOBAL_CONFIG } from '../default-global-config.const';
-import { GlobalSectionConfig } from '../global-config.model';
 import { KeyboardConfig } from '@sp/keyboard-config';
 import { TaskSharedActions } from '../../../root-store/meta/task-shared.actions';
 import { selectAllTasks } from '../../tasks/store/task.selectors';
@@ -557,11 +556,9 @@ describe('GlobalConfigEffects', () => {
       actions$.next(
         updateGlobalConfigSection({
           sectionKey: 'timeTracking',
-          // GlobalSectionConfig does not list TimeTrackingConfig, so the payload
-          // needs a cast - the config page saves this section the same way.
           sectionCfg: {
             isParallelTimersEnabled: false,
-          } as unknown as Partial<GlobalSectionConfig>,
+          },
         }),
       );
     };

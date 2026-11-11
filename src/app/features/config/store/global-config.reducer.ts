@@ -7,11 +7,9 @@ import {
   on,
 } from '@ngrx/store';
 import {
-  AppFeaturesConfig,
   ClipboardImagesConfig,
   FocusModeConfig,
   GlobalConfigState,
-  MiscConfig,
   SyncConfig,
 } from '../global-config.model';
 import type { KeyboardConfig } from '@sp/keyboard-config';
@@ -253,11 +251,9 @@ export const globalConfigReducer = createReducer<GlobalConfigState>(
     const { sectionKey, sectionCfg } = action;
     const normalizedSectionCfg =
       sectionKey === 'misc'
-        ? stripRemovedUserProfilesSetting(
-            normalizeStartOfNextDayConfig(sectionCfg as Partial<MiscConfig>),
-          )
+        ? stripRemovedUserProfilesSetting(normalizeStartOfNextDayConfig(sectionCfg))
         : sectionKey === 'appFeatures'
-          ? stripRemovedUserProfilesSetting(sectionCfg as Partial<AppFeaturesConfig>)
+          ? stripRemovedUserProfilesSetting(sectionCfg)
           : sectionCfg;
     const updatedSection = {
       ...state[sectionKey],

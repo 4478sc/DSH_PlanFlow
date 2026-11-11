@@ -31,9 +31,10 @@ import {
   ConfigFormConfig,
   GenericConfigFormSection,
   GlobalConfigFormSectionKey,
-  GlobalConfigSectionKey,
+  GlobalConfigFormModel,
+  GlobalConfigSectionUpdateArgs,
   GlobalConfigState,
-  GlobalSectionConfig,
+  PersistedGlobalConfigSectionKey,
 } from '../../features/config/global-config.model';
 import { from, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -439,8 +440,9 @@ export class ConfigPageComponent implements OnInit {
       return;
     }
 
-    // From here on we know it's a real GlobalConfigState section.
-    const sectionKey = formSectionKey as GlobalConfigSectionKey;
+    // These generic Formly events lose their key/model relationship. Local-only
+    // models have already been routed above; keep the assertion at this boundary.
+    const sectionKey = formSectionKey as PersistedGlobalConfigSectionKey;
 
     if ((NEW_INSTALL_CONFIG_SECTION_KEYS as readonly string[]).includes(sectionKey)) {
       // Sync only the fields that changed, never this device's untouched defaults.
@@ -449,12 +451,18 @@ export class ConfigPageComponent implements OnInit {
         config,
       );
       if (Object.keys(changed).length > 0) {
-        this.configService.updateSection(sectionKey, changed);
+        // Formly emits an untyped record; keep its one assertion at the UI
+        // boundary rather than weakening typed action/service callers.
+        this.configService.updateSection(
+          ...([sectionKey, changed] as GlobalConfigSectionUpdateArgs),
+        );
       }
       return;
     }
 
-    this.configService.updateSection(sectionKey, config);
+    this.configService.updateSection(
+      ...([sectionKey, config] as GlobalConfigSectionUpdateArgs),
+    );
   }
 
   saveTimeTrackingSwitch($event: { config: unknown }): void {
@@ -547,14 +555,14 @@ export class ConfigPageComponent implements OnInit {
 
   getGlobalCfgSection(
     sectionKey: GlobalConfigFormSectionKey | ProjectCfgFormKey,
-  ): GlobalSectionConfig {
+  ): GlobalConfigFormModel | undefined {
     if (sectionKey === 'taskWidget') {
-      return this.taskWidgetSettingsService.settings() as GlobalSectionConfig;
+      return this.taskWidgetSettingsService.settings();
     }
     if (sectionKey === 'focusModeLocal') {
-      return this.focusModeLocalSettingsService.settings() as GlobalSectionConfig;
+      return this.focusModeLocalSettingsService.settings();
     }
-    return (this.globalCfg as unknown as Record<string, GlobalSectionConfig>)[sectionKey];
+    return this.globalCfg?.[sectionKey as PersistedGlobalConfigSectionKey];
   }
 
   showLogs(): void {

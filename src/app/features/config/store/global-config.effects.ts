@@ -32,7 +32,7 @@ import {
   selectMiscConfig,
 } from './global-config.reducer';
 import { mapKeyboardConfigToQwerty } from '../keyboard-shortcut.util';
-import { MiscConfig, TimeTrackingConfig } from '../global-config.model';
+
 import { MatDialog } from '@angular/material/dialog';
 import { DialogConfirmComponent } from '../../../ui/dialog-confirm/dialog-confirm.component';
 import { TaskTimeSyncService } from '../../tasks/task-time-sync.service';
@@ -76,8 +76,7 @@ export class GlobalConfigEffects {
         ofType(updateGlobalConfigSection),
         filter(
           ({ sectionKey, sectionCfg }) =>
-            sectionKey === 'timeTracking' &&
-            (sectionCfg as TimeTrackingConfig).isParallelTimersEnabled === false,
+            sectionKey === 'timeTracking' && sectionCfg.isParallelTimersEnabled === false,
         ),
         withLatestFrom(
           this._store.select(selectTrackedTaskIds),
@@ -148,11 +147,12 @@ export class GlobalConfigEffects {
     () =>
       this._actions$.pipe(
         ofType(updateGlobalConfigSection),
-        filter(
-          ({ sectionKey, sectionCfg }) => this._isElectron && sectionKey === 'keyboard',
-        ),
-        tap(({ sectionKey, sectionCfg }) => {
-          let keyboardCfg: KeyboardConfig = sectionCfg as KeyboardConfig;
+        filter(() => this._isElectron),
+        filter((action) => action.sectionKey === 'keyboard'),
+        tap(({ sectionCfg }) => {
+          // The Electron API requires a complete plugin_* index signature even
+          // though section updates are partial. Preserve the existing API bridge.
+          let keyboardCfg = sectionCfg as KeyboardConfig;
           if (this._isMac) {
             keyboardCfg = mapKeyboardConfigToQwerty(
               keyboardCfg,
@@ -229,17 +229,17 @@ export class GlobalConfigEffects {
   setStartOfNextDayDiffOnChange = createEffect(() =>
     this._actions$.pipe(
       ofType(updateGlobalConfigSection),
-      filter(({ sectionKey }) => sectionKey === 'misc'),
+      filter((action) => action.sectionKey === 'misc'),
       filter(
         ({ sectionCfg }) =>
           sectionCfg &&
-          (typeof (sectionCfg as MiscConfig).startOfNextDay === 'number' ||
-            typeof (sectionCfg as MiscConfig).startOfNextDayTime === 'string'),
+          (typeof sectionCfg.startOfNextDay === 'number' ||
+            typeof sectionCfg.startOfNextDayTime === 'string'),
       ),
       withLatestFrom(this._store.select(selectAllTasks)),
       switchMap(([{ sectionCfg }, allTasks]) => {
         const oldTodayStr = this._dateService.todayStr();
-        const miscCfg = normalizeStartOfNextDayConfig(sectionCfg as Partial<MiscConfig>);
+        const miscCfg = normalizeStartOfNextDayConfig(sectionCfg);
         this._dateService.setStartOfNextDayDiff(
           miscCfg.startOfNextDayTime,
           miscCfg.startOfNextDay,
