@@ -9,9 +9,9 @@ import {
   ClipboardImagesConfig,
   EvaluationConfig,
   FlowtimeConfig,
-  GlobalConfigSectionKey,
+  GlobalConfigSectionUpdate,
+  GlobalConfigSectionUpdateArgs,
   GlobalConfigState,
-  GlobalSectionConfig,
   IdleConfig,
   LocalizationConfig,
   MiscConfig,
@@ -180,16 +180,16 @@ export class GlobalConfigService {
   });
 
   updateSection(
-    sectionKey: GlobalConfigSectionKey,
-    sectionCfg: Partial<GlobalSectionConfig>,
-    isSkipSnack?: boolean,
+    ...[sectionKey, sectionCfg, isSkipSnack]: GlobalConfigSectionUpdateArgs
   ): void {
     this._store.dispatch(
+      // TS loses the tuple's correlation when rebuilding an object. Callers are
+      // checked against the mapped tuple; this bridge does not widen that API.
       updateGlobalConfigSection({
         sectionKey,
         sectionCfg,
         isSkipSnack,
-      }),
+      } as GlobalConfigSectionUpdate),
     );
   }
 }

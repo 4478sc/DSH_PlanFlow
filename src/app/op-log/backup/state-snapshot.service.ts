@@ -218,6 +218,10 @@ export class StateSnapshotService {
           ? null
           : ((task as { selectedTaskId?: string | null })?.selectedTaskId ?? null),
         currentTaskId: null,
+        // The running set is local runtime state too: without this, a snapshot
+        // taken on a device with parallel timers would make the importing
+        // device start tracking those tasks on its own (#29).
+        trackedTaskIds: [],
       },
     } as Omit<AppStateSnapshot, 'archiveYoung' | 'archiveOld'>;
   }

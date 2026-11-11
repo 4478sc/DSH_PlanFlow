@@ -426,19 +426,36 @@ export type GlobalConfigFormSectionKey =
   | 'taskWidget'
   | 'focusModeLocal';
 
-export type GlobalSectionConfig =
-  | MiscConfig
-  | TasksConfig
-  | PomodoroConfig
-  | FlowtimeConfig
-  | KeyboardConfig
-  | ScheduleConfig
-  | ReminderConfig
-  | DailySummaryNote
-  | SyncConfig
-  | ClipboardImagesConfig
+/** Only real state sections may become persistent update operations. */
+export type PersistedGlobalConfigSectionKey = keyof GlobalConfigState;
+
+/** Derive this union from state so new sections cannot be forgotten (#37). */
+export type GlobalSectionConfig = NonNullable<
+  GlobalConfigState[PersistedGlobalConfigSectionKey]
+>;
+
+/** Local-only form models must not widen the persistent action payload. */
+export type GlobalConfigFormModel =
+  | GlobalSectionConfig
   | TaskWidgetConfig
   | FocusModeLocalConfig;
+
+export type GlobalConfigSectionUpdate = {
+  [K in PersistedGlobalConfigSectionKey]-?: {
+    sectionKey: K;
+    sectionCfg: Partial<NonNullable<GlobalConfigState[K]>>;
+    isSkipSnack?: boolean;
+  };
+}[PersistedGlobalConfigSectionKey];
+
+/** Preserve the same key/payload relationship for the positional service API. */
+export type GlobalConfigSectionUpdateArgs = {
+  [K in PersistedGlobalConfigSectionKey]-?: [
+    sectionKey: K,
+    sectionCfg: Partial<NonNullable<GlobalConfigState[K]>>,
+    isSkipSnack?: boolean,
+  ];
+}[PersistedGlobalConfigSectionKey];
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 export interface LimitedFormlyFieldConfig<FormModel> extends Omit<

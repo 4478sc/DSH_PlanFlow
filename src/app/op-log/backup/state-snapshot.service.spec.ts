@@ -171,6 +171,13 @@ describe('StateSnapshotService', () => {
       expect((snapshot.task as any).currentTaskId).toBeNull();
     });
 
+    it('should clear the running timer set', () => {
+      const snapshot = service.getStateSnapshot();
+
+      // A restored snapshot must not start timers the user never started (#29).
+      expect((snapshot.task as any).trackedTaskIds).toEqual([]);
+    });
+
     it('should include task state with ids and entities', () => {
       const snapshot = service.getStateSnapshot();
 

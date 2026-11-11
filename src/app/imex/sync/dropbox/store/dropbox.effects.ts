@@ -3,7 +3,6 @@ import { createEffect, ofType } from '@ngrx/effects';
 import { LOCAL_ACTIONS } from '../../../../util/local-actions.token';
 import { Observable } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
-import { SyncConfig } from '../../../../features/config/global-config.model';
 import { updateGlobalConfigSection } from '../../../../features/config/store/global-config.actions';
 import { environment } from '../../../../../environments/environment';
 import { SyncProviderManager } from '../../../../op-log/sync-providers/provider-manager.service';
@@ -19,12 +18,9 @@ export class DropboxEffects {
     () =>
       this._actions$.pipe(
         ofType(updateGlobalConfigSection),
-        filter(
-          ({ sectionKey, sectionCfg }): boolean =>
-            sectionKey === 'sync' && (sectionCfg as SyncConfig).isEnabled === false,
-        ),
-        tap(async ({ sectionCfg }) => {
-          const syncCfg = sectionCfg as SyncConfig;
+        filter((action) => action.sectionKey === 'sync'),
+        filter(({ sectionCfg }) => sectionCfg.isEnabled === false),
+        tap(async ({ sectionCfg: syncCfg }) => {
           if (syncCfg.syncProvider !== SyncProviderId.Dropbox) {
             return;
           }
